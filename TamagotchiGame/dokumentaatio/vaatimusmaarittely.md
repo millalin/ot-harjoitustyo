@@ -1,17 +1,17 @@
-#Tamagotchi vaativuusmäärittely#
+#Tamagotchi vaativuusmäärittely
 
-##Sovelluksen tarkoitus##
+###Sovelluksen tarkoitus
 
 Tamagotchi on virtuaalilemmikki, joka elää tietokoneen näytöllä. Sitä tulee kuitenkin leikittää, syöttää ja hoitata yhtälailla kuin tavallista lemmikkiä tai se muuttuu surulliseksi, nälkäiseksi tai voi jopa kuolla. Tamagotchipelillä voi virtuaalisesti hoivata ikiomaa lemmikkiä. Sovellukseen on mahdollista luoda eri Tamagotchi eri nimillä. 
 
-##Käyttäjät##
+###Käyttäjät
 Sovelluksella on normaalikäyttäjä, joka on pelin pelaaja. 
 
-##Käyttöliittymäluonnos##
+###Käyttöliittymäluonnos
 
-![luonnos](~/Downloads/luonnos.png)
+![alt.text](luonnos.jpg)
 
-##Perusversion tarjoama toiminnallisuus##
+###Perusversion tarjoama toiminnallisuus
 
 Mitä toiminnallisuuksia käyttäjän halutaan pystyä tekevän:
 
