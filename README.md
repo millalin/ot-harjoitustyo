@@ -1,6 +1,6 @@
 #### Ohjelmistotekniikka, harjoitustyö
 
-[vaativuusmäärittely](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/dokumentaatio/vaatimusmaarittely.md)
+[vaatimusmäärittely](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/dokumentaatio/vaatimusmaarittely.md)
 
 ## Tehtävät
 

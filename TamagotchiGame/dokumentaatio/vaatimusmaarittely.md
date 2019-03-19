@@ -1,4 +1,4 @@
-# Tamagotchi vaativuusmäärittely
+# Tamagotchi vaatimusmäärittely
 
 ### Sovelluksen tarkoitus
 
