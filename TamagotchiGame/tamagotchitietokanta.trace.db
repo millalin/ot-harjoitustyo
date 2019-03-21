@@ -1,0 +1,15 @@
+2019-03-21 16:31:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TAMAGOTCHI" already exists; SQL statement:
+CREATE TABLE Tamagotchi(id serial, name varchar(25), hunger integer, energy integer); [42101-197]
+2019-03-21 16:57:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TAMAGOTCHI" already exists; SQL statement:
+CREATE TABLE Tamagotchi(id serial, name varchar(25), hunger integer, energy integer); [42101-197]
+2019-03-21 17:54:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "NAME VARCHAR(25)": "'TextField@46613cc4[styleClass=text-input text-field]' (52)"; SQL statement:
+INSERT INTO Tamagotchi (name, hunger, energy) VALUES (?, ?, ?) [22001-197]
+2019-03-21 17:54:19 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE TAMAGOTCHI SET NAME = ?, HUNGER = ?, ENERGY = ? WHERE ID = ?)[*] "; SQL statement:
+UPDATE Tamagotchi SET name = ?, hunger = ?, energy = ? WHERE id = ?) [42000-197]
+2019-03-21 17:58:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE TAMAGOTCHI SET NAME = ?, HUNGER = ?, ENERGY = ? WHERE ID = ?)[*] "; SQL statement:
+UPDATE Tamagotchi SET name = ?, hunger = ?, energy = ? WHERE id = ?) [42000-197]
