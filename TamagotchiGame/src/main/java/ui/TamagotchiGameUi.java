@@ -134,16 +134,12 @@ public class TamagotchiGameUi extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {
-          
-                conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25), hunger integer, energy integer);").executeUpdate();
-            System.out.println("onnistui");
-        } catch (SQLException ex) {
-            Logger.getLogger(TamagotchiDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
 
      
         launch(args);
     }
+    
+    
 
 }
