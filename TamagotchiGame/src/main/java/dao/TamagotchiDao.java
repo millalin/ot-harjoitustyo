@@ -20,21 +20,25 @@ import java.util.logging.Logger;
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
-    //   public List<Tamagotchi> tamas;
-    private Tamagotchi tamagotchi;
+    public List<Tamagotchi> tamas;
+    //private Tamagotchi tamagotchi;
+    private String name;
 
-    public TamagotchiDao(Tamagotchi tamagotchi) throws Exception {
-        this.tamagotchi = tamagotchi;
+    public TamagotchiDao() throws Exception {
+        
 
     }
 
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
+        
+       
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
         //    tamas.add(tamagotchi);
         PreparedStatement statement
                 = connection.prepareStatement("INSERT INTO Tamagotchi (name, hunger, energy) VALUES (?, ?, ?)");
+        
         statement.setString(1, tamagotchi.getName());
         statement.setInt(2, tamagotchi.getHunger());
         statement.setInt(3, tamagotchi.getEnergy());
@@ -53,11 +57,11 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
         PreparedStatement statement
-                = connection.prepareStatement("UPDATE Tamagotchi SET name = ?, hunger = ?, energy = ? WHERE id = ?");
-        statement.setString(1, tamagotchi.getName());
-        statement.setInt(2, tamagotchi.getHunger());
-        statement.setInt(3, tamagotchi.getEnergy());
-        statement.setInt(4, tamagotchi.getId());
+                = connection.prepareStatement("UPDATE Tamagotchi SET hunger = ?, energy = ? WHERE name = ?");
+      
+        statement.setInt(1, tamagotchi.getHunger());
+        statement.setInt(2, tamagotchi.getEnergy());
+        statement.setString(3, tamagotchi.getName());
 
         statement.executeUpdate();
 
@@ -68,9 +72,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
-//    private int generateId() {
-    //       return tamas.size() + 1;
-    //  }
+    private int generateId() {
+        return tamas.size() + 1;
+    }
+
     public void alustaTietokanta() {
         try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();

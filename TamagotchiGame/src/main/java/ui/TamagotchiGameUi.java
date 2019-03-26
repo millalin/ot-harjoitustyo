@@ -34,14 +34,19 @@ import javafx.stage.Stage;
  */
 public class TamagotchiGameUi extends Application {
 
-    private Tamagotchi tamagotchi;
+    //private Tamagotchi tamagotchi;
     //private TamagotchiDao tamagotchiDao;
     private TamagotchiService tamagotchiservice;
+    private String nimi;
+
+
+  
 
     @Override
-    public void start(Stage stage) {
-
-        tamagotchiservice = new TamagotchiService();
+    public void start(Stage stage) throws Exception{
+        
+        TamagotchiDao tamagotchiDao = new TamagotchiDao();
+        tamagotchiservice= new TamagotchiService((tamagotchiDao));
 
         Button createTamagotchi = new Button("Create");
         Button getTamagotchi = new Button("Load");
@@ -96,8 +101,8 @@ public class TamagotchiGameUi extends Application {
         state.setTop(buttons);
         state.setCenter(ruutuhappy);
 
-        //    sadstate.setTop(buttons);
-        String nimi = nimiKentta.getText();
+           
+        
 
         Scene eka = new Scene(group);
         Scene toka = new Scene(state);
@@ -107,14 +112,17 @@ public class TamagotchiGameUi extends Application {
 
             try {
                 //     tamagotchiDao.alustaTietokanta();
-                tamagotchi = new Tamagotchi(nimi);
+
+                nimi=nimiKentta.getText();
 
                 //     tamagotchi = new Tamagotchi(nimi);
                 tamagotchiservice.newTamagotchi(nimi);
+                
+                System.out.println("nimi: "+nimi);
                 //  tamagotchiDao = new TamagotchiDao(tamagotchi);
                 //tamagotchiDao.create(tamagotchi);
 
-                if (tamagotchi.isAlive()) {
+                if (tamagotchiservice.TamagotchiAlive(nimi)) { //muuta serv puolelle
                     paivita(state, ruutusad, ruutuhappy);
                 }
 
@@ -146,8 +154,8 @@ public class TamagotchiGameUi extends Application {
                 //tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20
                 try {
                     //  tamagotchiDao.update(tamagotchi);
-                    tamagotchiservice.updateTamagotchi();
-                    System.out.println("tila" + tamagotchiservice.getMood());
+                    tamagotchiservice.updateTamagotchi(nimi);
+                    System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
 
                 } catch (Exception ex) {
                     Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,10 +187,10 @@ public class TamagotchiGameUi extends Application {
                     return;
                 }
                 try {
-                    if (tamagotchiservice.getMood().equals("sad")) {
+                    if (tamagotchiservice.getMood(nimi).equals("sad")) {
                         state.setCenter(ruutusad);
 
-                    } else if (tamagotchiservice.getMood().equals("happy")) {
+                    } else if (tamagotchiservice.getMood(nimi).equals("happy")) {
                         state.setCenter(ruutuhappy);
                     }
                 } catch (Exception ex) {

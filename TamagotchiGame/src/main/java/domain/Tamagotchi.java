@@ -30,7 +30,7 @@ public class Tamagotchi {
     private boolean sick;
 
     public Tamagotchi(String name) {
-        this.id = 1;
+        
         this.name = name;
 
         this.hunger = 80;

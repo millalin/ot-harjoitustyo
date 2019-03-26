@@ -6,7 +6,8 @@
 package domain;
 
 import dao.TamagotchiDao;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,24 +15,48 @@ import java.sql.SQLException;
  */
 public class TamagotchiService {
 
-    private Tamagotchi tamagotchi;
+    
     private TamagotchiDao tamagotchiDao;
+    private String name;
+    public Map<String,Tamagotchi> tamas;
+    
+    public TamagotchiService(TamagotchiDao tamagotchiDao)  {
+        this.tamagotchiDao=tamagotchiDao;
+        tamas=new HashMap();
+        
+    }
 
-    public void newTamagotchi(String nimi) throws Exception {
-        tamagotchi = new Tamagotchi(nimi);
-        tamagotchiDao = new TamagotchiDao(tamagotchi);
+    public void newTamagotchi(String name) throws Exception {
+        int id = this.generateId();
+        Tamagotchi tamagotchi = new Tamagotchi(name);
+        tamas.put(name, tamagotchi);
+        
+        
         tamagotchiDao.create(tamagotchi);
     }
     
-    public void updateTamagotchi() throws Exception {
+    public void updateTamagotchi(String name) throws Exception {
         
+        Tamagotchi tamagotchi =tamas.get(name);
         tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20
         tamagotchiDao.update(tamagotchi);
         System.out.println("hunger: " + tamagotchi.getHunger());
     }
     
-    public String getMood() throws Exception   {
+    public boolean TamagotchiAlive(String name)     {
+        Tamagotchi tamagotchi =tamas.get(name);
+        
+        if (tamagotchi.isAlive())   {
+            return true;
+        }
+        return false;
+    }
+    
+    public String getMood(String name) throws Exception   {
+        Tamagotchi tamagotchi =tamas.get(name);
+        
         String mood="";
+        
         
         if(tamagotchi.getHunger()>60)   {
             mood="sad";
@@ -41,4 +66,7 @@ public class TamagotchiService {
         return mood;
     }
 
+     private int generateId() {
+        return tamas.size() + 1;
+    }
 }
