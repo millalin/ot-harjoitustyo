@@ -33,7 +33,7 @@ public class Tamagotchi {
         this.id = 1;
         this.name = name;
 
-        this.hunger = 50;
+        this.hunger = 80;
         this.happiness = 50;
         this.energy = 80;
         this.clean = 80;
