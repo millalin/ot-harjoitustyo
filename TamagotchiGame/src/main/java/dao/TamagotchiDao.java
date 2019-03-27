@@ -9,8 +9,8 @@ import domain.Tamagotchi;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,9 +20,9 @@ import java.util.logging.Logger;
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
-    public List<Tamagotchi> tamas;
+   
     //private Tamagotchi tamagotchi;
-    private String name;
+   
 
     public TamagotchiDao() throws Exception {
         
@@ -71,10 +71,37 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
         return tamagotchi;
     }
+    
+    public Tamagotchi loadTamagotchi(String name)  throws Exception {
+        int energy=0;
+        int hunger=0;
+        
+        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
-    private int generateId() {
-        return tamas.size() + 1;
+        PreparedStatement statement
+                = connection.prepareStatement("SELECT * FROM Tamagotchi SET WHERE name = ?");
+        
+        statement.setString(1, name);
+        
+         ResultSet resultSet = statement.executeQuery();
+        
+          while(resultSet.next()) {
+            // haetaan nykyiseltä riviltä opiskelijanumero int-muodossa
+            hunger = resultSet.getInt("hunger");
+            energy = resultSet.getInt("energy");
+            
+          }
+          
+          connection.close();
+          
+          Tamagotchi tamagotchi = new Tamagotchi(name);
+          tamagotchi.setHunger(hunger);
+          tamagotchi.setEnergy(energy);
+          
+          return tamagotchi;
     }
+
+    
 
     public void alustaTietokanta() {
         try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {

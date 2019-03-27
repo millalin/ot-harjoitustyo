@@ -27,12 +27,21 @@ public class TamagotchiService {
     }
 
     public void newTamagotchi(String name) throws Exception {
-        int id = this.generateId();
+       
         Tamagotchi tamagotchi = new Tamagotchi(name);
         tamas.put(name, tamagotchi);
         
         
         tamagotchiDao.create(tamagotchi);
+    }
+    
+    public Tamagotchi getTamagotchi(String name) throws Exception {
+        
+        Tamagotchi tamagotchi = tamagotchiDao.loadTamagotchi(name);
+        
+        tamas.put(name, tamagotchi);
+        
+        return tamagotchi;
     }
     
     public void updateTamagotchi(String name) throws Exception {
@@ -66,7 +75,5 @@ public class TamagotchiService {
         return mood;
     }
 
-     private int generateId() {
-        return tamas.size() + 1;
-    }
+     
 }

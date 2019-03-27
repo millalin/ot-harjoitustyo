@@ -99,9 +99,7 @@ public class TamagotchiGameUi extends Application {
         ruutusad.getChildren().add(sadpicture);
 
         state.setTop(buttons);
-        state.setCenter(ruutuhappy);
-
-           
+        state.setCenter(ruutuhappy);   
         
 
         Scene eka = new Scene(group);
@@ -111,18 +109,12 @@ public class TamagotchiGameUi extends Application {
             //luo lisäksi tama
 
             try {
-                //     tamagotchiDao.alustaTietokanta();
 
                 nimi=nimiKentta.getText();
-
-                //     tamagotchi = new Tamagotchi(nimi);
                 tamagotchiservice.newTamagotchi(nimi);
-                
-                System.out.println("nimi: "+nimi);
-                //  tamagotchiDao = new TamagotchiDao(tamagotchi);
-                //tamagotchiDao.create(tamagotchi);
+               
 
-                if (tamagotchiservice.TamagotchiAlive(nimi)) { //muuta serv puolelle
+                if (tamagotchiservice.TamagotchiAlive(nimi)) { 
                     paivita(state, ruutusad, ruutuhappy);
                 }
 
@@ -132,28 +124,59 @@ public class TamagotchiGameUi extends Application {
             }
             stage.setScene(toka);
         });
+        
+        
+        
+        //KESKEN kun haetaan vanha päivitä tiekannasta eka
+        getTamagotchi.setOnAction((event) -> {
+            //luo lisäksi tama
 
-        /*        if (tamagotchi.isAlive()) {
-            //timer
-            tamagotchiservice.updateTamagotchi();
+            try {
 
-        } */
+                nimi=kentta.getText();
+                System.out.println("nimi haettu: "+nimi);
+
+                tamagotchiservice.getTamagotchi(nimi);
+               
+
+                if (tamagotchiservice.TamagotchiAlive(nimi)) { 
+                    paivita(state, ruutusad, ruutuhappy);
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+            stage.setScene(toka);
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+   
         returnbutton.setOnAction((event) -> {
             stage.setScene(eka);
         });
+        
+        
 
         stage.setScene(eka);
         stage.show();
 
+        
         feedbutton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                //nälkä
 
-                //tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20
                 try {
-                    //  tamagotchiDao.update(tamagotchi);
+                   
                     tamagotchiservice.updateTamagotchi(nimi);
                     System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
 
@@ -166,6 +189,9 @@ public class TamagotchiGameUi extends Application {
 
     }
 
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -174,6 +200,9 @@ public class TamagotchiGameUi extends Application {
         launch(args);
     }
 
+    
+    
+    
     public void paivita(BorderPane state, FlowPane ruutusad, FlowPane ruutuhappy) {
 
         AnimationTimer animationtimer = new AnimationTimer() {
