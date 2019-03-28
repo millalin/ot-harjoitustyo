@@ -177,7 +177,7 @@ public class TamagotchiGameUi extends Application {
 
                 try {
                    
-                    tamagotchiservice.updateTamagotchi(nimi);
+                    tamagotchiservice.updateTamagotchiHunger(nimi);
                     System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
 
                 } catch (Exception ex) {

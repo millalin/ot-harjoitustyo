@@ -44,10 +44,11 @@ public class TamagotchiService {
         return tamagotchi;
     }
     
-    public void updateTamagotchi(String name) throws Exception {
+    public void updateTamagotchiHunger(String name) throws Exception {
         
         Tamagotchi tamagotchi =tamas.get(name);
         tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20
+        
         tamagotchiDao.update(tamagotchi);
         System.out.println("hunger: " + tamagotchi.getHunger());
     }
