@@ -19,7 +19,9 @@ import static org.junit.Assert.*;
  * @author milla
  */
 public class TamagotchiServiceTest {
-Tamagotchi tamagotchi;
+
+    Tamagotchi tamagotchi;
+
     public TamagotchiServiceTest() {
     }
 
