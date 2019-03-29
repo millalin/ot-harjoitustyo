@@ -7,6 +7,11 @@
 import dao.TamagotchiDao;
 import domain.Tamagotchi;
 import domain.TamagotchiService;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,6 +26,9 @@ import static org.junit.Assert.*;
 public class TamagotchiServiceTest {
 
     Tamagotchi tamagotchi;
+    TamagotchiService serv;
+    String name;
+    TamagotchiDao tdao;
 
     public TamagotchiServiceTest() {
     }
@@ -35,17 +43,19 @@ public class TamagotchiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        String name = "name";
-        TamagotchiDao tdao = new TamagotchiDao();
-        TamagotchiService serv = new TamagotchiService(tdao);
+        name = "name";
+        tdao = new TamagotchiDao();
+        serv = new TamagotchiService(tdao);
         serv.newTamagotchi(name);
-        serv.updateTamagotchiHunger(name);
         tamagotchi = serv.getTamagotchi(name);
 
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception {
+
+        //poista tietokannasta
+        tdao.deleteTamagotchi(name);
     }
 
     // TODO add test methods here.
@@ -57,7 +67,6 @@ public class TamagotchiServiceTest {
 
     @Test
     public void tamagotchinNalkaOnAlussa80() {
-        Tamagotchi tamagotchi = new Tamagotchi("nimi");
 
         int vastaus = tamagotchi.getHunger();
 
@@ -65,8 +74,9 @@ public class TamagotchiServiceTest {
     }
 
     @Test
-    public void tamagotchinNalkaVaheneeKunSyotetaanKerran() {
+    public void tamagotchinNalkaVaheneeKunSyotetaanKerran() throws Exception {
 
+        serv.updateTamagotchiHunger(name);
         int vastaus = tamagotchi.getHunger();
 
         assertEquals(60, vastaus);

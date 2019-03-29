@@ -18,13 +18,14 @@ public class T {
         // TODO code application logic here
         int summa=0;
         
-       double y= 1.0666668-1.0666666;
+       float y= (float)1.0666668-(float)1.0666666;
         
         System.out.println("y: "+y);
         
-        double x=y* 1.23456;
+        float x=y* (float)1.23456;
         
         System.out.println("x: "+x);
+        
        
         double t=1.0666668*1.23456 -1.0666666*1.23456;
         
