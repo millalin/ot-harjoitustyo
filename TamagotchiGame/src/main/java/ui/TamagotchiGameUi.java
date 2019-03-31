@@ -77,6 +77,9 @@ public class TamagotchiGameUi extends Application {
 
         Image sad = new Image("file:GIFMaker.org_z09dXD.gif");
         ImageView sadpicture = new ImageView(sad);
+        
+        Image eat= new Image("file:GIFMaker.org_tw7fJ6.gif");
+        ImageView eatpicture=new ImageView(eat);
 
         //napit
         HBox buttons = new HBox();
@@ -94,9 +97,12 @@ public class TamagotchiGameUi extends Application {
 
         FlowPane ruutuhappy = new FlowPane();
         FlowPane ruutusad = new FlowPane();
+        FlowPane ruutueat = new FlowPane();
+        
 
         ruutuhappy.getChildren().add(happypicture);
         ruutusad.getChildren().add(sadpicture);
+        ruutueat.getChildren().add(eatpicture);
 
         state.setTop(buttons);
         state.setCenter(ruutuhappy);   
@@ -115,7 +121,7 @@ public class TamagotchiGameUi extends Application {
                
 
                 if (tamagotchiservice.TamagotchiAlive(nimi)) { 
-                    paivita(state, ruutusad, ruutuhappy);
+                    paivita(state, ruutusad, ruutuhappy, ruutueat);
                 }
 
             } catch (Exception ex) {
@@ -140,7 +146,7 @@ public class TamagotchiGameUi extends Application {
                
 
                 if (tamagotchiservice.TamagotchiAlive(nimi)) { 
-                    paivita(state, ruutusad, ruutuhappy);
+                    paivita(state, ruutusad, ruutuhappy,ruutueat);
                 }
 
             } catch (Exception ex) {
@@ -176,7 +182,7 @@ public class TamagotchiGameUi extends Application {
             public void handle(ActionEvent event) {
 
                 try {
-                   
+                    
                     tamagotchiservice.updateTamagotchiHunger(nimi);
                     System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
 
@@ -203,7 +209,7 @@ public class TamagotchiGameUi extends Application {
     
     
     
-    public void paivita(BorderPane state, FlowPane ruutusad, FlowPane ruutuhappy) {
+    public void paivita(BorderPane state, FlowPane ruutusad, FlowPane ruutuhappy, FlowPane ruutueat) {
 
         AnimationTimer animationtimer = new AnimationTimer() {
 
@@ -216,12 +222,16 @@ public class TamagotchiGameUi extends Application {
                     return;
                 }
                 try {
+                   
+                    if (tamagotchiservice.getMood(nimi).equals("eat"))  {
+                        state.setCenter(ruutueat);
+                    }
                     if (tamagotchiservice.getMood(nimi).equals("sad")) {
                         state.setCenter(ruutusad);
 
                     } else if (tamagotchiservice.getMood(nimi).equals("happy")) {
                         state.setCenter(ruutuhappy);
-                    }
+                    } 
                 } catch (Exception ex) {
                     Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
                 }

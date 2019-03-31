@@ -47,7 +47,12 @@ public class TamagotchiService {
     public void updateTamagotchiHunger(String name) throws Exception {
         
         Tamagotchi tamagotchi =tamas.get(name);
-        tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20
+        if(tamagotchi.getHunger()-20<=0)    {
+            tamagotchi.setHunger(0);
+        } else {
+            tamagotchi.setHunger(tamagotchi.getHunger() - 20); //kun syötetään nälkä vähenee 20 
+        }
+       
         
         tamagotchiDao.update(tamagotchi);
         System.out.println("hunger: " + tamagotchi.getHunger());

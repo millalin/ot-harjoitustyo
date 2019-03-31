@@ -41,6 +41,22 @@
                     <mainClass>com.zetcode.JavaSeH2Server</mainClass>
                 </configuration>
             </plugin>
+            
+           
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.3</version>
+            <executions>
+                <execution>
+                    <id>default-prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>  
+    
         </plugins>
     </build> 
 

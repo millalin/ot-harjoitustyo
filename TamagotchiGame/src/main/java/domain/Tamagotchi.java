@@ -89,6 +89,7 @@ public class Tamagotchi {
     }
 
     public void setHunger(int hunger) {
+       
         this.hunger = hunger;
     }
 
