@@ -8,3 +8,4 @@ päivä |  aika |  mitä tein
 26.3 | 3 | Animationtimer kokeilua ja tilan muutoskokeiluja
 26.3 | 3 | Tietokannan säätämistä ja toiminnallisuuden kokeilua, luokkien muutoksia
 29.3 | 1 | Testien päivitystä 
+1.4 | 3 | gifien tekoa ja pientä koodin säätöä

@@ -37,7 +37,7 @@ public class TamagotchiGameUi extends Application {
     //private Tamagotchi tamagotchi;
     //private TamagotchiDao tamagotchiDao;
     private TamagotchiService tamagotchiservice;
-    private String nimi;
+    private String name;
 
 
   
@@ -52,17 +52,17 @@ public class TamagotchiGameUi extends Application {
         Button getTamagotchi = new Button("Load");
 
         //alkunäkymä
-        Label nimiTeksti = new Label("Name of your tamagotchi: ");
-        TextField nimiKentta = new TextField();
+        Label nameText = new Label("Name of your tamagotchi: ");
+        TextField nameField = new TextField();
         Label oldone = new Label("Load your old tamagotchi: ");
-        TextField kentta = new TextField();
+        TextField field = new TextField();
 
         GridPane group = new GridPane();
-        group.add(nimiTeksti, 0, 0);
-        group.add(nimiKentta, 1, 0);
+        group.add(nameText, 0, 0);
+        group.add(nameField, 1, 0);
         group.add(createTamagotchi, 1, 1);
         group.add(oldone, 0, 2);
-        group.add(kentta, 1, 2);
+        group.add(field, 1, 2);
         group.add(getTamagotchi, 1, 3);
 
         group.setHgap(10);
@@ -72,13 +72,13 @@ public class TamagotchiGameUi extends Application {
         //pelinäkymää
         BorderPane state = new BorderPane();
 
-        Image happy = new Image("file:GIFMaker.org_KWB9ba.gif");
+        Image happy = new Image("file:tamag(3).gif");
         ImageView happypicture = new ImageView(happy);
 
-        Image sad = new Image("file:GIFMaker.org_z09dXD.gif");
+        Image sad = new Image("file:tamag(12).gif");
         ImageView sadpicture = new ImageView(sad);
         
-        Image eat= new Image("file:GIFMaker.org_tw7fJ6.gif");
+        Image eat= new Image("file:tamag(6).gif");
         ImageView eatpicture=new ImageView(eat);
 
         //napit
@@ -95,17 +95,19 @@ public class TamagotchiGameUi extends Application {
         buttons.getChildren().add(cleanbutton);
         buttons.getChildren().add(returnbutton);
 
-        FlowPane ruutuhappy = new FlowPane();
-        FlowPane ruutusad = new FlowPane();
-        FlowPane ruutueat = new FlowPane();
+        FlowPane frameHappy = new FlowPane();
+        FlowPane fmareSad = new FlowPane();
+        FlowPane frameEat = new FlowPane();
+        FlowPane framePlay=new FlowPane();
         
 
-        ruutuhappy.getChildren().add(happypicture);
-        ruutusad.getChildren().add(sadpicture);
-        ruutueat.getChildren().add(eatpicture);
+        frameHappy.getChildren().add(happypicture);
+        fmareSad.getChildren().add(sadpicture);
+        frameEat.getChildren().add(eatpicture);
+        
 
         state.setTop(buttons);
-        state.setCenter(ruutuhappy);   
+        state.setCenter(frameHappy);   
         
 
         Scene eka = new Scene(group);
@@ -116,12 +118,12 @@ public class TamagotchiGameUi extends Application {
 
             try {
 
-                nimi=nimiKentta.getText();
-                tamagotchiservice.newTamagotchi(nimi);
+                name=nameField.getText();
+                tamagotchiservice.newTamagotchi(name);
                
 
-                if (tamagotchiservice.TamagotchiAlive(nimi)) { 
-                    paivita(state, ruutusad, ruutuhappy, ruutueat);
+                if (tamagotchiservice.TamagotchiAlive(name)) { 
+                    update(state, fmareSad, frameHappy, frameEat);
                 }
 
             } catch (Exception ex) {
@@ -139,14 +141,14 @@ public class TamagotchiGameUi extends Application {
 
             try {
 
-                nimi=kentta.getText();
-                System.out.println("nimi haettu: "+nimi);
+                name=field.getText();
+                System.out.println("nimi haettu: "+name);
 
-                tamagotchiservice.getTamagotchi(nimi);
+                tamagotchiservice.getTamagotchi(name);
                
 
-                if (tamagotchiservice.TamagotchiAlive(nimi)) { 
-                    paivita(state, ruutusad, ruutuhappy,ruutueat);
+                if (tamagotchiservice.TamagotchiAlive(name)) { 
+                    update(state, fmareSad, frameHappy,frameEat);
                 }
 
             } catch (Exception ex) {
@@ -183,9 +185,10 @@ public class TamagotchiGameUi extends Application {
 
                 try {
                     
-                    state.setCenter(ruutueat);
-                    tamagotchiservice.updateTamagotchiHunger(nimi);
-                    System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
+                    state.setCenter(frameEat);
+                    tamagotchiservice.updateTamagotchiHunger(name);
+                 //TESTITULOSTUS
+                    System.out.println("tila:  " + tamagotchiservice.getMood(name));
 
                 } catch (Exception ex) {
                     Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,6 +196,8 @@ public class TamagotchiGameUi extends Application {
 
             }
         });
+
+         
 
     }
 
@@ -210,7 +215,7 @@ public class TamagotchiGameUi extends Application {
     
     
     
-    public void paivita(BorderPane state, FlowPane ruutusad, FlowPane ruutuhappy, FlowPane ruutueat) {
+    public void update(BorderPane state, FlowPane ruutusad, FlowPane ruutuhappy, FlowPane ruutueat) {
 
         AnimationTimer animationtimer = new AnimationTimer() {
 
@@ -224,13 +229,11 @@ public class TamagotchiGameUi extends Application {
                 }
                 try {
                    
-                    if (tamagotchiservice.getMood(nimi).equals("eat"))  {
-                        state.setCenter(ruutueat);
-                    }
-                    if (tamagotchiservice.getMood(nimi).equals("sad")) {
+                    
+                    if (tamagotchiservice.getMood(name).equals("sad")) {
                         state.setCenter(ruutusad);
 
-                    } else if (tamagotchiservice.getMood(nimi).equals("happy")) {
+                    } else if (tamagotchiservice.getMood(name).equals("happy")) {
                         state.setCenter(ruutuhappy);
                     } 
                 } catch (Exception ex) {
