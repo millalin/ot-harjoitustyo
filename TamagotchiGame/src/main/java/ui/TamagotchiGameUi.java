@@ -183,6 +183,7 @@ public class TamagotchiGameUi extends Application {
 
                 try {
                     
+                    state.setCenter(ruutueat);
                     tamagotchiservice.updateTamagotchiHunger(nimi);
                     System.out.println("tila:  " + tamagotchiservice.getMood(nimi));
 
@@ -218,7 +219,7 @@ public class TamagotchiGameUi extends Application {
             @Override
             public void handle(long l) {
 
-                if (l - before < 100000000) {
+                if (l - before < 1_000_000_000_0L) {
                     return;
                 }
                 try {
