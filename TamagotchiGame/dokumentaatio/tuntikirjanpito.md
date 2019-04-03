@@ -9,3 +9,5 @@ päivä |  aika |  mitä tein
 26.3 | 3 | Tietokannan säätämistä ja toiminnallisuuden kokeilua, luokkien muutoksia
 29.3 | 1 | Testien päivitystä 
 1.4 | 3 | gifien tekoa ja pientä koodin säätöä
+2.4 | 3 | gifejä lisää, ajan kulumisen laskemista ja kokeiluja ohjelmassa
+3.4 | 5 | tietokannan päivitys, nappien lisäys, testit toimimaan uudella tavalla laskiessa, toiminnallisuuksien lisäämistä

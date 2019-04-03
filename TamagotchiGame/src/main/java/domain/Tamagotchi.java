@@ -27,21 +27,22 @@ public class Tamagotchi {
     private int clean;
     private boolean alive;
     private int age; //days
-    private boolean sick;
+    private int sick;
 
     public Tamagotchi(String name) {
         
         this.name = name;
 
-        this.hunger = 80;
-        this.happiness = 50;
-        this.energy = 80;
-        this.clean = 80;
+        this.hunger =700000;
+        this.happiness = 500000;
+        this.energy = 800000;
+        this.clean = 800000;
         this.alive = true;
         this.age = 0;
-        this.sick = false;
+        this.sick = 200000;
 
         this.dateOfBirth = System.currentTimeMillis();
+        this.currentTime=0;
     }
 
     public int getId() {
@@ -52,7 +53,7 @@ public class Tamagotchi {
         this.id = id;
     }
 
-    public long getCurrentTime() {
+    public  long getCurrentTime() {
         return currentTime;
     }
 
@@ -60,11 +61,11 @@ public class Tamagotchi {
         this.currentTime = currentTime;
     }
 
-    public boolean isSick() {
+    public int isSick() {
         return sick;
     }
 
-    public void setSick(boolean sick) {
+    public void setSick(int sick) {
         this.sick = sick;
     }
 

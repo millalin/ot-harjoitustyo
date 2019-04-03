@@ -7,11 +7,8 @@
 import dao.TamagotchiDao;
 import domain.Tamagotchi;
 import domain.TamagotchiService;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +26,7 @@ public class TamagotchiServiceTest {
     TamagotchiService serv;
     String name;
     TamagotchiDao tdao;
+    public Map<String, Tamagotchi> tamas;
 
     public TamagotchiServiceTest() {
     }
@@ -47,7 +45,10 @@ public class TamagotchiServiceTest {
         tdao = new TamagotchiDao();
         serv = new TamagotchiService(tdao);
         serv.newTamagotchi(name);
-        tamagotchi = serv.getTamagotchi(name);
+        tamagotchi = new Tamagotchi(name);
+        tdao.create(tamagotchi);
+        tamas=new HashMap();
+        tamas.put(name, tamagotchi);
 
     }
 
@@ -66,19 +67,24 @@ public class TamagotchiServiceTest {
     }
 
     @Test
-    public void tamagotchinNalkaOnAlussa80() {
+    public void tamagotchinNalkaOnAlussa800000() {
 
-        int vastaus = tamagotchi.getHunger();
+       
+        int result=tamagotchi.getHunger();
+        
 
-        assertEquals(80, vastaus);
+        assertEquals(800000, result);
+       
     }
 
     @Test
     public void tamagotchinNalkaVaheneeKunSyotetaanKerran() throws Exception {
 
         serv.updateTamagotchiHunger(name);
-        int vastaus = tamagotchi.getHunger();
+        tamagotchi=serv.getTamagotchi(name);
+        int result = tamagotchi.getHunger();
+        
 
-        assertEquals(60, vastaus);
+        assertEquals(650000, result);
     }
 }
