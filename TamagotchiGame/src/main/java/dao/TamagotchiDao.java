@@ -101,12 +101,13 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         connection.close();
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
-     //   long currentTime = System.currentTimeMillis();
-       // long timeGone = currentTime - time;
+        long currentTime = System.currentTimeMillis();
+        long timeGone = currentTime - time;
 
-        int x = (int) ((System.currentTimeMillis() - time) / 10000);
-
-        tamagotchi.setHunger(hunger + (56 * x));
+        int x = (int) (timeGone / 10000);
+        
+        int newHunger = hunger + (56 * x);
+        tamagotchi.setHunger(newHunger);
         tamagotchi.setEnergy(energy);
         tamagotchi.setAlive(true); //myöh haku ja päiv tietokannasta
 

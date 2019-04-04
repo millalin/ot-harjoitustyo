@@ -87,28 +87,28 @@ public class TamagotchiGameUi extends Application {
         BorderPane state = new BorderPane();
         BorderPane deadState = new BorderPane();
         
-        Image happy = new Image("file:tamag(3).gif");
+        Image happy = new Image("file:Gifs/tamag(3).gif");
         ImageView happypicture = new ImageView(happy);
         
-        Image sad = new Image("file:tamag(12).gif");
+        Image sad = new Image("file:Gifs/tamag(12).gif");
         ImageView sadpicture = new ImageView(sad);
         
-        Image eat = new Image("file:tamag(6).gif");
+        Image eat = new Image("file:Gifs/tamag(6).gif");
         ImageView eatpicture = new ImageView(eat);
         
-        Image play = new Image("file:tamag(8).gif");
+        Image play = new Image("file:Gifs/tamag(8).gif");
         ImageView playpicture = new ImageView(play);
         
-        Image dead = new Image("file:tamag(13).gif");
+        Image dead = new Image("file:Gifs/tamag(13).gif");
         ImageView deadpicture = new ImageView(dead);
         
-        Image sick = new Image("file:tamag(14).gif");
+        Image sick = new Image("file:Gifs/tamag(14).gif");
         ImageView sickpicture = new ImageView(sick);
         
-        Image sleep = new Image("file:tamag(15).gif");
+        Image sleep = new Image("file:Gifs/tamag(15).gif");
         ImageView sleeppicture = new ImageView(sleep);
         
-        Image medicate = new Image("file:tamag(16).gif");
+        Image medicate = new Image("file:Gifs/tamag(16).gif");
         ImageView medicatepicture = new ImageView(medicate);
 
         //napit

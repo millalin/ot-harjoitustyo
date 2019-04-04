@@ -1,17 +1,17 @@
 # Ohjelmistotekniikka, TamagotchiGame
 
+
+Tamagotchi on virtuaalilemmikki, jota pitää hoivata. Sitä pitää syöttää, leikittää ja lääkitä säännöllisesti, jottei se menehdy. 
+Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää käydä hoitamassa. 
+
+
+### Dokumentaatio
+
 [Vaatimusmäärittely](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/dokumentaatio/tuntikirjanpito.md)
 
-## Tehtävät
-
-**Viikko 1**
-
-
-[gitlog.txt](https://github.com/millalin/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](https://github.com/millalin/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+[Arkkitehtuurikuvaus]
 
 
 
