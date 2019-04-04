@@ -21,6 +21,7 @@ public class TamagotchiService {
     private String name;
     public Map<String, Tamagotchi> tamas;
 
+    
     public TamagotchiService(TamagotchiDao tamagotchiDao) {
         this.tamagotchiDao = tamagotchiDao;
         tamas = new HashMap();
@@ -31,14 +32,13 @@ public class TamagotchiService {
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
         tamas.put(name, tamagotchi);
-
         tamagotchiDao.create(tamagotchi);
     }
 
+    
     public Tamagotchi getTamagotchi(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamagotchiDao.loadTamagotchi(name);
-
         tamas.put(name, tamagotchi);
 
         return tamagotchi;
@@ -56,6 +56,7 @@ public class TamagotchiService {
         tamagotchiDao.update(tamagotchi);
         System.out.println("hunger: " + tamagotchi.getHunger());
     }
+    
 
     public boolean TamagotchiAlive(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
@@ -68,9 +69,9 @@ public class TamagotchiService {
             return true;
         }
         return false;
-
     }
 
+    
     public String getMood(String name) throws Exception {
         Tamagotchi tamagotchi = tamas.get(name);
 
@@ -86,15 +87,15 @@ public class TamagotchiService {
 
     public void time(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
-        //tamagotchi.setCurrentTime(tamagotchi.getCurrentTime() + 56);
-
+/*
         System.out.println("aika : " + System.currentTimeMillis());
         System.out.println("synt aika: " + tamagotchi.getDateOfBirth());
         System.out.println("aika-synt aika: " + (System.currentTimeMillis() - tamagotchi.getDateOfBirth()));
-
+*/
         tamagotchi.setHunger(tamagotchi.getHunger() + 56);
         System.out.println("hung" + tamagotchi.getHunger());
     }
+    
 
     public String tamaslist() throws Exception {
         ArrayList<String> list = tamagotchiDao.list();
@@ -106,7 +107,6 @@ public class TamagotchiService {
             sb.append("\n");
         }
 
-       
         return sb.toString();
     }
     

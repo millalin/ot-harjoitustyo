@@ -45,13 +45,6 @@ public class Tamagotchi {
         this.currentTime=0;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public  long getCurrentTime() {
         return currentTime;
@@ -81,9 +74,6 @@ public class Tamagotchi {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getHunger() {
         return hunger;

@@ -7,6 +7,7 @@
 import dao.TamagotchiDao;
 import domain.Tamagotchi;
 import domain.TamagotchiService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -47,7 +48,7 @@ public class TamagotchiServiceTest {
         serv.newTamagotchi(name);
         tamagotchi = new Tamagotchi(name);
         tdao.create(tamagotchi);
-        tamas=new HashMap();
+        tamas = new HashMap();
         tamas.put(name, tamagotchi);
 
     }
@@ -57,6 +58,7 @@ public class TamagotchiServiceTest {
 
         //poista tietokannasta
         tdao.deleteTamagotchi(name);
+        tdao.deleteTamagotchi("x");
     }
 
     // TODO add test methods here.
@@ -67,24 +69,88 @@ public class TamagotchiServiceTest {
     }
 
     @Test
-    public void tamagotchinNalkaOnAlussa800000() {
+    public void tamagotchinNalkaOnAlussa700000() {
 
-       
-        int result=tamagotchi.getHunger();
-        
+        int result = tamagotchi.getHunger();
 
-        assertEquals(800000, result);
-       
+        assertEquals(700000, result);
+
     }
 
     @Test
     public void tamagotchinNalkaVaheneeKunSyotetaanKerran() throws Exception {
 
         serv.updateTamagotchiHunger(name);
-        tamagotchi=serv.getTamagotchi(name);
+        tamagotchi = serv.getTamagotchi(name);
         int result = tamagotchi.getHunger();
-        
 
-        assertEquals(650000, result);
+        assertEquals(550000, result);
     }
+
+    @Test
+    public void tamagotchiMoodIsSadWhenHungrer700000() throws Exception {
+
+        String result = serv.getMood(name);
+
+        assertEquals("sad", result);
+    }
+
+    @Test
+    public void tamagotchiMoodIsHappyWhenHungrer400000() throws Exception {
+
+        serv.updateTamagotchiHunger(name);
+        serv.updateTamagotchiHunger(name);
+        String result = serv.getMood(name);
+
+        assertEquals("happy", result);
+    }
+
+    @Test
+    public void tamagotchiHungerGoesupWhenTime() throws Exception {
+        Tamagotchi tama=new Tamagotchi("x");
+        
+        tdao.create(tama);
+        tama=serv.getTamagotchi("x");
+        serv.time("x");
+        int result=tama.getHunger();
+
+        assertEquals(700056, result);
+    }
+    
+     @Test
+    public void tamagotchiDeadWhenHungerOver1000000() throws Exception {
+        Tamagotchi tama=new Tamagotchi("x");
+        tdao.create(tama);
+        tama=serv.getTamagotchi("x");
+        tama.setHunger(1000001);
+        boolean result=serv.TamagotchiAlive("x");
+
+        assertEquals(false, result);
+    }
+    
+    
+     @Test
+    public void tamagotchiAliveWhenHungerLessThan1000000() throws Exception {
+        Tamagotchi tama=new Tamagotchi("x");
+        tdao.create(tama);
+        tama=serv.getTamagotchi("x");
+        tama.setHunger(999999);
+        boolean result=serv.TamagotchiAlive("x");
+
+        assertEquals(true, result);
+    }
+    
+    
+      @Test
+    public void tamagotchiListReturnsListAsString() throws Exception {
+
+        String result =serv.tamaslist();
+        boolean notEmpty=true;
+        if(result.isEmpty())    {
+            notEmpty=false;
+        }
+
+          assertTrue(notEmpty);
+    }
+    
 }
