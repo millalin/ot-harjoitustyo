@@ -11,4 +11,4 @@ päivä |  aika |  mitä tein
 1.4 | 3 | gifien tekoa ja pientä koodin säätöä
 2.4 | 3 | gifejä lisää, ajan kulumisen laskemista ja kokeiluja ohjelmassa
 3.4 | 5 | tietokannan päivitys, nappien lisäys, testit toimimaan uudella tavalla laskiessa, toiminnallisuuksien lisäämistä
-4.4 | 2 | testien tekoa ja checkstylen käyttöönotto
+4.4 | 3 | testien tekoa ja checkstylen käyttöönotto ja checkstyle korjaukset
