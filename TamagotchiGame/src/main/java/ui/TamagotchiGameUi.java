@@ -169,7 +169,7 @@ public class TamagotchiGameUi extends Application {
                 name = nameField.getText();
                 tamagotchiservice.newTamagotchi(name);
                 
-                if (tamagotchiservice.TamagotchiAlive(name)) {
+                if (tamagotchiservice.tamagotchiAlive(name)) {
                     update(state, stage, deadScene);
                 }
                 
@@ -190,8 +190,8 @@ public class TamagotchiGameUi extends Application {
                 System.out.println("nimi haettu: " + name);
                 
                 tamagotchiservice.getTamagotchi(name);
-                System.out.println("elossa? " + tamagotchiservice.TamagotchiAlive(name));
-                if (tamagotchiservice.TamagotchiAlive(name)) {
+                System.out.println("elossa? " + tamagotchiservice.tamagotchiAlive(name));
+                if (tamagotchiservice.tamagotchiAlive(name)) {
                     update(state, stage, deadScene);
                     stage.setScene(toka);
                 } else {
@@ -305,7 +305,7 @@ public class TamagotchiGameUi extends Application {
                 }
                 try {
                     
-                    if (tamagotchiservice.TamagotchiAlive(name) == false) {
+                    if (tamagotchiservice.tamagotchiAlive(name) == false) {
                         stage.setScene(deadScene);
                         System.out.println("pitäisi loppua, huonosti kävi");
                         

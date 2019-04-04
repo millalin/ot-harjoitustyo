@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +21,11 @@ import java.util.logging.Logger;
  * @author milla
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
+
+    private int energy = 0;
+    private int hunger = 0;
+    private int happiness = 0;
+    private long time = 0;
 
     //private Tamagotchi tamagotchi;
     public TamagotchiDao() throws Exception {
@@ -51,7 +56,6 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
-    
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
@@ -64,7 +68,6 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         statement.setInt(3, tamagotchi.getHappiness());
         statement.setLong(4, System.currentTimeMillis());
         statement.setString(5, tamagotchi.getName());
-        
 
         statement.executeUpdate();
 
@@ -74,13 +77,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
         return tamagotchi;
     }
-    
 
     public Tamagotchi loadTamagotchi(String name) throws Exception {
-        int energy = 0;
-        int hunger = 0;
-        int happiness=0;
-        long time=0;
 
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
@@ -92,68 +90,59 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            
+
             hunger = resultSet.getInt("hunger");
             energy = resultSet.getInt("energy");
-            happiness=resultSet.getInt("happiness");
-            time=resultSet.getLong("time");
-            
+            happiness = resultSet.getInt("happiness");
+            time = resultSet.getLong("time");
 
         }
 
         connection.close();
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
-        long currentTime=System.currentTimeMillis();
-        
-        System.out.println("tamaika: "+time);
-        long timeGone=currentTime-time;
-        
-        System.out.println("aikaa mennyt: "+ timeGone);
-        
-        int x=(int)(timeGone/10000);
-        System.out.println("x: "+x);
-        int newHunger=hunger +(56*x);
-        tamagotchi.setHunger(newHunger);
+     //   long currentTime = System.currentTimeMillis();
+       // long timeGone = currentTime - time;
+
+        int x = (int) ((System.currentTimeMillis() - time) / 10000);
+
+        tamagotchi.setHunger(hunger + (56 * x));
         tamagotchi.setEnergy(energy);
         tamagotchi.setAlive(true); //myöh haku ja päiv tietokannasta
 
         return tamagotchi;
     }
-    
-    public ArrayList list() throws Exception   {
-        ArrayList list=new ArrayList();
+
+    public ArrayList list() throws Exception {
+        ArrayList list = new ArrayList();
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("SELECT name FROM Tamagotchi;");
 
-
         ResultSet resultSet = statement.executeQuery();
-        
-         while (resultSet.next()) {
-            String name=resultSet.getString("name");
+
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
             list.add(name);
 
         }
-        
+
         return list;
-        
+
     }
-    
 
     public void deleteTamagotchi(String name) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("DELETE FROM Tamagotchi WHERE name = ?");
-        
+
         statement.setString(1, name);
 
         statement.executeUpdate();
         connection.close();
     }
-    
 
     public void alustaTietokanta() {
         try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {

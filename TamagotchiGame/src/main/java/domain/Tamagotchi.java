@@ -33,7 +33,7 @@ public class Tamagotchi {
         
         this.name = name;
 
-        this.hunger =700000;
+        this.hunger = 700000;
         this.happiness = 500000;
         this.energy = 800000;
         this.clean = 800000;
@@ -42,7 +42,7 @@ public class Tamagotchi {
         this.sick = 200000;
 
         this.dateOfBirth = System.currentTimeMillis();
-        this.currentTime=0;
+        this.currentTime = 0;
     }
 
 

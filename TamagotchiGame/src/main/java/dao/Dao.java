@@ -11,8 +11,10 @@ import java.sql.SQLException;
 /**
  *
  * @author milla
+ * @param <T>
+ * @param <K>
  */
-public interface Dao <T, K>{
+public interface Dao<T, K> {
 
     Tamagotchi create(T tamagotchi) throws SQLException;
 

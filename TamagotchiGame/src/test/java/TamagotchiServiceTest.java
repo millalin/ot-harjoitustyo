@@ -123,7 +123,7 @@ public class TamagotchiServiceTest {
         tdao.create(tama);
         tama=serv.getTamagotchi("x");
         tama.setHunger(1000001);
-        boolean result=serv.TamagotchiAlive("x");
+        boolean result=serv.tamagotchiAlive("x");
 
         assertEquals(false, result);
     }
@@ -135,7 +135,7 @@ public class TamagotchiServiceTest {
         tdao.create(tama);
         tama=serv.getTamagotchi("x");
         tama.setHunger(999999);
-        boolean result=serv.TamagotchiAlive("x");
+        boolean result=serv.tamagotchiAlive("x");
 
         assertEquals(true, result);
     }

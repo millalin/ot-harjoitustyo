@@ -58,7 +58,7 @@ public class TamagotchiService {
     }
     
 
-    public boolean TamagotchiAlive(String name) {
+    public boolean tamagotchiAlive(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
         if (tamagotchi.getHunger() > 1000000) {
             tamagotchi.setAlive(false);

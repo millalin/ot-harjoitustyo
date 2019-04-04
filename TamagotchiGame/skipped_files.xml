@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?xml version="1.0"?>
 
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
-<root>
-    
-</root>
+<suppressions>
+    <suppress files="ui.TamagotchiGameUi.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="ui.TamagotchiGameUi.GuiHelper.java" checks="[a-zA-Z0-9]*"/>
+</suppressions>
