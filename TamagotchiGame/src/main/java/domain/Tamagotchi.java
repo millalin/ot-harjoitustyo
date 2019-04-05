@@ -36,7 +36,7 @@ public class Tamagotchi {
         this.hunger = 700000;
         this.happiness = 500000;
         this.energy = 800000;
-        this.clean = 800000;
+        this.clean = 400000;
         this.alive = true;
         this.age = 0;
         this.sick = 200000;

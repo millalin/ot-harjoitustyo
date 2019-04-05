@@ -69,6 +69,19 @@ public class TamagotchiService {
         tamagotchiDao.update(tamagotchi);
         System.out.println("happiness: " + tamagotchi.getHappiness());
     }
+     
+        public void updateTamagotchiClean(String name) throws Exception {
+
+        Tamagotchi tamagotchi = tamas.get(name);
+        if (tamagotchi.getClean()+ 150000 >= 1000000) {
+            tamagotchi.setClean(1000000);
+        } else {
+            tamagotchi.setClean(tamagotchi.getClean()+ 150000);
+        }
+
+      //  tamagotchiDao.update(tamagotchi); TEE TUONNE PÄIVITYS
+        System.out.println("clean: " + tamagotchi.getClean());
+    }
     
 
     public boolean tamagotchiAlive(String name) {
@@ -94,6 +107,8 @@ public class TamagotchiService {
             mood = "hungry";
         } else if (tamagotchi.getHappiness()<500000)    {
             mood = "sad";
+        }else if (tamagotchi.getClean() <500000)    {
+            mood = "dirty";
         } else {
             mood = "happy";
         }

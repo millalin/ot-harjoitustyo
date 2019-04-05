@@ -12,3 +12,4 @@ päivä |  aika |  mitä tein
 2.4 | 3 | gifejä lisää, ajan kulumisen laskemista ja kokeiluja ohjelmassa
 3.4 | 5 | tietokannan päivitys, nappien lisäys, testit toimimaan uudella tavalla laskiessa, toiminnallisuuksien lisäämistä
 4.4 | 3 | testien tekoa ja checkstylen käyttöönotto ja checkstyle korjaukset
+5.4 | 1 | uusien gifien teko ja lisäys, toiminnot nappiin clean ja onnellisuuden lisääminen kulumaan ajan kanssa

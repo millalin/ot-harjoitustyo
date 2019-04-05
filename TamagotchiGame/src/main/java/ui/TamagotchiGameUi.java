@@ -46,6 +46,8 @@ public class TamagotchiGameUi extends Application {
     FlowPane frameDead;
     FlowPane frameMedicate;
     FlowPane frameHungry;
+    FlowPane frameDirty;
+    FlowPane frameClean;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -115,6 +117,12 @@ public class TamagotchiGameUi extends Application {
         Image hungry = new Image("file:Gifs/tamag(17).gif");
         ImageView hungrypicture = new ImageView(hungry);
         
+        Image dirty = new Image("file:Gifs/tamag(18).gif");
+        ImageView dirtypicture = new ImageView(dirty);
+        
+        Image clean = new Image("file:Gifs/tamag(19).gif");
+        ImageView cleanpicture = new ImageView(clean);
+        
         //napit
         HBox buttons = new HBox();
         buttons.setSpacing(100);
@@ -147,6 +155,8 @@ public class TamagotchiGameUi extends Application {
         frameMedicate = new FlowPane();
         frameDead = new FlowPane();
         frameHungry = new FlowPane();
+        frameDirty = new FlowPane();
+        frameClean = new FlowPane();
         
         frameHappy.getChildren().add(happypicture);
         frameSad.getChildren().add(sadpicture);
@@ -155,6 +165,8 @@ public class TamagotchiGameUi extends Application {
         frameMedicate.getChildren().add(medicatepicture);
         frameDead.getChildren().add(deadpicture);
         frameHungry.getChildren().add(hungrypicture);
+        frameDirty.getChildren().add(dirtypicture);
+        frameClean.getChildren().add(cleanpicture);
         
         state.setTop(buttons);
         state.setPadding(new Insets(30, 20, 20, 30));
@@ -252,6 +264,27 @@ public class TamagotchiGameUi extends Application {
             }
         });
         
+          cleanbutton.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                
+                try {
+                    
+                    state.setCenter(frameClean);
+                    tamagotchiservice.updateTamagotchiClean(name);
+                    //TESTITULOSTUS
+                    System.out.println("tila:  " + tamagotchiservice.getMood(name));
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        });
+          
+          
+        
         playbutton.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -323,6 +356,8 @@ public class TamagotchiGameUi extends Application {
                         
                     } else if (tamagotchiservice.getMood(name).equals("hungry"))    {
                         state.setCenter(frameHungry);
+                    }else if (tamagotchiservice.getMood(name).equals("dirty"))  {
+                        state.setCenter(frameDirty);
                     } else if (tamagotchiservice.getMood(name).equals("happy")) {
                         state.setCenter(frameHappy);
                     } 
