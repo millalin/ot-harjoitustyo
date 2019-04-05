@@ -57,6 +57,19 @@ public class TamagotchiService {
         System.out.println("hunger: " + tamagotchi.getHunger());
     }
     
+     public void updateTamagotchiHappiness(String name) throws Exception {
+
+        Tamagotchi tamagotchi = tamas.get(name);
+        if (tamagotchi.getHappiness()+ 150000 >= 1000000) {
+            tamagotchi.setHappiness(1000000);
+        } else {
+            tamagotchi.setHappiness(tamagotchi.getHappiness() + 150000);
+        }
+
+        tamagotchiDao.update(tamagotchi);
+        System.out.println("happiness: " + tamagotchi.getHappiness());
+    }
+    
 
     public boolean tamagotchiAlive(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
@@ -78,6 +91,8 @@ public class TamagotchiService {
         String mood = "";
 
         if (tamagotchi.getHunger() > 550000) {
+            mood = "hungry";
+        } else if (tamagotchi.getHappiness()<500000)    {
             mood = "sad";
         } else {
             mood = "happy";
@@ -93,6 +108,7 @@ public class TamagotchiService {
         System.out.println("aika-synt aika: " + (System.currentTimeMillis() - tamagotchi.getDateOfBirth()));
 */
         tamagotchi.setHunger(tamagotchi.getHunger() + 56);
+        tamagotchi.setHappiness(tamagotchi.getHappiness() - 56);
         System.out.println("hung" + tamagotchi.getHunger());
     }
     

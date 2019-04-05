@@ -45,6 +45,7 @@ public class TamagotchiGameUi extends Application {
     FlowPane framePlay;
     FlowPane frameDead;
     FlowPane frameMedicate;
+    FlowPane frameHungry;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -111,6 +112,9 @@ public class TamagotchiGameUi extends Application {
         Image medicate = new Image("file:Gifs/tamag(16).gif");
         ImageView medicatepicture = new ImageView(medicate);
 
+        Image hungry = new Image("file:Gifs/tamag(17).gif");
+        ImageView hungrypicture = new ImageView(hungry);
+        
         //napit
         HBox buttons = new HBox();
         buttons.setSpacing(100);
@@ -142,6 +146,7 @@ public class TamagotchiGameUi extends Application {
         framePlay = new FlowPane();
         frameMedicate = new FlowPane();
         frameDead = new FlowPane();
+        frameHungry = new FlowPane();
         
         frameHappy.getChildren().add(happypicture);
         frameSad.getChildren().add(sadpicture);
@@ -149,8 +154,10 @@ public class TamagotchiGameUi extends Application {
         framePlay.getChildren().add(playpicture);
         frameMedicate.getChildren().add(medicatepicture);
         frameDead.getChildren().add(deadpicture);
+        frameHungry.getChildren().add(hungrypicture);
         
         state.setTop(buttons);
+        state.setPadding(new Insets(30, 20, 20, 30));
         state.setCenter(frameHappy);
         state.setBottom(buttons2);
 
@@ -253,7 +260,7 @@ public class TamagotchiGameUi extends Application {
                 try {
                     
                     state.setCenter(framePlay);
-                    //      tamagotchiservice.updateTamagotchiHunger(name);
+                          tamagotchiservice.updateTamagotchiHappiness(name);
                     System.out.println("tila:  " + tamagotchiservice.getMood(name));
                     
                 } catch (Exception ex) {
@@ -314,9 +321,11 @@ public class TamagotchiGameUi extends Application {
                     if (tamagotchiservice.getMood(name).equals("sad")) {
                         state.setCenter(frameSad);
                         
+                    } else if (tamagotchiservice.getMood(name).equals("hungry"))    {
+                        state.setCenter(frameHungry);
                     } else if (tamagotchiservice.getMood(name).equals("happy")) {
                         state.setCenter(frameHappy);
-                    }
+                    } 
 
                     //AIKA KULUU?
                     tamagotchiservice.time(name);

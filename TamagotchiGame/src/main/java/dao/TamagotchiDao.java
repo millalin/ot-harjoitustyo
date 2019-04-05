@@ -22,10 +22,10 @@ import java.util.logging.Logger;
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
-    private int energy = 0;
-    private int hunger = 0;
-    private int happiness = 0;
-    private long time = 0;
+    private int energy;
+    private int hunger;
+    private int happiness;
+    private long time;
 
     //private Tamagotchi tamagotchi;
     public TamagotchiDao() throws Exception {
@@ -109,6 +109,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         int newHunger = hunger + (56 * x);
         tamagotchi.setHunger(newHunger);
         tamagotchi.setEnergy(energy);
+        tamagotchi.setHappiness(happiness);
         tamagotchi.setAlive(true); //myöh haku ja päiv tietokannasta
 
         return tamagotchi;
@@ -145,6 +146,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         connection.close();
     }
 
+    
+    
     public void alustaTietokanta() {
         try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();
