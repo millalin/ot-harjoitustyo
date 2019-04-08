@@ -11,7 +11,31 @@ Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää 
 
 [Työaikakirjanpito](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
-[Arkkitehtuurikuvaus]
+[Arkkitehtuurikuvaus](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
+### Releaset
+
+
+### Komentorivikomennot
+
+####Testaus
+
+Testit suoritetaan komennolla
+
+    mvn test
+
+Testikattavuusrapotti luodaan komennolla
+
+    mvn jacoco:report
+
+
+#### Checkstyle
+
+Tiedostoon checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla
+
+    mvn jxr:jxr checkstyle:checkstyle
+
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto target/site/checkstyle.html
 
 
 

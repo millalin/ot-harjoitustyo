@@ -54,7 +54,7 @@ public class Tamagotchi {
         this.currentTime = currentTime;
     }
 
-    public int isSick() {
+    public int getSick() {
         return sick;
     }
 
