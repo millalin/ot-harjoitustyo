@@ -18,7 +18,7 @@ Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää 
 
 ### Komentorivikomennot
 
-####Testaus
+#### Testaus
 
 Testit suoritetaan komennolla
 

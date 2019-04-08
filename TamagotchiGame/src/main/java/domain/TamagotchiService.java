@@ -21,7 +21,6 @@ public class TamagotchiService {
     private String name;
     public Map<String, Tamagotchi> tamas;
 
-    
     public TamagotchiService(TamagotchiDao tamagotchiDao) {
         this.tamagotchiDao = tamagotchiDao;
         tamas = new HashMap();
@@ -35,7 +34,6 @@ public class TamagotchiService {
         tamagotchiDao.create(tamagotchi);
     }
 
-    
     public Tamagotchi getTamagotchi(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamagotchiDao.loadTamagotchi(name);
@@ -56,11 +54,11 @@ public class TamagotchiService {
         tamagotchiDao.update(tamagotchi);
         System.out.println("hunger: " + tamagotchi.getHunger());
     }
-    
-     public void updateTamagotchiHappiness(String name) throws Exception {
+
+    public void updateTamagotchiHappiness(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getHappiness()+ 150000 >= 1000000) {
+        if (tamagotchi.getHappiness() + 150000 >= 1000000) {
             tamagotchi.setHappiness(1000000);
         } else {
             tamagotchi.setHappiness(tamagotchi.getHappiness() + 150000);
@@ -69,26 +67,41 @@ public class TamagotchiService {
         tamagotchiDao.update(tamagotchi);
         System.out.println("happiness: " + tamagotchi.getHappiness());
     }
-     
-        public void updateTamagotchiClean(String name) throws Exception {
+
+    public void updateTamagotchiClean(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getClean()+ 150000 >= 1000000) {
+        if (tamagotchi.getClean() + 150000 >= 1000000) {
             tamagotchi.setClean(1000000);
         } else {
-            tamagotchi.setClean(tamagotchi.getClean()+ 150000);
+            tamagotchi.setClean(tamagotchi.getClean() + 150000);
         }
 
-      //  tamagotchiDao.update(tamagotchi); TEE TUONNE PÄIVITYS
+        tamagotchiDao.update(tamagotchi);
         System.out.println("clean: " + tamagotchi.getClean());
     }
-    
+
+    public void updateTamagotchiMedicate(String name) throws Exception {
+
+        Tamagotchi tamagotchi = tamas.get(name);
+        if (tamagotchi.getSick() - 150000 <= 0) {
+            tamagotchi.setSick(0);
+        } else {
+            tamagotchi.setSick(tamagotchi.getSick() - 150000);
+        }
+
+        tamagotchiDao.update(tamagotchi);
+        System.out.println("sick: " + tamagotchi.getSick());
+    }
 
     public boolean tamagotchiAlive(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getHunger() > 1000000) {
+        if (tamagotchi.getHunger() >= 1000000) {
             tamagotchi.setAlive(false);
             //PÄIVITYS myöhemmin myös tietokantaan?? onko tarve
+        }
+        if (tamagotchi.getHappiness() <= 0 || tamagotchi.getSick() >= 1000000) {
+            tamagotchi.setAlive(false);
         }
 
         if (tamagotchi.isAlive()) {
@@ -97,7 +110,6 @@ public class TamagotchiService {
         return false;
     }
 
-    
     public String getMood(String name) throws Exception {
         Tamagotchi tamagotchi = tamas.get(name);
 
@@ -105,10 +117,12 @@ public class TamagotchiService {
 
         if (tamagotchi.getHunger() > 550000) {
             mood = "hungry";
-        } else if (tamagotchi.getHappiness()<500000)    {
+        } else if (tamagotchi.getHappiness() < 500000) {
             mood = "sad";
-        }else if (tamagotchi.getClean() <500000)    {
+        } else if (tamagotchi.getClean() < 500000) {
             mood = "dirty";
+        } else if (tamagotchi.getSick() > 500000) {
+            mood = "sick";
         } else {
             mood = "happy";
         }
@@ -117,11 +131,11 @@ public class TamagotchiService {
 
     public void time(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
-/*
+        /*
         System.out.println("aika : " + System.currentTimeMillis());
         System.out.println("synt aika: " + tamagotchi.getDateOfBirth());
         System.out.println("aika-synt aika: " + (System.currentTimeMillis() - tamagotchi.getDateOfBirth()));
-*/
+         */
         tamagotchi.setHunger(tamagotchi.getHunger() + 56);
         tamagotchi.setHappiness(tamagotchi.getHappiness() - 56);
         tamagotchi.setClean(tamagotchi.getClean() - 56);
@@ -129,12 +143,11 @@ public class TamagotchiService {
         tamagotchi.setSick(tamagotchi.getSick() + 56);
         System.out.println("hung" + tamagotchi.getHunger());
     }
-    
 
     public String tamaslist() throws Exception {
         ArrayList<String> list = tamagotchiDao.list();
         String tamas = list.toString();
-        
+
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
             sb.append(s);
@@ -143,8 +156,8 @@ public class TamagotchiService {
 
         return sb.toString();
     }
-    
-    public void delete(String name)  throws Exception   {
+
+    public void delete(String name) throws Exception {
         tamagotchiDao.deleteTamagotchi(name);
     }
 

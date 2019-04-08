@@ -92,12 +92,15 @@ public class TamagotchiServiceTest {
 
         String result = serv.getMood(name);
 
-        assertEquals("sad", result);
+        assertEquals("hungry", result);
     }
 
     @Test
     public void tamagotchiMoodIsHappyWhenHungrer400000() throws Exception {
 
+        serv.updateTamagotchiClean(name);
+        serv.updateTamagotchiClean(name);
+        serv.updateTamagotchiHappiness(name);
         serv.updateTamagotchiHunger(name);
         serv.updateTamagotchiHunger(name);
         String result = serv.getMood(name);
