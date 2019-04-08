@@ -124,6 +124,7 @@ public class TamagotchiService {
 */
         tamagotchi.setHunger(tamagotchi.getHunger() + 56);
         tamagotchi.setHappiness(tamagotchi.getHappiness() - 56);
+        tamagotchi.setClean(tamagotchi.getClean() - 56);
         System.out.println("hung" + tamagotchi.getHunger());
     }
     
