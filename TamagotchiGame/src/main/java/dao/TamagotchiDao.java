@@ -118,10 +118,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         int x = (int) (timeGone / 10000);
         
         int newHunger = hunger + (56 * x);
-        int newEnergy= energy - (56 * x);
+        int newEnergy = energy - (56 * x);
         int newHappiness = happiness - (56 * x);
         int newClean = clean - (56 * x);
-        int newSick =sick + (56 * x);
+        int newSick = sick + (56 * x);
         tamagotchi.setHunger(newHunger);
         tamagotchi.setEnergy(newEnergy);
         tamagotchi.setHappiness(newHappiness);

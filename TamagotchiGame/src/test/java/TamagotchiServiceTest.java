@@ -96,7 +96,7 @@ public class TamagotchiServiceTest {
     }
 
     @Test
-    public void tamagotchiMoodIsHappyWhenHungrer400000() throws Exception {
+    public void tamagotchiMoodIsHappyWhenNothingWrong() throws Exception {
 
         serv.updateTamagotchiClean(name);
         serv.updateTamagotchiClean(name);
