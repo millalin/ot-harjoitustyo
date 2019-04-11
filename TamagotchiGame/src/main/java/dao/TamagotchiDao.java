@@ -81,10 +81,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         statement.setLong(6, System.currentTimeMillis());
         statement.setString(7, tamagotchi.getName());
 
+        //mood??
+        
         statement.executeUpdate();
-
         statement.close();
-
         connection.close();
 
         return tamagotchi;

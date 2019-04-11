@@ -29,7 +29,7 @@ public class TamagotchiService {
 
     public boolean alreadyExists(String name) throws Exception {
         if (tamaslist().contains(name)) {
-            System.out.println("on jo");
+       
             return true;
         }
         return false;
@@ -62,7 +62,6 @@ public class TamagotchiService {
         }
 
         tamagotchiDao.update(tamagotchi);
-        System.out.println("hunger: " + tamagotchi.getHunger());
     }
 
     public void updateTamagotchiHappiness(String name) throws Exception {
@@ -75,7 +74,6 @@ public class TamagotchiService {
         }
 
         tamagotchiDao.update(tamagotchi);
-        System.out.println("happiness: " + tamagotchi.getHappiness());
     }
 
     public void updateTamagotchiClean(String name) throws Exception {
@@ -88,7 +86,6 @@ public class TamagotchiService {
         }
 
         tamagotchiDao.update(tamagotchi);
-        System.out.println("clean: " + tamagotchi.getClean());
     }
 
     public void updateTamagotchiMedicate(String name) throws Exception {
@@ -101,20 +98,18 @@ public class TamagotchiService {
         }
 
         tamagotchiDao.update(tamagotchi);
-        System.out.println("sick: " + tamagotchi.getSick());
     }
 
     public void updateTamagotchiSleep(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getEnergy() + 150000 >= 1000000) {
+        if (tamagotchi.getEnergy() + 1000 >= 1000000) {
             tamagotchi.setEnergy(1000000);
         } else {
             tamagotchi.setEnergy(tamagotchi.getEnergy() + 1000);
         }
 
         tamagotchiDao.update(tamagotchi);
-        System.out.println("energy: " + tamagotchi.getEnergy());
     }
 
     public boolean tamagotchiAlive(String name) {
