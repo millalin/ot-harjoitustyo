@@ -6,8 +6,9 @@ package ui;
  * and open the template in the editor.
  */
 import dao.TamagotchiDao;
-import domain.Tamagotchi;
 import domain.TamagotchiService;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,10 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -56,6 +54,8 @@ public class TamagotchiGameUi extends Application {
     TextField field;
     TextField del;
 
+
+    
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -63,6 +63,7 @@ public class TamagotchiGameUi extends Application {
         //tamagotchiservice = start.getTamagotchiservice();
         TamagotchiDao tamagotchiDao = new TamagotchiDao();
         tamagotchiservice = new TamagotchiService((tamagotchiDao));
+      
         frames = new TamagotchiFrames();
        // frames.frames();
 
@@ -88,6 +89,7 @@ public class TamagotchiGameUi extends Application {
 
         createTamagotchi.setOnAction((event) -> {
             try {
+                
                 name = nameField.getText();
                 tamagotchiservice.newTamagotchi(name);
 

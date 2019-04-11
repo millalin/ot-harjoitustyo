@@ -29,16 +29,20 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     private long birthtime;
     private int clean;
     private int sick;
+    private String address;
 
     //private Tamagotchi tamagotchi;
     public TamagotchiDao() throws Exception {
+
+        address = "jdbc:h2:./tamagotchitietokanta";
+        alustaTietokanta();
 
     }
 
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
 
-        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
+        Connection connection = DriverManager.getConnection(address, "sa", "");
 
         //    tamas.add(tamagotchi);
         PreparedStatement statement
@@ -64,12 +68,11 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
+        Connection connection = DriverManager.getConnection(address, "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("UPDATE Tamagotchi SET hunger = ?, energy = ?, happiness= ?, clean = ?, sick = ?, time = ? WHERE name = ?");
 
-        
         statement.setInt(1, tamagotchi.getHunger());
         statement.setInt(2, tamagotchi.getEnergy());
         statement.setInt(3, tamagotchi.getHappiness());
@@ -89,7 +92,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     public Tamagotchi loadTamagotchi(String name) throws Exception {
 
-        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
+        Connection connection = DriverManager.getConnection(address, "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("SELECT * FROM Tamagotchi WHERE name = ?");
@@ -116,7 +119,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         long timeGone = currentTime - time;
 
         int x = (int) (timeGone / 10000);
-        
+
         int newHunger = hunger + (56 * x);
         int newEnergy = energy - (56 * x);
         int newHappiness = happiness - (56 * x);
@@ -134,7 +137,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     public ArrayList list() throws Exception {
         ArrayList list = new ArrayList();
-        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
+        Connection connection = DriverManager.getConnection(address, "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("SELECT name FROM Tamagotchi;");
@@ -152,7 +155,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     }
 
     public void deleteTamagotchi(String name) throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "");
+        Connection connection = DriverManager.getConnection(address, "sa", "");
 
         PreparedStatement statement
                 = connection.prepareStatement("DELETE FROM Tamagotchi WHERE name = ?");
@@ -163,16 +166,16 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         connection.close();
     }
 
-    
-    
     public void alustaTietokanta() {
-        try (Connection conne = DriverManager.getConnection("jdbc:h2:./tamagotchitietokanta", "sa", "")) {
+        try (Connection conne = DriverManager.getConnection(address, "sa", "")) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();
-            conne.prepareStatement("CREATE TABLE Tamagotchi(id serial, name varchar(25),birthtime long, hunger integer, energy integer, happiness integer,clean integer, sick integer, time long);").executeUpdate();
-
+            conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25),birthtime long, hunger integer, energy integer, happiness integer,clean integer, sick integer, time long);")
+                    .executeUpdate();
+            conne.close();
         } catch (SQLException ex) {
             Logger.getLogger(TamagotchiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 }
+

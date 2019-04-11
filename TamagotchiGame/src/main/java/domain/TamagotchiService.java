@@ -160,5 +160,9 @@ public class TamagotchiService {
     public void delete(String name) throws Exception {
         tamagotchiDao.deleteTamagotchi(name);
     }
+    
+    public void alusta()    {
+        
+    }
 
 }

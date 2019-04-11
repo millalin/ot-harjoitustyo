@@ -15,4 +15,5 @@ päivä |  aika |  mitä tein
 5.4 | 1 | uusien gifien teko ja lisäys, toiminnot nappiin clean ja onnellisuuden lisääminen kulumaan ajan kanssa
 8.4 | 5 | pakkauskaavion tekoa, readme päivitys, tietokannan muuttaminen ja päivitys sekä toimintojen lisääminen tallentamaan tietokantaan, koodin siistimistä
 10.4 | 3 | pom muutos,ui luokan siistimistä, uuden luokan teko, metodien teko, muutama checkstyle korjaus
-yht | 35 |
+11.4 | 2 | jar paketin luominen , tietokanta toimimaan oikein
+yht | 37 |
