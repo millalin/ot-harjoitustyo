@@ -27,11 +27,21 @@ public class TamagotchiService {
 
     }
 
+    public boolean alreadyExists(String name) throws Exception {
+        if (tamaslist().contains(name)) {
+            System.out.println("on jo");
+            return true;
+        }
+        return false;
+    }
+
     public void newTamagotchi(String name) throws Exception {
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
         tamas.put(name, tamagotchi);
+
         tamagotchiDao.create(tamagotchi);
+
     }
 
     public Tamagotchi getTamagotchi(String name) throws Exception {
@@ -71,10 +81,10 @@ public class TamagotchiService {
     public void updateTamagotchiClean(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getClean() + 150000 >= 1000000) {
+        if (tamagotchi.getClean() + 250000 >= 1000000) {
             tamagotchi.setClean(1000000);
         } else {
-            tamagotchi.setClean(tamagotchi.getClean() + 150000);
+            tamagotchi.setClean(tamagotchi.getClean() + 250000);
         }
 
         tamagotchiDao.update(tamagotchi);
@@ -84,14 +94,27 @@ public class TamagotchiService {
     public void updateTamagotchiMedicate(String name) throws Exception {
 
         Tamagotchi tamagotchi = tamas.get(name);
-        if (tamagotchi.getSick() - 150000 <= 0) {
+        if (tamagotchi.getSick() - 300000 <= 0) {
             tamagotchi.setSick(0);
         } else {
-            tamagotchi.setSick(tamagotchi.getSick() - 150000);
+            tamagotchi.setSick(tamagotchi.getSick() - 300000);
         }
 
         tamagotchiDao.update(tamagotchi);
         System.out.println("sick: " + tamagotchi.getSick());
+    }
+
+    public void updateTamagotchiSleep(String name) throws Exception {
+
+        Tamagotchi tamagotchi = tamas.get(name);
+        if (tamagotchi.getEnergy() + 150000 >= 1000000) {
+            tamagotchi.setEnergy(1000000);
+        } else {
+            tamagotchi.setEnergy(tamagotchi.getEnergy() + 1000);
+        }
+
+        tamagotchiDao.update(tamagotchi);
+        System.out.println("energy: " + tamagotchi.getEnergy());
     }
 
     public boolean tamagotchiAlive(String name) {
@@ -103,7 +126,6 @@ public class TamagotchiService {
         if (tamagotchi.getHappiness() <= 0 || tamagotchi.getSick() >= 1000000) {
             tamagotchi.setAlive(false);
         }
-
         if (tamagotchi.isAlive()) {
             return true;
         }
@@ -113,35 +135,44 @@ public class TamagotchiService {
     public String getMood(String name) throws Exception {
         Tamagotchi tamagotchi = tamas.get(name);
 
-        String mood = "";
+        if (!tamagotchi.getMood().equals("sleep")) {
+            if (tamagotchi.getEnergy() < 100000) {
+                tamagotchi.setMood("sleep");
+            } else if (tamagotchi.getHunger() > 550000) {
+                tamagotchi.setMood("hungry");
 
-        if (tamagotchi.getHunger() > 550000) {
-            mood = "hungry";
-        } else if (tamagotchi.getHappiness() < 500000) {
-            mood = "sad";
-        } else if (tamagotchi.getClean() < 500000) {
-            mood = "dirty";
-        } else if (tamagotchi.getSick() > 500000) {
-            mood = "sick";
-        } else {
-            mood = "happy";
+            } else if (tamagotchi.getHappiness() < 500000) {
+                tamagotchi.setMood("sad");
+
+            } else if (tamagotchi.getClean() < 500000) {
+                tamagotchi.setMood("dirty");
+
+            } else if (tamagotchi.getSick() > 500000) {
+                tamagotchi.setMood("sick");
+
+            } else {
+                tamagotchi.setMood("happy");
+
+            }
         }
-        return mood;
+
+        return tamagotchi.getMood();
+    }
+
+    public void setMood(String name, String mood) {
+        Tamagotchi tamagotchi = tamas.get(name);
+        tamagotchi.setMood(mood);
     }
 
     public void time(String name) {
         Tamagotchi tamagotchi = tamas.get(name);
-        /*
-        System.out.println("aika : " + System.currentTimeMillis());
-        System.out.println("synt aika: " + tamagotchi.getDateOfBirth());
-        System.out.println("aika-synt aika: " + (System.currentTimeMillis() - tamagotchi.getDateOfBirth()));
-         */
+
         tamagotchi.setHunger(tamagotchi.getHunger() + 56);
         tamagotchi.setHappiness(tamagotchi.getHappiness() - 56);
         tamagotchi.setClean(tamagotchi.getClean() - 56);
         tamagotchi.setEnergy(tamagotchi.getEnergy() - 56);
         tamagotchi.setSick(tamagotchi.getSick() + 56);
-        System.out.println("hung" + tamagotchi.getHunger());
+
     }
 
     public String tamaslist() throws Exception {
@@ -159,10 +190,6 @@ public class TamagotchiService {
 
     public void delete(String name) throws Exception {
         tamagotchiDao.deleteTamagotchi(name);
-    }
-    
-    public void alusta()    {
-        
     }
 
 }

@@ -24,6 +24,7 @@ public class TamagotchiFrames {
     FlowPane frameHungry;
     FlowPane frameDirty;
     FlowPane frameClean;
+    FlowPane frameSleep;
 
     public TamagotchiFrames() {
 
@@ -71,6 +72,7 @@ public class TamagotchiFrames {
         frameHungry = new FlowPane();
         frameDirty = new FlowPane();
         frameClean = new FlowPane();
+        frameSleep = new FlowPane();
 
         frameHappy.getChildren().add(happypicture);
         frameSad.getChildren().add(sadpicture);
@@ -81,6 +83,15 @@ public class TamagotchiFrames {
         frameHungry.getChildren().add(hungrypicture);
         frameDirty.getChildren().add(dirtypicture);
         frameClean.getChildren().add(cleanpicture);
+        frameSleep.getChildren().add(sleeppicture);
+    }
+
+    public FlowPane getFrameSleep() {
+        return frameSleep;
+    }
+
+    public void setFrameSleep(FlowPane frameSleep) {
+        this.frameSleep = frameSleep;
     }
 
     public FlowPane getFrameHappy() {

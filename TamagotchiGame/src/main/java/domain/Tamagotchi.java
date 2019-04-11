@@ -28,6 +28,7 @@ public class Tamagotchi {
     private boolean alive;
     private int age; //days
     private int sick;
+    private String mood;
 
     public Tamagotchi(String name) {
         
@@ -43,6 +44,15 @@ public class Tamagotchi {
 
         this.dateOfBirth = System.currentTimeMillis();
         this.currentTime = 0;
+        this.mood = "sad";
+    }
+
+    public String getMood() {
+        return mood;
+    }
+
+    public void setMood(String mood) {
+        this.mood = mood;
     }
 
 
