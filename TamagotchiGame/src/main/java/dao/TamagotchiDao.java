@@ -34,7 +34,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     //private Tamagotchi tamagotchi;
     public TamagotchiDao() throws Exception {
 
-        address = "jdbc:h2:./tamagotchitietokanta";
+        address = "jdbc:h2:./src/main/resources/tamagotchitietokanta";
         alustaTietokanta();
 
     }
