@@ -7,13 +7,13 @@ Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää 
 
 ### Dokumentaatio
 
-[Käyttöohje](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+[Käyttöohje]
 
 [Vaatimusmäärittely](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Arkkitehtuurikuvaus](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-{Testausdokumentti](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/testausdokumentti.md)
+{Testausdokumentti]
 
 [Työaikakirjanpito](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
