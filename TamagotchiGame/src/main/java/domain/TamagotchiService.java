@@ -116,7 +116,6 @@ public class TamagotchiService {
         Tamagotchi tamagotchi = tamas.get(name);
         if (tamagotchi.getHunger() >= 1000000) {
             tamagotchi.setAlive(false);
-            //PÄIVITYS myöhemmin myös tietokantaan?? onko tarve
         }
         if (tamagotchi.getHappiness() <= 0 || tamagotchi.getSick() >= 1000000) {
             tamagotchi.setAlive(false);

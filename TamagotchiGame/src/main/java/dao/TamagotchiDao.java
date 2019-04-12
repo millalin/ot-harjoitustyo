@@ -29,6 +29,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     private long birthtime;
     private int clean;
     private int sick;
+    private String mood;
     private String address;
 
     //private Tamagotchi tamagotchi;
@@ -46,7 +47,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
         //    tamas.add(tamagotchi);
         PreparedStatement statement
-                = connection.prepareStatement("INSERT INTO Tamagotchi (name,birthtime, hunger, energy,happiness,clean,sick,time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                = connection.prepareStatement("INSERT INTO Tamagotchi (name,birthtime, hunger, energy,happiness,clean,sick,mood,time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         statement.setString(1, tamagotchi.getName());
         statement.setLong(2, System.currentTimeMillis());
@@ -55,7 +56,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         statement.setInt(5, tamagotchi.getHappiness());
         statement.setInt(6, tamagotchi.getClean());
         statement.setInt(7, tamagotchi.getSick());
-        statement.setLong(8, System.currentTimeMillis());
+        statement.setString(8, tamagotchi.getMood());
+        statement.setLong(9, System.currentTimeMillis());
 
         statement.executeUpdate();
 
@@ -71,17 +73,17 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         Connection connection = DriverManager.getConnection(address, "sa", "");
 
         PreparedStatement statement
-                = connection.prepareStatement("UPDATE Tamagotchi SET hunger = ?, energy = ?, happiness= ?, clean = ?, sick = ?, time = ? WHERE name = ?");
+                = connection.prepareStatement("UPDATE Tamagotchi SET hunger = ?, energy = ?, happiness= ?, clean = ?, sick = ?, mood = ?, time = ? WHERE name = ?");
 
         statement.setInt(1, tamagotchi.getHunger());
         statement.setInt(2, tamagotchi.getEnergy());
         statement.setInt(3, tamagotchi.getHappiness());
         statement.setInt(4, tamagotchi.getClean());
         statement.setInt(5, tamagotchi.getSick());
-        statement.setLong(6, System.currentTimeMillis());
-        statement.setString(7, tamagotchi.getName());
+        statement.setString(6, tamagotchi.getMood());
+        statement.setLong(7, System.currentTimeMillis());
+        statement.setString(8, tamagotchi.getName());
 
-        //mood??
         
         statement.executeUpdate();
         statement.close();
@@ -108,6 +110,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
             happiness = resultSet.getInt("happiness");
             clean = resultSet.getInt("clean");
             sick = resultSet.getInt("sick");
+            mood = resultSet.getString("mood");
             time = resultSet.getLong("time");
 
         }
@@ -130,6 +133,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         tamagotchi.setHappiness(newHappiness);
         tamagotchi.setClean(newClean);
         tamagotchi.setSick(newSick);
+        tamagotchi.setMood(mood);
         tamagotchi.setAlive(true); //myöh haku ja päiv tietokannasta
 
         return tamagotchi;
@@ -169,7 +173,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     public void alustaTietokanta() {
         try (Connection conne = DriverManager.getConnection(address, "sa", "")) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();
-            conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25),birthtime long, hunger integer, energy integer, happiness integer,clean integer, sick integer, time long);")
+            conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25),birthtime long, hunger integer, energy integer, happiness integer,clean integer, sick integer, mood varchar(10), time long);")
                     .executeUpdate();
             conne.close();
         } catch (SQLException ex) {

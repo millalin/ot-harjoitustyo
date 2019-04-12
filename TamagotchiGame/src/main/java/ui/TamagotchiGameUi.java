@@ -43,7 +43,7 @@ public class TamagotchiGameUi extends Application {
 
     Label nameText;
     Label oldone;
-    boolean ignoreEvents;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -52,6 +52,7 @@ public class TamagotchiGameUi extends Application {
         tamagotchiservice = new TamagotchiService((tamagotchiDao));
         frames = new TamagotchiFrames();
         allbuttons = new Buttons();
+
 
         GridPane startGroup = startGridPane();
 
@@ -198,9 +199,6 @@ public class TamagotchiGameUi extends Application {
             @Override
             public void handle(long l) {
 
-                if (ignoreEvents) {
-                    return;
-                }
                 if (l - before < 1_000_000_000_0L) {  //10 000 ms eli 10sec 
                     return;
                 }
@@ -213,6 +211,9 @@ public class TamagotchiGameUi extends Application {
                     if (tamagotchiservice.getMood(name).equals("sleep")) {
                         state.setCenter(frames.getFrameSleep());
                         tamagotchiservice.updateTamagotchiSleep(name);
+                        allbuttons.disableButtons(true);
+                    } else  {
+                        allbuttons.disableButtons(false);
                     }
                     if (tamagotchiservice.getMood(name).equals("sad")) {
                         state.setCenter(frames.getFrameSad());
