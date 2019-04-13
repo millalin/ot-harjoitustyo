@@ -10,3 +10,10 @@ Pakkaus ui sisältää javaFX:llä toteutetun käyttöliittymän, pakkaus domain
 
 ![alt.text](kaavio.jpg)
 
+### Päätoiminnallisuudet
+
+#### Uuden tamagotchin luominen
+
+Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut tekstikenttään uuden tamagotchin nimen, jota ei ole jo olemassa tietokannassa, etenee uuden tamagotchin luominen seuraavasti: 
+
+![alt.text](sekvenssikaavio.creating.png)

@@ -15,6 +15,7 @@ päivä |  aika |  mitä tein
 5.4 | 1 | uusien gifien teko ja lisäys, toiminnot nappiin clean ja onnellisuuden lisääminen kulumaan ajan kanssa
 8.4 | 5 | pakkauskaavion tekoa, readme päivitys, tietokannan muuttaminen ja päivitys sekä toimintojen lisääminen tallentamaan tietokantaan, koodin siistimistä
 10.4 | 3 | pom muutos,ui luokan siistimistä, uuden luokan teko, metodien teko, muutama checkstyle korjaus
-11.4 | 7 | jar paketin luominen , tietokanta toimimaan oikein, napin lisäys, toimintojen lisääminen nappeihin, toiminnon lisäys ettei samaa nimeä voi lisätä tai ettei voi hakea tamagotchia jota ei ole, uuden luokan luominen ui pakkaukseen, koodin siistimistä, testien tekoa
+11.4 | 7 | jar paketin luomisen testaus , tietokanta toimimaan oikein, napin lisäys, toimintojen lisääminen nappeihin, toiminnon lisäys ettei samaa nimeä voi lisätä tai ettei voi hakea tamagotchia jota ei ole, uuden luokan luominen ui pakkaukseen, koodin siistimistä, testien tekoa
 12.4 | 2 | jar paketin luominen ja releasen tekeminen, readme päivitys, koodin pientä muokkausta
-yht | 48 |
+13.4 | 2 | sekvenssikaavion tekoa ja ohjelman jatkotoiminnallisuuksien miettimistä ja tarkistuksia, että kaikki toimii oikein
+yht | 50 |
