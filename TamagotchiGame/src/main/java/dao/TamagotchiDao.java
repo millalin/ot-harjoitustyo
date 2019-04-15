@@ -121,13 +121,13 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         long currentTime = System.currentTimeMillis();
         long timeGone = currentTime - time;
 
-        int x = (int) (timeGone / 10000);
+        int x = (int) (timeGone / 1000);
 
-        int newHunger = hunger + (56 * x);
-        int newEnergy = energy - (56 * x);
-        int newHappiness = happiness - (56 * x);
-        int newClean = clean - (56 * x);
-        int newSick = sick + (56 * x);
+        int newHunger = hunger + (5 * x);
+        int newEnergy = energy - (5 * x);
+        int newHappiness = happiness - (5 * x);
+        int newClean = clean - (5 * x);
+        int newSick = sick + (5 * x);
         tamagotchi.setHunger(newHunger);
         tamagotchi.setEnergy(newEnergy);
         tamagotchi.setHappiness(newHappiness);

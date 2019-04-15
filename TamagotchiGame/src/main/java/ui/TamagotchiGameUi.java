@@ -44,6 +44,7 @@ public class TamagotchiGameUi extends Application {
     Label nameText;
     Label oldone;
 
+    int count = 9;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -52,7 +53,6 @@ public class TamagotchiGameUi extends Application {
         tamagotchiservice = new TamagotchiService((tamagotchiDao));
         frames = new TamagotchiFrames();
         allbuttons = new Buttons();
-
 
         GridPane startGroup = startGridPane();
 
@@ -78,7 +78,7 @@ public class TamagotchiGameUi extends Application {
             try {
                 name = nameField.getText();
                 if (tamagotchiservice.alreadyExists(name)) {
-                    nameText.setText("Name already exists, choose other one");
+                    nameText.setText("Name already exists, please choose another one");
                 } else {
                     tamagotchiservice.newTamagotchi(name);
                     update(state, stage, deadScene);
@@ -130,6 +130,7 @@ public class TamagotchiGameUi extends Application {
         stage.show();
 
         allbuttons.getFeedbutton().setOnAction((ActionEvent event) -> {
+            count = 0;
             state.setCenter(frames.getFrameEat());
             try {
                 tamagotchiservice.updateTamagotchiHunger(name);
@@ -140,8 +141,10 @@ public class TamagotchiGameUi extends Application {
 
         allbuttons.getCleanbutton().setOnAction((ActionEvent event) -> {
             try {
+                count = 0;
                 state.setCenter(frames.getFrameClean());
                 tamagotchiservice.updateTamagotchiClean(name);
+
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -149,8 +152,10 @@ public class TamagotchiGameUi extends Application {
 
         allbuttons.getPlaybutton().setOnAction((ActionEvent event) -> {
             try {
+                count = 0;
                 state.setCenter(frames.getFramePlay());
                 tamagotchiservice.updateTamagotchiHappiness(name);
+
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -158,6 +163,7 @@ public class TamagotchiGameUi extends Application {
 
         allbuttons.getMedicatebutton().setOnAction((ActionEvent event) -> {
             try {
+                count = 0;
                 state.setCenter(frames.getFrameMedicate());
                 tamagotchiservice.updateTamagotchiMedicate(name);
 
@@ -181,7 +187,6 @@ public class TamagotchiGameUi extends Application {
         allbuttons.getWakeup().setOnAction((ActionEvent event) -> {
             try {
                 tamagotchiservice.setMood(name, "happy");
-                update(state, stage, deadScene);
                 allbuttons.disableButtons(false);
 
             } catch (Exception ex) {
@@ -199,10 +204,14 @@ public class TamagotchiGameUi extends Application {
             @Override
             public void handle(long l) {
 
-                if (l - before < 1_000_000_000_0L) {  //10 000 ms eli 10sec 
+                if (l - before < 1_000_000_000L) {  //10 00 ms eli 1sec 
                     return;
                 }
+
                 try {
+
+                    count++;
+                    System.out.println(count);
 
                     if (tamagotchiservice.tamagotchiAlive(name) == false) {
                         stage.setScene(deadScene);
@@ -212,19 +221,21 @@ public class TamagotchiGameUi extends Application {
                         state.setCenter(frames.getFrameSleep());
                         tamagotchiservice.updateTamagotchiSleep(name);
                         allbuttons.disableButtons(true);
-                    } else  {
+                    } else {
                         allbuttons.disableButtons(false);
                     }
-                    if (tamagotchiservice.getMood(name).equals("sad")) {
-                        state.setCenter(frames.getFrameSad());
-                    } else if (tamagotchiservice.getMood(name).equals("hungry")) {
-                        state.setCenter(frames.getFrameHungry());
-                    } else if (tamagotchiservice.getMood(name).equals("dirty")) {
-                        state.setCenter(frames.getFrameDirty());
-                    } else if (tamagotchiservice.getMood(name).equals("happy")) {
-                        state.setCenter(frames.frameHappy);
-                    } else if (tamagotchiservice.getMood(name).equals("sick")) {
-                        state.setCenter(frames.getFrameSad()); //tee kipeä kuva ja muuta
+                    if (count > 8) {
+                        if (tamagotchiservice.getMood(name).equals("sad")) {
+                            state.setCenter(frames.getFrameSad());
+                        } else if (tamagotchiservice.getMood(name).equals("hungry")) {
+                            state.setCenter(frames.getFrameHungry());
+                        } else if (tamagotchiservice.getMood(name).equals("dirty")) {
+                            state.setCenter(frames.getFrameDirty());
+                        } else if (tamagotchiservice.getMood(name).equals("sick")) {
+                            state.setCenter(frames.getFrameSad()); //tee kipeä kuva ja muuta
+                        } else if (tamagotchiservice.getMood(name).equals("happy")) {
+                            state.setCenter(frames.frameHappy);
+                        }
                     }
 
                     //AIKA KULUU
@@ -233,7 +244,6 @@ public class TamagotchiGameUi extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 before = l;
             }
 
@@ -244,7 +254,7 @@ public class TamagotchiGameUi extends Application {
     public GridPane startGridPane() throws Exception {
 
         //alkunäkymä
-        nameText = new Label("New tamagotchi: ");
+        nameText = new Label("Create tamagotchi: ");
         nameField = new TextField();
         oldone = new Label("Load your old tamagotchi: ");
         field = new TextField();

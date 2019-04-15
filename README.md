@@ -1,8 +1,8 @@
 # Ohjelmistotekniikka, TamagotchiGame
 
 
-Tamagotchi on virtuaalilemmikki, jota pitää hoivata. Sitä pitää syöttää, leikittää ja lääkitä säännöllisesti, jottei se menehdy. 
-Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää käydä hoitamassa. 
+TamagotchiGame on virtuaalilemmikkpeli. Tamagotchi on lemmikki, jota pitää hoivata. Sitä pitää syöttää, leikittää ja lääkitä säännöllisesti, jottei se menehdy. 
+Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää käydä hoitamassa erikseen. 
 
 ### Dokumentaatio
 

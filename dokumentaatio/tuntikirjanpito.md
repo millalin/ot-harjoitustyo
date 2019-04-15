@@ -18,4 +18,5 @@ päivä |  aika |  mitä tein
 11.4 | 7 | jar paketin luomisen testaus , tietokanta toimimaan oikein, napin lisäys, toimintojen lisääminen nappeihin, toiminnon lisäys ettei samaa nimeä voi lisätä tai ettei voi hakea tamagotchia jota ei ole, uuden luokan luominen ui pakkaukseen, koodin siistimistä, testien tekoa
 12.4 | 2 | jar paketin luominen ja releasen tekeminen, readme päivitys, koodin pientä muokkausta
 13.4 | 2 | sekvenssikaavion tekoa ja ohjelman jatkotoiminnallisuuksien miettimistä ja tarkistuksia, että kaikki toimii oikein
-yht | 50 |
+14.4 | 1 | pieni muutos sekvenssikaavioon, ohjelman ajan muutos niin, että painikeanimaation aikaa voi säätää ja se on sama kaikilla
+yht | 51 |
