@@ -7,18 +7,13 @@ package ui;
  */
 import dao.TamagotchiDao;
 import domain.TamagotchiService;
-import java.io.FileInputStream;
-import java.util.Properties;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -43,7 +38,6 @@ public class TamagotchiGameUi extends Application {
 
     Label nameText;
     Label oldone;
-
     int count = 9;
 
     @Override

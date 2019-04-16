@@ -58,7 +58,7 @@ public class TamagotchiService {
         if (tamagotchi.getHunger() - 150000 <= 0) {
             tamagotchi.setHunger(0);
         } else {
-            tamagotchi.setHunger(tamagotchi.getHunger() - 150000); //kun syötetään nälkä vähenee 150t 
+            tamagotchi.setHunger(tamagotchi.getHunger() - 150000); 
         }
 
         tamagotchiDao.update(tamagotchi);
@@ -170,12 +170,10 @@ public class TamagotchiService {
         tamagotchi.setEnergy(tamagotchi.getEnergy() - 5);
         tamagotchi.setSick(tamagotchi.getSick() + 5);
 
-        System.out.println("näl  "+tamagotchi.getHunger());
     }
 
     public String tamaslist() throws Exception {
         ArrayList<String> list = tamagotchiDao.list();
-        String tamas = list.toString();
 
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
