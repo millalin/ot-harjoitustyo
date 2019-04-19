@@ -47,6 +47,10 @@ public class Tamagotchi {
         this.mood = "sad";
     }
 
+    public void setDateOfBirth(long dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getMood() {
         return mood;
     }
@@ -60,9 +64,7 @@ public class Tamagotchi {
         return currentTime;
     }
 
-    public void setCurrentTime(long currentTime) {
-        this.currentTime = currentTime;
-    }
+   
 
     public int getSick() {
         return sick;
@@ -76,9 +78,7 @@ public class Tamagotchi {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(long dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+  
 
     public String getName() {
         return name;
@@ -127,6 +127,8 @@ public class Tamagotchi {
     }
 
     public int getAge() {
+        long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; //sekkuntia
+        int age = (int)a/60/60/24;
         return age;
     }
 

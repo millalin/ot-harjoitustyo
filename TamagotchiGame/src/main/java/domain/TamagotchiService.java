@@ -5,10 +5,10 @@
  */
 package domain;
 
+import Database.Database;
 import dao.TamagotchiDao;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,18 +18,37 @@ import java.util.Map;
 public class TamagotchiService {
 
     private TamagotchiDao tamagotchiDao;
+    private Database database;
     private String name;
     public Map<String, Tamagotchi> tamagotchis;
 
-    public TamagotchiService(TamagotchiDao tamagotchiDao) {
-        this.tamagotchiDao = tamagotchiDao;
+    public TamagotchiService(Database database) throws Exception {
+        this.database = database;
+        this.tamagotchiDao = new TamagotchiDao(database);
         tamagotchis = new HashMap();
 
     }
 
+    public Tamagotchi Tamagotchi(String name) {
+        Tamagotchi t = tamagotchis.get(name);
+
+        return t;
+    }
+
     public boolean alreadyExists(String name) throws Exception {
+        if (name.equals("")) {
+            return false;
+        }
         if (tamaslist().contains(name)) {
-       
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean tooShortName(String name) throws Exception {
+
+        if (name.chars().count() < 3) {
             return true;
         }
         return false;
@@ -58,7 +77,7 @@ public class TamagotchiService {
         if (tamagotchi.getHunger() - 150000 <= 0) {
             tamagotchi.setHunger(0);
         } else {
-            tamagotchi.setHunger(tamagotchi.getHunger() - 150000); 
+            tamagotchi.setHunger(tamagotchi.getHunger() - 150000);
         }
 
         tamagotchiDao.update(tamagotchi);
@@ -111,8 +130,6 @@ public class TamagotchiService {
 
         tamagotchiDao.update(tamagotchi);
     }
-    
-     
 
     public boolean tamagotchiAlive(String name) {
         Tamagotchi tamagotchi = tamagotchis.get(name);
@@ -188,4 +205,21 @@ public class TamagotchiService {
         tamagotchiDao.deleteTamagotchi(name);
     }
 
+    public boolean baby(String name) {
+        Tamagotchi tamagotchi = tamagotchis.get(name);
+        int age = tamagotchi.getAge();
+
+        if (age > 3) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

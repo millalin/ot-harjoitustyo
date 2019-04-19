@@ -5,6 +5,7 @@
  */
 package dao;
 
+import Database.Database;
 import domain.Tamagotchi;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
+    private Database database;
     private int energy;
     private int hunger;
     private int happiness;
@@ -33,9 +35,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     private String address;
 
     //private Tamagotchi tamagotchi;
-    public TamagotchiDao() throws Exception {
+    public TamagotchiDao(Database database) throws Exception {
 
-        address = "jdbc:h2:./src/main/resources/tamagotchitietokanta";
+        this.database = database;
+     
         alustaTietokanta();
 
     }
@@ -43,9 +46,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
 
-        Connection connection = DriverManager.getConnection(address, "sa", "");
+        Connection connection = database.newConnection();
 
-        //    tamas.add(tamagotchi);
         PreparedStatement statement
                 = connection.prepareStatement("INSERT INTO Tamagotchi (name,birthtime, hunger, energy,happiness,clean,sick,mood,time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -70,7 +72,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
-        Connection connection = DriverManager.getConnection(address, "sa", "");
+        Connection connection = database.newConnection();
 
         PreparedStatement statement
                 = connection.prepareStatement("UPDATE Tamagotchi SET hunger = ?, energy = ?, happiness= ?, clean = ?, sick = ?, mood = ?, time = ? WHERE name = ?");
@@ -94,7 +96,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     public Tamagotchi loadTamagotchi(String name) throws Exception {
 
-        Connection connection = DriverManager.getConnection(address, "sa", "");
+        Connection connection = database.newConnection();
 
         PreparedStatement statement
                 = connection.prepareStatement("SELECT * FROM Tamagotchi WHERE name = ?");
@@ -112,6 +114,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
             sick = resultSet.getInt("sick");
             mood = resultSet.getString("mood");
             time = resultSet.getLong("time");
+            birthtime = resultSet.getLong("birthtime");
 
         }
 
@@ -128,6 +131,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         int newHappiness = happiness - (5 * x);
         int newClean = clean - (5 * x);
         int newSick = sick + (5 * x);
+        tamagotchi.setDateOfBirth(birthtime);
         tamagotchi.setHunger(newHunger);
         tamagotchi.setEnergy(newEnergy);
         tamagotchi.setHappiness(newHappiness);
@@ -141,7 +145,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     public ArrayList list() throws Exception {
         ArrayList list = new ArrayList();
-        Connection connection = DriverManager.getConnection(address, "sa", "");
+        Connection connection = database.newConnection();
 
         PreparedStatement statement
                 = connection.prepareStatement("SELECT name FROM Tamagotchi;");
@@ -159,7 +163,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     }
 
     public void deleteTamagotchi(String name) throws Exception {
-        Connection connection = DriverManager.getConnection(address, "sa", "");
+        Connection connection = database.newConnection();
 
         PreparedStatement statement
                 = connection.prepareStatement("DELETE FROM Tamagotchi WHERE name = ?");
@@ -171,7 +175,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     }
 
     public void alustaTietokanta() {
-        try (Connection conne = DriverManager.getConnection(address, "sa", "")) {
+        try (Connection conne = database.newConnection()) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();
             conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25),birthtime long, hunger integer, energy integer, happiness integer,clean integer, sick integer, mood varchar(10), time long);")
                     .executeUpdate();
