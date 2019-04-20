@@ -20,4 +20,5 @@ päivä |  aika |  mitä tein
 13.4 | 2 | sekvenssikaavion tekoa ja ohjelman jatkotoiminnallisuuksien miettimistä ja tarkistuksia, että kaikki toimii oikein
 14.4 | 1 | pieni muutos sekvenssikaavioon, ohjelman ajan muutos niin, että painikeanimaation aikaa voi säätää ja se on sama kaikilla
 19.4 | 8 | uuden luokan database luominen, statistics luominen, joka näyttää tamagotchin tilanteen napista, kuvien tekoa, pienten toimintojen muutoksia (nimi pitää olla väh 3 merkkiä kun luo tamagotchin) sekä frame, että kun uusi tamagotchi niin aluksi muna näkyy 30 sekuntia ennen syntymää, baby toiminnot, että ensimmäiset 3 päivää tamagotchi on vauva ja sitten kehittyy
-yht | 59 |
+20.4 | 3 | Javadocin aloitusta, tamagotchin toimintojen muutosta niin, että kaikki arvot ovat ajan myötä nousevia ja statistics tilasto helpommin luettavissa, uuden tietokantaluokan hahmottelua, testien muokkaus, koodin muokkausta
+yht | 62 |
