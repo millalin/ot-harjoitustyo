@@ -19,7 +19,7 @@ public class Database {
     private Connection connection;
 
     public Database(String address) {
-        this.address = address;
+        this.address = "jdbc:h2:"+ address;
         
     }
 

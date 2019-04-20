@@ -1,3 +1,5 @@
+package domain;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +28,7 @@ public class TamagotchiServiceTest {
     Tamagotchi tamagotchi;
     TamagotchiService serv;
     String name;
-    TamagotchiDao tdao;
+  //  TamagotchiDao tdao;
     public Map<String, Tamagotchi> tamas;
     Database database;
     
@@ -44,13 +46,11 @@ public class TamagotchiServiceTest {
     @Before
     public void setUp() throws Exception {
         name = "name";
-        database = new Database("jdbc:h2:./src/main/resources/testitietokanta");
-        
+        database = new Database("jdbc:h2:./src/main/resources/testitietokanta");      
         serv = new TamagotchiService(database);
-        //   tdao = new TamagotchiDao(database);
-        // serv.newTamagotchi(name);
+        serv.setName(name);
         tamagotchi = new Tamagotchi(name);
-        serv.newTamagotchi(name);
+        serv.newTamagotchi();
         tamas = new HashMap();
         tamas.put(name, tamagotchi);
         
@@ -60,33 +60,33 @@ public class TamagotchiServiceTest {
     public void tearDown() throws Exception {
 
         //poista tietokannasta
-        serv.delete(name);
+        serv.delete();
        
     }
     
     @Test
-    public void tamagotchinNalkaOnAlussa700000() {
+    public void tamagotchiHunger700000AtBeginning() {
         
         int result = tamagotchi.getHunger();
         
-        assertEquals(700000, result);
+        assertEquals(600000, result);
         
     }
     
     @Test
-    public void tamagotchinNalkaVaheneeKunSyotetaanKerran() throws Exception {
+    public void tamagotchiHungerGoesDownWhenFed() throws Exception {
         
-        serv.updateTamagotchiHunger(name);
-        tamagotchi = serv.getTamagotchi(name);
+        serv.updateTamagotchiHunger();
+        tamagotchi = serv.getTamagotchi();
         int result = tamagotchi.getHunger();
         
-        assertEquals(550000, result);
+        assertEquals(450000, result);
     }
     
     @Test
     public void tamagotchiMoodIsSadWhenHungrer700000() throws Exception {
         
-        String result = serv.getMood(name);
+        String result = serv.getMood();
         
         assertEquals("hungry", result);
     }
@@ -94,12 +94,12 @@ public class TamagotchiServiceTest {
     @Test
     public void tamagotchiMoodIsHappyWhenNothingWrong() throws Exception {
         
-        serv.updateTamagotchiClean(name);
-        serv.updateTamagotchiClean(name);
-        serv.updateTamagotchiHappiness(name);
-        serv.updateTamagotchiHunger(name);
-        serv.updateTamagotchiHunger(name);
-        String result = serv.getMood(name);
+        serv.updateTamagotchiClean();
+        serv.updateTamagotchiClean();
+        serv.updateTamagotchiHappiness();
+        serv.updateTamagotchiHunger();
+        serv.updateTamagotchiHunger();
+        String result = serv.getMood();
         
         assertEquals("happy", result);
     }
@@ -107,21 +107,21 @@ public class TamagotchiServiceTest {
     @Test
     public void tamagotchiHungerGoesupWhenTime() throws Exception {
         
-        serv.newTamagotchi(name);
-        tamagotchi = serv.getTamagotchi(name);
-        serv.time(name);
+        serv.newTamagotchi();
+        tamagotchi = serv.getTamagotchi();
+        serv.time();
         int result = tamagotchi.getHunger();
         
-        assertEquals(700005, result);
+        assertEquals(600005, result);
     }
     
     @Test
     public void tamagotchiDeadWhenHungerOver1000000() throws Exception {
         
-        serv.newTamagotchi(name);
-        tamagotchi = serv.getTamagotchi(name);
+        serv.newTamagotchi();
+        tamagotchi = serv.getTamagotchi();
         tamagotchi.setHunger(1000001);
-        boolean result = serv.tamagotchiAlive(name);
+        boolean result = serv.tamagotchiAlive();
         
         assertEquals(false, result);
     }
@@ -129,10 +129,10 @@ public class TamagotchiServiceTest {
     @Test
     public void tamagotchiAliveWhenHungerLessThan1000000() throws Exception {
         
-        serv.newTamagotchi(name);
-        tamagotchi = serv.getTamagotchi(name);
+        serv.newTamagotchi();
+        tamagotchi = serv.getTamagotchi();
         tamagotchi.setHunger(999999);
-        boolean result = serv.tamagotchiAlive(name);
+        boolean result = serv.tamagotchiAlive();
         
         assertEquals(true, result);
     }
@@ -151,26 +151,26 @@ public class TamagotchiServiceTest {
     
     @Test
     public void tamagotchiSickIsLessWhenMedicated() throws Exception {
-        serv.updateTamagotchiMedicate(name);
-        tamagotchi = serv.getTamagotchi(name);
+        serv.updateTamagotchiMedicate();
+        tamagotchi = serv.getTamagotchi();
         int result = tamagotchi.getSick();
         
         assertEquals(0, result);
     }
     
     @Test
-    public void tamagotchiEnergyDoesNotGoOver1000000() throws Exception {
-        tamagotchi = serv.getTamagotchi(name);
-        tamagotchi.setEnergy(999999);
-        serv.updateTamagotchiSleep(name);
-        int result = tamagotchi.getEnergy();
+    public void tamagotchiTirednessDoesNotGoUnder0() throws Exception {
+        tamagotchi = serv.getTamagotchi();
+        tamagotchi.setTiredness(999);
+        serv.updateTamagotchiSleep();
+        int result = tamagotchi.getTiredness();
         
-        assertEquals(1000000, result);
+        assertEquals(0, result);
     }
     
     @Test
     public void ifTamagotchiMoodIsSleepItStaysSleepEvenHungry() throws Exception {
-        tamagotchi = serv.getTamagotchi(name);
+        tamagotchi = serv.getTamagotchi();
         tamagotchi.setMood("sleep");
         
         String result = tamagotchi.getMood();
@@ -181,7 +181,7 @@ public class TamagotchiServiceTest {
     @Test
     public void ifTamagotchiExistsReturnsTrue() throws Exception {
         serv.tamaslist();
-        boolean exists = serv.alreadyExists(name);
+        boolean exists = serv.alreadyExists();
         
         assertTrue(exists);
     }
@@ -189,8 +189,8 @@ public class TamagotchiServiceTest {
     @Test
     public void tamagotchiMoodChangesWhenChanged() throws Exception {
         
-        tamagotchi = serv.getTamagotchi(name);
-        serv.setMood(name, "happy");
+        tamagotchi = serv.getTamagotchi();
+        serv.setMood("happy");
         String result = tamagotchi.getMood();
         
         assertEquals("happy", result);
@@ -199,10 +199,10 @@ public class TamagotchiServiceTest {
      @Test
     public void tamagotchiMoodChangesToLastChange() throws Exception {
         
-        tamagotchi = serv.getTamagotchi(name);
-        serv.setMood(name, "sad");
-        serv.setMood(name, "dirty");
-        serv.setMood(name, "sick");
+        tamagotchi = serv.getTamagotchi();
+        serv.setMood("sad");
+        serv.setMood("dirty");
+        serv.setMood("sick");
         String result = tamagotchi.getMood();
         
         assertEquals("sick", result);
@@ -211,9 +211,9 @@ public class TamagotchiServiceTest {
      @Test
     public void tamagotchiDiesWhenTooSick() throws Exception {
         
-        tamagotchi = serv.getTamagotchi(name);
+        tamagotchi = serv.getTamagotchi();
         tamagotchi.setSick(1000000);
-        boolean alive = serv.tamagotchiAlive(name);
+        boolean alive = serv.tamagotchiAlive();
         
         assertEquals(false, alive);
     }
@@ -221,8 +221,8 @@ public class TamagotchiServiceTest {
      @Test
     public void tamagotchiNameTooShortNotOkay() throws Exception {
         
-        
-        boolean tooShort = serv.tooShortName("x");
+        serv.setName("x");
+        boolean tooShort = serv.tooShortName();
         
          assertTrue(tooShort);
     }

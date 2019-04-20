@@ -5,12 +5,10 @@
  */
 package domain;
 
-import java.sql.Timestamp;
-
 /**
- *
- * @author milla
+ *  Tamagotchi virtuaalilemmikkiä edustava luokka
  */
+
 public class Tamagotchi {
 
     /**
@@ -18,13 +16,12 @@ public class Tamagotchi {
      * @author milla
      */
     private String name;
-    private int id;
     private long dateOfBirth;
     private long currentTime;
     private int hunger;
-    private int happiness;
-    private int energy;
-    private int clean;
+    private int sadness;
+    private int tiredness;
+    private int dirtiness;
     private boolean alive;
     private int age; //days
     private int sick;
@@ -34,10 +31,10 @@ public class Tamagotchi {
         
         this.name = name;
 
-        this.hunger = 700000;
-        this.happiness = 500000;
-        this.energy = 800000;
-        this.clean = 400000;
+        this.hunger = 600000;
+        this.sadness = 400000;
+        this.tiredness = 200000;
+        this.dirtiness = 500000;
         this.alive = true;
         this.age = 0;
         this.sick = 200000;
@@ -94,28 +91,28 @@ public class Tamagotchi {
         this.hunger = hunger;
     }
 
-    public int getHappiness() {
-        return happiness;
+    public int getSadness() {
+        return sadness;
     }
 
-    public void setHappiness(int happiness) {
-        this.happiness = happiness;
+    public void setSadness(int happiness) {
+        this.sadness = happiness;
     }
 
-    public int getEnergy() {
-        return energy;
+    public int getTiredness() {
+        return tiredness;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public void setTiredness(int energy) {
+        this.tiredness = energy;
     }
 
-    public int getClean() {
-        return clean;
+    public int getDirtiness() {
+        return dirtiness;
     }
 
     public void setClean(int clean) {
-        this.clean = clean;
+        this.dirtiness = clean;
     }
 
     public boolean isAlive() {
@@ -126,10 +123,16 @@ public class Tamagotchi {
         this.alive = alive;
     }
 
+    /**
+     * Palauttaa iän laskettuna päiviksi
+     *
+     * @return tamagotchin iän päivinä
+     */
+    
     public int getAge() {
         long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; //sekkuntia
-        int age = (int)a/60/60/24;
-        return age;
+        int currentAge = (int)a/60/60/24;
+        return currentAge;
     }
 
     public void setAge(int age) {

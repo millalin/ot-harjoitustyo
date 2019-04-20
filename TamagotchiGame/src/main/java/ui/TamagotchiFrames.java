@@ -18,9 +18,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 /**
- *
- * @author milla
+ * Tamagotchin eri tiloista kuvina vastaava luokka
  */
+
 public class TamagotchiFrames {
 
     
@@ -165,7 +165,7 @@ public class TamagotchiFrames {
     }
 
     public FlowPane getFrameSick() {
-        if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+        if (tamagotchiservice.baby())   {
             return frameBabysick;
         }
         return frameSick;
@@ -180,28 +180,28 @@ public class TamagotchiFrames {
     } */
 
     public FlowPane getFrameHappy() {
-        if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+        if (tamagotchiservice.baby())   {
             return frameBabyhappy;
         }
         return frameHappy;
     }
 
     public FlowPane getFrameSad() {
-        if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+        if (tamagotchiservice.baby())   {
             return frameBabysad;
         }
         return frameSad;
     }
 
     public FlowPane getFrameEat() {
-        if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+        if (tamagotchiservice.baby())   {
             return frameBabyeat;
         }
         return frameEat;
     }
 
     public FlowPane getFramePlay() {
-         if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+         if (tamagotchiservice.baby())   {
             return frameBabyplay;
         }
         return framePlay;
@@ -212,21 +212,21 @@ public class TamagotchiFrames {
     }
 
     public FlowPane getFrameMedicate() {
-          if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+          if (tamagotchiservice.baby())   {
             return frameBabymedicate;
         }
         return frameMedicate;
     }
 
     public FlowPane getFrameHungry() {
-          if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+          if (tamagotchiservice.baby())   {
             return frameBabyhungry;
         }
         return frameHungry;
     }
 
     public FlowPane getFrameDirty() {
-         if (tamagotchiservice.baby(tamagotchiservice.getName()))   {
+         if (tamagotchiservice.baby())   {
             return frameBabydirty;
         }
         return frameDirty;
@@ -239,20 +239,20 @@ public class TamagotchiFrames {
       public VBox statistics(String name) throws Exception {
          
         CategoryAxis x = new CategoryAxis();
-        NumberAxis y = new NumberAxis();
+        NumberAxis y = new NumberAxis(0,1000000, 100000);
         BarChart<String, Number> chart = new BarChart<>(x, y);
-        y.forceZeroInRangeProperty();
+        
 
         chart.setTitle("Tamagotchi");
         chart.setLegendVisible(false);
-        Tamagotchi t = tamagotchiservice.Tamagotchi(name);
+        Tamagotchi t = tamagotchiservice.Tamagotchi();
 
         XYChart.Series stats = new XYChart.Series();
         stats.getData().add(new XYChart.Data("Hunger", t.getHunger()));
-        stats.getData().add(new XYChart.Data("Happiness", t.getHappiness()));
-        stats.getData().add(new XYChart.Data("Clean", t.getClean()));
+        stats.getData().add(new XYChart.Data("Sadness", t.getSadness())); //
+        stats.getData().add(new XYChart.Data("Dirtiness", t.getDirtiness()));
         stats.getData().add(new XYChart.Data("Sick", t.getSick()));
-        stats.getData().add(new XYChart.Data("Energy", t.getEnergy()));
+        stats.getData().add(new XYChart.Data("Tiredness", t.getTiredness()));
 
         chart.getData().add(stats);
         VBox box = new VBox(chart);

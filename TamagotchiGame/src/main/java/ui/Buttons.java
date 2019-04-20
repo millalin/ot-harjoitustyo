@@ -9,9 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 /**
- *
- * @author milla
+ * Sovelluksen napeista ja niiden muotoilusta vastaava luokka
  */
+
 public class Buttons {
 
     HBox buttons;

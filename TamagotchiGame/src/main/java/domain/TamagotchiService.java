@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author milla
+ * Sovelluslogiikasta vastaava luokka. Luokka hallinnoi tietokantaluokkia ja luokka palauttaa sisällön TamagotchiUi-luokalle toteuttaen ui-luokan käyttämää käyttöliittymälogiikkaa.
  */
 public class TamagotchiService {
 
@@ -29,13 +28,19 @@ public class TamagotchiService {
 
     }
 
-    public Tamagotchi Tamagotchi(String name) {
+    public Tamagotchi Tamagotchi() {
         Tamagotchi t = tamagotchis.get(name);
 
         return t;
     }
 
-    public boolean alreadyExists(String name) throws Exception {
+    /**
+     * Tarkastus onko samanniminen Tamagotchi jo olemassa
+     *
+     * @return true jos tamagotchi on olemassa, muuten false
+     */
+    
+    public boolean alreadyExists() throws Exception {
         if (name.equals("")) {
             return false;
         }
@@ -46,15 +51,15 @@ public class TamagotchiService {
         return false;
     }
 
-    public boolean tooShortName(String name) throws Exception {
+    public boolean tooShortName() throws Exception {
 
-        if (name.chars().count() < 3) {
+        if (name.chars().count() < 2) {
             return true;
         }
         return false;
     }
 
-    public void newTamagotchi(String name) throws Exception {
+    public void newTamagotchi() throws Exception {
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
         tamagotchis.put(name, tamagotchi);
@@ -63,7 +68,13 @@ public class TamagotchiService {
 
     }
 
-    public Tamagotchi getTamagotchi(String name) throws Exception {
+    /**
+     * Tamagotchin hakeminen tietokannasta ja lisääminen hashmappiin
+     *
+     * @return nimellä löytyvä tamagotchi
+     */
+    
+    public Tamagotchi getTamagotchi() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchiDao.loadTamagotchi(name);
         tamagotchis.put(name, tamagotchi);
@@ -71,7 +82,11 @@ public class TamagotchiService {
         return tamagotchi;
     }
 
-    public void updateTamagotchiHunger(String name) throws Exception {
+    /**
+     * tamagotchin nälän päivitys
+     */
+    
+    public void updateTamagotchiHunger() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getHunger() - 150000 <= 0) {
@@ -83,31 +98,43 @@ public class TamagotchiService {
         tamagotchiDao.update(tamagotchi);
     }
 
-    public void updateTamagotchiHappiness(String name) throws Exception {
+    /**
+     * tamagotchin onnellisuuden päivitys
+     */
+    
+    public void updateTamagotchiHappiness() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
-        if (tamagotchi.getHappiness() + 150000 >= 1000000) {
-            tamagotchi.setHappiness(1000000);
+        if (tamagotchi.getSadness() - 150000 <= 0) {
+            tamagotchi.setSadness(0);
         } else {
-            tamagotchi.setHappiness(tamagotchi.getHappiness() + 150000);
+            tamagotchi.setSadness(tamagotchi.getSadness() - 150000);
         }
 
         tamagotchiDao.update(tamagotchi);
     }
 
-    public void updateTamagotchiClean(String name) throws Exception {
+    /**
+     * tamagotchin siisteyden päivitys
+     */
+    
+    public void updateTamagotchiClean() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
-        if (tamagotchi.getClean() + 250000 >= 1000000) {
-            tamagotchi.setClean(1000000);
+        if (tamagotchi.getDirtiness() - 250000 <= 0) {
+            tamagotchi.setClean(0);
         } else {
-            tamagotchi.setClean(tamagotchi.getClean() + 250000);
+            tamagotchi.setClean(tamagotchi.getDirtiness() - 250000);
         }
 
         tamagotchiDao.update(tamagotchi);
     }
 
-    public void updateTamagotchiMedicate(String name) throws Exception {
+    /**
+     * tamagotchin sairaustason päivitys
+     */
+    
+    public void updateTamagotchiMedicate() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getSick() - 300000 <= 0) {
@@ -118,25 +145,33 @@ public class TamagotchiService {
 
         tamagotchiDao.update(tamagotchi);
     }
+    
+    /**
+     * tamagotchin energian päivitys
+     */
 
-    public void updateTamagotchiSleep(String name) throws Exception {
+    public void updateTamagotchiSleep() throws Exception {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
-        if (tamagotchi.getEnergy() + 1000 >= 1000000) {
-            tamagotchi.setEnergy(1000000);
+        if (tamagotchi.getTiredness() - 1000 <= 0) {
+            tamagotchi.setTiredness(0);
         } else {
-            tamagotchi.setEnergy(tamagotchi.getEnergy() + 1000);
+            tamagotchi.setTiredness(tamagotchi.getTiredness() - 1000);
         }
 
         tamagotchiDao.update(tamagotchi);
     }
 
-    public boolean tamagotchiAlive(String name) {
+    /**
+     * Tarkastus onko Tamagotchi elossa ja asettaminen kuolleeksi jos liian nälkä, onneton, likainen tai sairas. 
+     *
+     * @return true jos tamagotchi on elossa, false jos kuollut
+     */
+    
+    public boolean tamagotchiAlive() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
-        if (tamagotchi.getHunger() >= 1000000) {
-            tamagotchi.setAlive(false);
-        }
-        if (tamagotchi.getHappiness() <= 0 || tamagotchi.getSick() >= 1000000) {
+       
+        if (tamagotchi.getSadness() >= 1000000 || tamagotchi.getSick() >= 1000000 || tamagotchi.getDirtiness() >= 1000000 || tamagotchi.getHunger() >= 1000000) {
             tamagotchi.setAlive(false);
         }
         if (tamagotchi.isAlive()) {
@@ -145,46 +180,41 @@ public class TamagotchiService {
         return false;
     }
 
-    public String getMood(String name) throws Exception {
+    public String getMood() throws Exception {
         Tamagotchi tamagotchi = tamagotchis.get(name);
 
         if (!tamagotchi.getMood().equals("sleep")) {
-            if (tamagotchi.getEnergy() < 100000) {
+            if (tamagotchi.getTiredness() > 900000) {
                 tamagotchi.setMood("sleep");
-            } else if (tamagotchi.getHunger() > 550000) {
+            } else if (tamagotchi.getHunger() > 450000) {
                 tamagotchi.setMood("hungry");
-
-            } else if (tamagotchi.getHappiness() < 500000) {
+            } else if (tamagotchi.getSadness() > 400000) {
                 tamagotchi.setMood("sad");
-
-            } else if (tamagotchi.getClean() < 500000) {
+            } else if (tamagotchi.getDirtiness() > 500000) {
                 tamagotchi.setMood("dirty");
-
             } else if (tamagotchi.getSick() > 500000) {
                 tamagotchi.setMood("sick");
-
             } else {
                 tamagotchi.setMood("happy");
-
             }
         }
 
         return tamagotchi.getMood();
     }
 
-    public void setMood(String name, String mood) throws Exception {
+    public void setMood(String mood) throws Exception {
         Tamagotchi tamagotchi = tamagotchis.get(name);
         tamagotchi.setMood(mood);
         tamagotchiDao.update(tamagotchi);
     }
 
-    public void time(String name) {
+    public void time() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
 
         tamagotchi.setHunger(tamagotchi.getHunger() + 5);
-        tamagotchi.setHappiness(tamagotchi.getHappiness() - 5);
-        tamagotchi.setClean(tamagotchi.getClean() - 5);
-        tamagotchi.setEnergy(tamagotchi.getEnergy() - 5);
+        tamagotchi.setSadness(tamagotchi.getSadness() + 5);
+        tamagotchi.setClean(tamagotchi.getDirtiness() + 5);
+        tamagotchi.setTiredness(tamagotchi.getTiredness() + 5);
         tamagotchi.setSick(tamagotchi.getSick() + 5);
 
     }
@@ -201,11 +231,11 @@ public class TamagotchiService {
         return sb.toString();
     }
 
-    public void delete(String name) throws Exception {
+    public void delete() throws Exception {
         tamagotchiDao.deleteTamagotchi(name);
     }
 
-    public boolean baby(String name) {
+    public boolean baby() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
         int age = tamagotchi.getAge();
 
