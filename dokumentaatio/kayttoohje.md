@@ -17,7 +17,7 @@ Sovellus käynnistyy alkunäkymään, jossa voi valita haluaako luoda uuden tama
 
 Uuden tamagotchin luominen tapahtuu syöttämällä nimi nimikenttään painamalla create nappia. Nime
 
-![alk.text](kayttoohjekuvat/alkunakyma.load.png)
+![alt.text](kayttoohjekuvat/alkunakyma.load.png)
 
 Olemassaolevan tamagotchin lataaminen tapahtuu syöttämällä nimi nimikenttään ja painamalla load nappia. Nimi tulee syöttää täysin oikein ja jos tamagotchia ei ole olemassa, ohjelma ilmoittaa siitä. Alkunäkymä myös näyttää alalaidassa kaikki tietokannassa olevat tamagotchit listana. 
 
@@ -28,13 +28,13 @@ Tietokannassa olevan tamagotchin voi poistaa syöttämällä nimen nimikenttää
 
 Pelinäkymässä on 8 nappia eri toiminnoille ja keskellä näkyy tamagotchi ja sen tila. Kun tamagotchi syntyy se on aluksi muna 30 sekunnin ajan. Tämän jälkeen ruudulle ilmestyy tamagotchivauva. Aluksi sen tila ei ole täydellinen ja sitä pitääkin heti esimerkiksi syöttää.
 
-[!alt.text](kayttoohjekuvat/pelinakyma_nalka.png)
+![alt.text](kayttoohjekuvat/pelinakyma_nalka.png)
 
 Feed painikkeella voi syöttää tamagotchia, jolloin sen nälkä vähenee. Play painikkeella voi leikkiä sen kanssa, jolloin sen onnellisuus lisääntyy. Clean painikkeella siivotaan tamagotchin jätökset ja sen likaisuus laskee. Medicate painikkeella voi lääkitä tamagotchin sen ollessa sairas, jolloin sen sairaustila laskee. Sleep painikkeella tamagothcin voi laittaa nukkumaan, jolloin sen energia lisääntyy ja wake up painikkeella tamagotchin voi herättää. Tamagotchin nukkuessa muut napit eivät ole toiminnassa, ennen kuin se herätetään. 
 
 Statistics painikkeesta näkee tamagotchin tämänhetkisen tilan 
 
-[!alt.text](kayttoohjekuvat/tilastonakyma.png)
+![alt.text](kayttoohjekuvat/tilastonakyma.png)
 
 Exit painikkeella voi poistua pelinäkymästä ja palata alkunäkymään. 
 
@@ -42,7 +42,7 @@ Jos tamagotchin nälkä, surullisuus, likaisuus tai sairaus ylittävät 1 000 00
 
 Kun hoidat ja hoivaat tamagotchiasi säännöllisesti, siitä kehittyy 4 päivän kuluttua aikuinen. Tämänkin jälkeen tamagotchi toki tarvitsee hoivaa, jotta se selviytyisi.
 
-[!alt.text](kayttoohjekuvat/aikuinen.png)
+![alt.text](kayttoohjekuvat/aikuinen.png)
 
 
 
