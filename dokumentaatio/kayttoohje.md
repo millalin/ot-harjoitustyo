@@ -15,13 +15,13 @@ Sovellus käynnistyy alkunäkymään, jossa voi valita haluaako luoda uuden tama
 
 ![alt.text](kayttoohjekuvat/alkunakyma_luo.png)
 
-Uuden tamagotchin luominen tapahtuu syöttämällä nimi nimikenttään painamalla create nappia. Nime
+Uuden tamagotchin luominen tapahtuu syöttämällä nimi nimikenttään painamalla create nappia. Nimeä ei saa olla toisella tamagotchilla ja sen tulee olla vähintään 2 merkkiä pitkä. 
 
 ![alt.text](kayttoohjekuvat/alkunakyma_load.png)
 
 Olemassaolevan tamagotchin lataaminen tapahtuu syöttämällä nimi nimikenttään ja painamalla load nappia. Nimi tulee syöttää täysin oikein ja jos tamagotchia ei ole olemassa, ohjelma ilmoittaa siitä. Alkunäkymä myös näyttää alalaidassa kaikki tietokannassa olevat tamagotchit listana. 
 
-Tietokannassa olevan tamagotchin voi poistaa syöttämällä nimen nimikenttään ja painamalla delete nappia. Kun uuden tamagotchin luominen tai vanhan lataaminen onnistuu, siirrytään pelinäkymään. 
+Tietokannassa olevan tamagotchin voi poistaa syöttämällä nimen nimikenttään ja painamalla delete nappia. Statistics nappia painamalla pääsee katsomaan tietoja kaikista tamagotcheista, jotka ovat olleet tai ovat edelleen pelissä sekä tarkastamaan jokaisen syntymäpäivän ja iän päivinä. Kun uuden tamagotchin luominen tai vanhan lataaminen onnistuu, siirrytään pelinäkymään. 
 
 
 ## Pelinäkymä
