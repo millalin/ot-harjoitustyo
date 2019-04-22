@@ -24,20 +24,24 @@ import javafx.stage.Stage;
  * TamagotchiServise luokkaa käyttöliittymälogiikan toteuttamiseen.
  */
 public class TamagotchiGameUi extends Application {
-
+    
     private TamagotchiService tamagotchiservice;
     private Database database;
     private String name;
     private TamagotchiFrames frames;
     private Buttons allbuttons;
-
+    
     TextField nameField;
     TextField field;
     TextField del;
-
+    
     Label names;
     Label nameText;
     Label oldone;
+    Label delete;
+    Label tamas;
+    Label stats;
+    Label tamaAges;
     int count = 39;
 
     /**
@@ -49,23 +53,23 @@ public class TamagotchiGameUi extends Application {
      */
     @Override
     public void start(Stage stage) throws SQLException {
-
+        
         database = new Database("./src/main/resources/tamagotchitietokanta");
         tamagotchiservice = new TamagotchiService(database);
-
+        
         frames = new TamagotchiFrames(tamagotchiservice);
         allbuttons = new Buttons();
-
+        
         GridPane startGroup = startGridPane();
         GridPane ages = agesGridPane();
-
+        
         GridPane main = new GridPane();
         BorderPane state = new BorderPane();
         BorderPane deadState = new BorderPane();
-
+        
         HBox buttons = allbuttons.getButtons();
         HBox buttons2 = allbuttons.getButtons2();
-
+        
         state.setTop(buttons);
         state.setPadding(new Insets(30, 20, 20, 30));
         state.setCenter(frames.getFrameEgg());
@@ -76,12 +80,12 @@ public class TamagotchiGameUi extends Application {
 
         //deadState.setTop(); paluunappi? 
         deadState.setCenter(frames.getFrameDead());
-
+        
         Scene startScene = new Scene(startGroup);
         Scene playScene = new Scene(main);
         Scene deadScene = new Scene(deadState);
         Scene agesScene = new Scene(ages);
-
+        
         allbuttons.getCreateTamagotchi().setOnAction((event) -> {
             try {
                 name = nameField.getText();
@@ -99,9 +103,9 @@ public class TamagotchiGameUi extends Application {
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
         });
-
+        
         allbuttons.getGetTamagotchi().setOnAction((event) -> {
             try {
                 name = field.getText();
@@ -117,12 +121,12 @@ public class TamagotchiGameUi extends Application {
                 } else {
                     oldone.setText("There is no such tamagotchi");
                 }
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getDeleteTamagotchi().setOnAction((event) -> {
             try {
                 name = del.getText();
@@ -135,16 +139,24 @@ public class TamagotchiGameUi extends Application {
             }
         });
         
-            allbuttons.getAge().setOnAction((event) -> {
+        allbuttons.getAge().setOnAction((event) -> {
             try {
-                
+                tamaAges.setText(tamagotchiservice.ages());
                 stage.setScene(agesScene);
                 
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
+        allbuttons.getBack().setOnAction((event) -> {
+            try {
+                stage.setScene(startScene);
+            } catch (Exception ex) {
+                Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         allbuttons.getReturnbutton().setOnAction((event) -> {
             try {
                 nameField.clear();
@@ -156,10 +168,10 @@ public class TamagotchiGameUi extends Application {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         stage.setScene(startScene);
         stage.show();
-
+        
         allbuttons.getFeedbutton().setOnAction((ActionEvent event) -> {
             count = 30;
             state.setCenter(frames.getFrameEat());
@@ -169,72 +181,72 @@ public class TamagotchiGameUi extends Application {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getCleanbutton().setOnAction((ActionEvent event) -> {
             try {
                 count = 30;
                 state.setCenter(frames.getFrameClean());
                 tamagotchiservice.updateTamagotchiClean();
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getPlaybutton().setOnAction((ActionEvent event) -> {
             try {
                 count = 30;
                 state.setCenter(frames.getFramePlay());
                 tamagotchiservice.updateTamagotchiHappiness();
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getMedicatebutton().setOnAction((ActionEvent event) -> {
             try {
                 count = 30;
                 state.setCenter(frames.getFrameMedicate());
                 tamagotchiservice.updateTamagotchiMedicate();
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getSleepbutton().setOnAction((ActionEvent event) -> {
             try {
-
+                
                 state.setCenter(frames.getFrameSleep());
                 tamagotchiservice.setMood("sleep");
                 allbuttons.disableButtons(true);
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getWakeup().setOnAction((ActionEvent event) -> {
             try {
                 tamagotchiservice.setMood("happy");
                 allbuttons.disableButtons(false);
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
         allbuttons.getStatistics().setOnAction((ActionEvent event) -> {
             try {
                 count = 30;
                 state.setCenter(frames.statistics(name));
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        
     }
 
     /**
@@ -247,28 +259,28 @@ public class TamagotchiGameUi extends Application {
      * @param deadScene Scene-olio, joka asetetaan, jos tamagotchi on kuollut
      */
     public void update(BorderPane state, Stage stage, Scene deadScene) {
-
+        
         AnimationTimer animationtimer = new AnimationTimer() {
             long before = 0;
-
+            
             @Override
             public void handle(long l) {
-
+                
                 if (l - before < 1_000_000_000L) {  //10 00 ms eli 1sec 
                     return;
                 }
-
+                
                 try {
-
+                    
                     count++;
-
+                    
                     if (count < 30) {
                         state.setCenter(frames.getFrameEgg());
                     }
                     if (tamagotchiservice.tamagotchiAlive() == false) {
                         stage.setScene(deadScene);
                     }
-
+                    
                     if (tamagotchiservice.getMood().equals("sleep")) {
                         state.setCenter(frames.getFrameSleep());
                         tamagotchiservice.updateTamagotchiSleep();
@@ -292,13 +304,13 @@ public class TamagotchiGameUi extends Application {
 
                     //AIKA KULUU
                     tamagotchiservice.time();
-tamagotchiservice.ageUpdate();
+                    tamagotchiservice.ageUpdate();
                 } catch (Exception ex) {
                     Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 before = l;
             }
-
+            
         };
         animationtimer.start();
     }
@@ -316,12 +328,12 @@ tamagotchiservice.ageUpdate();
         nameField = new TextField();
         oldone = new Label("Load your old tamagotchi: ");
         field = new TextField();
-        Label delete = new Label("Delete tamagotchi: ");
+        delete = new Label("Delete tamagotchi: ");
         del = new TextField();
-        Label tamas = new Label("Tamagotchis:");
+        tamas = new Label("Tamagotchis:");
         names = new Label(tamagotchiservice.tamaslist());
-        Label stats = new Label("Show tamagotchi history");
-
+        stats = new Label("History of all tamagotchis");
+        
         GridPane group = new GridPane();
         group.setAlignment(Pos.CENTER);
         group.setMinSize(600, 300);
@@ -343,19 +355,25 @@ tamagotchiservice.ageUpdate();
         group.setPadding(new Insets(10, 10, 10, 10));
         return group;
     }
-
+    
     public GridPane agesGridPane() throws SQLException {
         GridPane tamagotchiAges = new GridPane();
-        tamagotchiAges.setAlignment(Pos.CENTER);
-        Label tamaAges = new Label(tamagotchiservice.ages());
-        tamagotchiAges.add(tamaAges, 1, 1);
+        
+        Label headline = new Label("History of all tamagotchis");
+        tamagotchiAges.add(headline, 1, 1);
+        tamaAges = new Label(tamagotchiservice.ages());
+        tamagotchiAges.add(tamaAges, 1, 3);
+        tamagotchiAges.add(allbuttons.getBack(), 5, 0);
         tamagotchiAges.setMinSize(400, 300);
-
+        tamagotchiAges.setVgap(10);
+        tamagotchiAges.setHgap(10);
+        tamagotchiAges.setPadding(new Insets(10, 10, 10, 10));
+        
         return tamagotchiAges;
     }
     
     public static void main(String[] args) throws Exception {
         launch(args);
     }
-
+    
 }

@@ -94,6 +94,23 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
         }
         return list;
     }
+    
+    public ArrayList names() throws SQLException    {
+         ArrayList list = new ArrayList();
+        Connection connection = database.newConnection();
+
+        PreparedStatement statement
+                = connection.prepareStatement("SELECT name FROM TamagotchisAges;");
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
+            list.add(name);
+
+        }
+        return list;
+    }
 
     public void createTable() {
         try (Connection conne = database.newConnection()) {

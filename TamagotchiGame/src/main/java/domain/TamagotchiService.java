@@ -53,7 +53,7 @@ public class TamagotchiService {
         if (name.equals("")) {
             return false;
         }
-        if (tamaslist().contains(name)) {
+        if (everyNameExistedlist().contains(name)) {
 
             return true;
         }
@@ -272,14 +272,35 @@ public class TamagotchiService {
     }
 
     /**
-     * Kaikkien tamagotchien nimien hakeminen tietokannasta.
+     * Kaikkien tamagotchien nimien hakeminen tietokannasta, jotka ovat yhä
+     * pelissä.
      *
      * @throws SQLException virhe tietokannanhallinnassa
      *
-     * @return kaikki tietokannassa olevian tamagotchien nimet
+     * @return kaikki pelitietokannassa olevian tamagotchien nimet
      */
     public String tamaslist() throws SQLException {
         ArrayList<String> list = tamagotchiDao.list();
+
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s);
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Kaikkien tamagotchien nimien hakeminen tietokannasta, jotka ovat olleet
+     * olemassa ennen tai ovat edelleen pelissä.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return kaikki tietokannassa olevian ja olleiden tamagotchien nimet
+     */
+    public String everyNameExistedlist() throws SQLException {
+        ArrayList<String> list = agesDao.names();
 
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
