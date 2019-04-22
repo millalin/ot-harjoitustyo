@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Database.Database;
+import database.Database;
 import domain.Tamagotchi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +21,6 @@ import java.util.logging.Logger;
  * @author milla
  */
 
-// LUOKKA EI OLE VIELÄ TOIMINNASSA 
-
 public class AgesDao implements Dao<Tamagotchi, Integer> {
 
     private Database database;
@@ -31,11 +29,11 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
 
         this.database = database;
 
-        alustaTietokanta();
+        createTable();
 
     }
-    
-      @Override
+
+    @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
 
         Connection connection = database.newConnection();
@@ -54,8 +52,8 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
 
         return tamagotchi;
     }
-    
-        @Override
+
+    @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
         Connection connection = database.newConnection();
 
@@ -67,40 +65,39 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
         statement.setBoolean(3, tamagotchi.isAlive());
         statement.setString(4, tamagotchi.getName());
 
-        
         statement.executeUpdate();
         statement.close();
         connection.close();
 
         return tamagotchi;
     }
-    
-      public ArrayList list() throws Exception {
+
+    public ArrayList list() throws SQLException {
         ArrayList list = new ArrayList();
         Connection connection = database.newConnection();
 
         PreparedStatement statement
-                = connection.prepareStatement("SELECT * FROM TamagotchisAges;");
+                = connection.prepareStatement("SELECT name, birthtime, age, alive FROM TamagotchisAges;");
 
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             long birthtime = resultSet.getLong("birthtime"); //
-            String date =DateFormat.getInstance().format(birthtime);
+            String date = DateFormat.getInstance().format(birthtime);
             int age = resultSet.getInt("age");
             boolean alive = resultSet.getBoolean("alive");
-            String tamagotchi = name + ", synt. " + date + ", ikä: " + age + " päivää";
-            
+            String tamagotchi = name + ", synt. " + date + ", ikä: " + age + " päivää. Elossa: " +alive;
+
             list.add(tamagotchi);
 
         }
         return list;
     }
 
-    public void alustaTietokanta() {
+    public void createTable() {
         try (Connection conne = database.newConnection()) {
-         
+
             conne.prepareStatement("CREATE TABLE IF NOT EXISTS TamagotchisAges(name varchar(25),birthtime long, age Integer, alive boolean);")
                     .executeUpdate();
             conne.close();

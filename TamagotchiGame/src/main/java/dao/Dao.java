@@ -9,8 +9,8 @@ import domain.Tamagotchi;
 import java.sql.SQLException;
 
 /**
+ * Tietokantahallintaluokkien perusrakenteen määrittävä rajapinta.
  *
- * @author milla
  * @param <T>
  * @param <K>
  */

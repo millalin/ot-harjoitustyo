@@ -5,11 +5,8 @@ package domain;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import dao.TamagotchiDao;
-import Database.Database;
-import domain.Tamagotchi;
-import domain.TamagotchiService;
+import database.Database;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -28,7 +25,7 @@ public class TamagotchiServiceTest {
     Tamagotchi tamagotchi;
     TamagotchiService serv;
     String name;
-  //  TamagotchiDao tdao;
+    //  TamagotchiDao tdao;
     public Map<String, Tamagotchi> tamas;
     Database database;
     
@@ -46,7 +43,7 @@ public class TamagotchiServiceTest {
     @Before
     public void setUp() throws Exception {
         name = "name";
-        database = new Database("jdbc:h2:./src/main/resources/testitietokanta");      
+        database = new Database("jdbc:h2:./src/main/resources/testitietokanta");        
         serv = new TamagotchiService(database);
         serv.setName(name);
         tamagotchi = new Tamagotchi(name);
@@ -57,11 +54,11 @@ public class TamagotchiServiceTest {
     }
     
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws SQLException {
 
         //poista tietokannasta
         serv.delete();
-       
+        
     }
     
     @Test
@@ -196,7 +193,7 @@ public class TamagotchiServiceTest {
         assertEquals("happy", result);
     }
     
-     @Test
+    @Test
     public void tamagotchiMoodChangesToLastChange() throws Exception {
         
         tamagotchi = serv.getTamagotchi();
@@ -208,7 +205,7 @@ public class TamagotchiServiceTest {
         assertEquals("sick", result);
     }
     
-     @Test
+    @Test
     public void tamagotchiDiesWhenTooSick() throws Exception {
         
         tamagotchi = serv.getTamagotchi();
@@ -218,12 +215,40 @@ public class TamagotchiServiceTest {
         assertEquals(false, alive);
     }
     
-     @Test
+    @Test
     public void tamagotchiNameTooShortNotOkay() throws Exception {
         
         serv.setName("x");
         boolean tooShort = serv.tooShortName();
         
-         assertTrue(tooShort);
+        assertTrue(tooShort);
+    }
+    
+    @Test
+    public void tamagotchiIsBabyWhenAgeLessThan4() throws Exception {
+        
+        boolean baby = serv.baby();
+        
+        assertTrue(baby);
+    }
+    
+    @Test
+    public void tamagotchiIsAdultWhenAgeMoreThan4() throws Exception {
+        
+        Tamagotchi t = serv.tamagotchi();
+        t.setDateOfBirth(t.getDateOfBirth() * 60 * 24 * 24 * 4);
+        boolean baby = serv.baby();
+        
+        assertEquals(false, baby);
+    }
+    
+     @Test
+    public void tamagotchisTirednessGoesDownWhenAsleep() throws Exception {
+        tamagotchi = serv.getTamagotchi();
+        serv.updateTamagotchiSleep();
+        int result = tamagotchi.getTiredness();
+        
+        
+        assertEquals(199000, result);
     }
 }

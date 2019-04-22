@@ -5,42 +5,51 @@
  */
 package domain;
 
-import Database.Database;
+import dao.AgesDao;
+import database.Database;
 import dao.TamagotchiDao;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Sovelluslogiikasta vastaava luokka. Luokka hallinnoi tietokantaluokkia ja luokka palauttaa sisällön TamagotchiUi-luokalle toteuttaen ui-luokan käyttämää käyttöliittymälogiikkaa.
+ * Sovelluslogiikasta vastaava luokka. Luokka hallinnoi tietokantaluokkia ja
+ * luokka palauttaa sisällön TamagotchiUi-luokalle toteuttaen ui-luokan
+ * käyttämää käyttöliittymälogiikkaa.
  */
 public class TamagotchiService {
 
     private TamagotchiDao tamagotchiDao;
+    private AgesDao agesDao;
     private Database database;
     private String name;
     public Map<String, Tamagotchi> tamagotchis;
 
-    public TamagotchiService(Database database) throws Exception {
+    public TamagotchiService(Database database) throws SQLException {
         this.database = database;
         this.tamagotchiDao = new TamagotchiDao(database);
+        this.agesDao = new AgesDao(database);
         tamagotchis = new HashMap();
-
     }
 
-    public Tamagotchi Tamagotchi() {
+    /**
+     * Tamagotchin palauttava metodi.
+     *
+     * @return tamagotchi olion ajantasaisine tietoineen
+     */
+    public Tamagotchi tamagotchi() {
         Tamagotchi t = tamagotchis.get(name);
 
         return t;
     }
 
     /**
-     * Tarkastus onko samanniminen Tamagotchi jo olemassa
+     * Tarkastus onko samanniminen Tamagotchi jo olemassa.
      *
      * @return true jos tamagotchi on olemassa, muuten false
      */
-    
-    public boolean alreadyExists() throws Exception {
+    public boolean alreadyExists() throws SQLException {
         if (name.equals("")) {
             return false;
         }
@@ -51,7 +60,15 @@ public class TamagotchiService {
         return false;
     }
 
-    public boolean tooShortName() throws Exception {
+    /**
+     * Tarkastus onko syötetty nimi liian lyhyt. Nimen tulee olla vähintään 2
+     * merkkiä pitkä.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return true jos nimi alle 2 merkkiä, muuten false
+     */
+    public boolean tooShortName() throws SQLException {
 
         if (name.chars().count() < 2) {
             return true;
@@ -59,22 +76,28 @@ public class TamagotchiService {
         return false;
     }
 
-    public void newTamagotchi() throws Exception {
+    /**
+     * Luo uuden tamagotchin ja tallettaa sen tietokantaan.
+     */
+    public void newTamagotchi() throws SQLException {
 
         Tamagotchi tamagotchi = new Tamagotchi(name);
         tamagotchis.put(name, tamagotchi);
 
         tamagotchiDao.create(tamagotchi);
+        agesDao.create(tamagotchi);
 
     }
 
     /**
-     * Tamagotchin hakeminen tietokannasta ja lisääminen hashmappiin
+     * Tamagotchin hakeminen tietokannasta päivitettyine tietoineen ja
+     * lisääminen hashmappiin
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return nimellä löytyvä tamagotchi
      */
-    
-    public Tamagotchi getTamagotchi() throws Exception {
+    public Tamagotchi getTamagotchi() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchiDao.loadTamagotchi(name);
         tamagotchis.put(name, tamagotchi);
@@ -83,10 +106,12 @@ public class TamagotchiService {
     }
 
     /**
-     * tamagotchin nälän päivitys
+     * tamagotchin nälän päivitys. Nälkä vähenee 150 000 syötettäessä, mutta ei
+     * mene alle nollan.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
      */
-    
-    public void updateTamagotchiHunger() throws Exception {
+    public void updateTamagotchiHunger() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getHunger() - 150000 <= 0) {
@@ -99,10 +124,12 @@ public class TamagotchiService {
     }
 
     /**
-     * tamagotchin onnellisuuden päivitys
+     * tamagotchin onnellisuuden päivitys. Surullisuus vähenee 150 000
+     * leikittäessä, mutta ei mene alle nollan.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
      */
-    
-    public void updateTamagotchiHappiness() throws Exception {
+    public void updateTamagotchiHappiness() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getSadness() - 150000 <= 0) {
@@ -115,10 +142,12 @@ public class TamagotchiService {
     }
 
     /**
-     * tamagotchin siisteyden päivitys
+     * tamagotchin siisteyden päivitys. Likaisuus vähenee 250 000 siivottaessa,
+     * mutta ei mene alle nollan.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
      */
-    
-    public void updateTamagotchiClean() throws Exception {
+    public void updateTamagotchiClean() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getDirtiness() - 250000 <= 0) {
@@ -131,10 +160,12 @@ public class TamagotchiService {
     }
 
     /**
-     * tamagotchin sairaustason päivitys
+     * tamagotchin sairaustason päivitys. Sairaustila vähenee 300 000
+     * lääkittäessä, mutta ei mene alle nollan.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
      */
-    
-    public void updateTamagotchiMedicate() throws Exception {
+    public void updateTamagotchiMedicate() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getSick() - 300000 <= 0) {
@@ -145,12 +176,14 @@ public class TamagotchiService {
 
         tamagotchiDao.update(tamagotchi);
     }
-    
-    /**
-     * tamagotchin energian päivitys
-     */
 
-    public void updateTamagotchiSleep() throws Exception {
+    /**
+     * tamagotchin energian päivitys. Metodia kutsutaan tamagotchin nukkuessa
+     * joka sekunti, jolloin väsymys vähenee 1000 yksikköä.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public void updateTamagotchiSleep() throws SQLException {
 
         Tamagotchi tamagotchi = tamagotchis.get(name);
         if (tamagotchi.getTiredness() - 1000 <= 0) {
@@ -163,14 +196,14 @@ public class TamagotchiService {
     }
 
     /**
-     * Tarkastus onko Tamagotchi elossa ja asettaminen kuolleeksi jos liian nälkä, onneton, likainen tai sairas. 
+     * Tarkastus onko Tamagotchi elossa ja asettaminen kuolleeksi jos liian
+     * nälkä, onneton, likainen tai sairas.
      *
      * @return true jos tamagotchi on elossa, false jos kuollut
      */
-    
     public boolean tamagotchiAlive() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
-       
+
         if (tamagotchi.getSadness() >= 1000000 || tamagotchi.getSick() >= 1000000 || tamagotchi.getDirtiness() >= 1000000 || tamagotchi.getHunger() >= 1000000) {
             tamagotchi.setAlive(false);
         }
@@ -180,7 +213,18 @@ public class TamagotchiService {
         return false;
     }
 
-    public String getMood() throws Exception {
+    /**
+     * Metodi hakee tamagotchin tämänhetkisen tilanteen nälästä,
+     * surullisuudesta, likaisuudesta ja sairaustasosta ja asettaa mielialan sen
+     * mukaisesti. Jos tamagotchi on liian väsynyt, se pakotetaan nukkumaan eikä
+     * se herää kesken unen ilman herätystä. Jos mitään ei ole vialla
+     * tamagotchin mieliala on onnellinen.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return tamagotchin tämänhetkisen mielialan
+     */
+    public String getMood() throws SQLException {
         Tamagotchi tamagotchi = tamagotchis.get(name);
 
         if (!tamagotchi.getMood().equals("sleep")) {
@@ -198,16 +242,24 @@ public class TamagotchiService {
                 tamagotchi.setMood("happy");
             }
         }
-
         return tamagotchi.getMood();
     }
 
-    public void setMood(String mood) throws Exception {
+    /**
+     * Asettaa mielialan tamagotchille ja päivittää sen tietokantaan.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public void setMood(String mood) throws SQLException {
         Tamagotchi tamagotchi = tamagotchis.get(name);
         tamagotchi.setMood(mood);
         tamagotchiDao.update(tamagotchi);
     }
 
+    /**
+     * Metodia kutsutaan joka sekunti ja se päivittää tamagotchin tilaa. Nälkä,
+     * surullisuus, likaisuus, väsymys ja sairaustila lisääntyvät 5 yksikköä.
+     */
     public void time() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
 
@@ -219,7 +271,14 @@ public class TamagotchiService {
 
     }
 
-    public String tamaslist() throws Exception {
+    /**
+     * Kaikkien tamagotchien nimien hakeminen tietokannasta.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return kaikki tietokannassa olevian tamagotchien nimet
+     */
+    public String tamaslist() throws SQLException {
         ArrayList<String> list = tamagotchiDao.list();
 
         StringBuilder sb = new StringBuilder();
@@ -231,15 +290,27 @@ public class TamagotchiService {
         return sb.toString();
     }
 
-    public void delete() throws Exception {
+    /**
+     * Tamagotchin poistaminen tietokannasta.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public void delete() throws SQLException {
         tamagotchiDao.deleteTamagotchi(name);
     }
 
+    /**
+     * Tamagotchin iän hakeminen ja tarkistus onko tamagotchi vauva vai
+     * aikuinen. Tamagotchi kehittyy aikuiseksi 4 päivän iässä.
+     *
+     * @return true, jos tamagotchi on vielä vauvatasolla, false, jos tamagotchi
+     * on aikuinen
+     */
     public boolean baby() {
         Tamagotchi tamagotchi = tamagotchis.get(name);
         int age = tamagotchi.getAge();
 
-        if (age > 3) {
+        if (age >= 4) {
             return false;
         }
         return true;
@@ -251,5 +322,22 @@ public class TamagotchiService {
 
     public String getName() {
         return this.name;
+    }
+
+    public String ages() throws SQLException {
+        ArrayList<String> list = agesDao.list();
+
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s);
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    public void ageUpdate() throws SQLException {
+        Tamagotchi tamagotchi = tamagotchis.get(name);
+        agesDao.update(tamagotchi);
     }
 }

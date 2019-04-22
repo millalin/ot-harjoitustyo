@@ -1,26 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Database;
+
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author milla
+ * Tietokantayhteyksiä hallinnoiva luokka.
  */
 public class Database {
 
     private String address;
     private Connection connection;
 
+    /**
+     * Luo uuden tietokantaolion.
+     *
+     * @param address tietokannan osoite
+     */
     public Database(String address) {
-        this.address = "jdbc:h2:"+ address;
-        
+        this.address = "jdbc:h2:" + address;
     }
 
     public String getAddress() {
@@ -31,16 +30,16 @@ public class Database {
         return connection;
     }
 
+    /**
+     * Luo uuden tietokantayhteyden osoitteeseen, joka on konstruktorissa.
+     *
+     * @return palauttaa uuden tietokantayhteyden
+     *
+     * @throws SQLEXception virhe tietokantayhteydessä
+     */
     public Connection newConnection() throws SQLException {
         this.connection = DriverManager.getConnection(address, "sa", "");
         return this.connection;
-    }
-
-
-    public void closeConnection() throws SQLException {
-        if (this.connection != null) {
-            this.connection.close();
-        }
     }
 
 }

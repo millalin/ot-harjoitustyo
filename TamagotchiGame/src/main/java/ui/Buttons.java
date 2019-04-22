@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 /**
- * Sovelluksen napeista ja niiden muotoilusta vastaava luokka
+ * Sovelluksen napeista ja niiden muotoilusta vastaava luokka.
  */
-
 public class Buttons {
 
     HBox buttons;
@@ -20,7 +14,6 @@ public class Buttons {
     Button createTamagotchi;
     Button getTamagotchi;
     Button deleteTamagotchi;
-
     Button feedbutton;
     Button playbutton;
     Button cleanbutton;
@@ -29,7 +22,7 @@ public class Buttons {
     Button sleepbutton;
     Button wakeup;
     Button statistics;
-
+    Button age;
     String style;
 
     public Buttons() {
@@ -49,7 +42,6 @@ public class Buttons {
                 + "    -fx-text-fill: #311c09;\n"
                 + "    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.1) , 2, 0.0 , 0 , 1);";
 
-        //napit
         buttons = new HBox();
 
         buttons.setSpacing(200);
@@ -88,7 +80,11 @@ public class Buttons {
         createTamagotchi = new Button("Create");
         getTamagotchi = new Button("Load");
         deleteTamagotchi = new Button("Delete");
+        age = new Button("Statistics");
+    }
 
+    public Button getAge() {
+        return age;
     }
 
     public HBox getButtons() {
@@ -142,8 +138,11 @@ public class Buttons {
     public Button getStatistics() {
         return statistics;
     }
-    
-      public void disableButtons(boolean t) {
+
+    /**
+     * Asettaa nappien toiminnan pois päältä ja takaisin toimintaan.
+     */
+    public void disableButtons(boolean t) {
         medicatebutton.setDisable(t);
         playbutton.setDisable(t);
         feedbutton.setDisable(t);

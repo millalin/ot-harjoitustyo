@@ -49,7 +49,7 @@ JavaDoc generoidaan komennolla
 
     mvn javadoc:javadoc
 
-JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
+JavaDocia voi tarkastella avaamalla selaimella tiedoston target/site/apidocs/index.html
 
 #### Checkstyle
 

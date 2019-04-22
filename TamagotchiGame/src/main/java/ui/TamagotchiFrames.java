@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ui;
 
+package ui;
 
 import domain.Tamagotchi;
 import domain.TamagotchiService;
@@ -18,12 +13,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Tamagotchin eri tiloista kuvina vastaava luokka
+ * Tamagotchin eri tiloista kuvina (gif) vastaava luokka.
  */
-
 public class TamagotchiFrames {
 
-    
     FlowPane frameHappy;
     FlowPane frameSad;
     FlowPane frameEat;
@@ -46,14 +39,10 @@ public class TamagotchiFrames {
     FlowPane frameBabymedicate;
     TamagotchiService tamagotchiservice;
     String name;
-    
-   
 
     public TamagotchiFrames(TamagotchiService tamagotchiservice) {
-        
+
         this.tamagotchiservice = tamagotchiservice;
-        
-        
 
         Image happy = new Image("/Gifs/tamag(3).gif");
         ImageView happypicture = new ImageView(happy);
@@ -87,34 +76,34 @@ public class TamagotchiFrames {
 
         Image clean = new Image("/Gifs/tamag(19).gif");
         ImageView cleanpicture = new ImageView(clean);
-        
+
         Image egg = new Image("/Gifs/tamag(20).gif");
         ImageView eggpicture = new ImageView(egg);
-        
+
         Image babyhappy = new Image("/Gifs/tamagbaby.gif");
         ImageView babyhappypicture = new ImageView(babyhappy);
-        
+
         Image babyeat = new Image("/Gifs/tamagbaby(1).gif");
         ImageView babyeatpicture = new ImageView(babyeat);
-        
+
         Image babysad = new Image("/Gifs/tamagbaby(2).gif");
         ImageView babysadpicture = new ImageView(babysad);
-        
+
         Image babysick = new Image("/Gifs/tamagbaby(3).gif");
         ImageView babysickpicture = new ImageView(babysick);
 
-         Image babyplay = new Image("/Gifs/tamababy.gif");
+        Image babyplay = new Image("/Gifs/tamababy.gif");
         ImageView babyplaypicture = new ImageView(babyplay);
-        
+
         Image babydirty = new Image("/Gifs/poop2.gif");
         ImageView babydirtypicture = new ImageView(babydirty);
-        
-          Image babyhungry = new Image("/Gifs/tamahungry.gif");
+
+        Image babyhungry = new Image("/Gifs/tamahungry.gif");
         ImageView babyhungrypicture = new ImageView(babyhungry);
-        
+
         Image babymedicate = new Image("/Gifs/tamamedi.gif");
         ImageView babymedicatepicture = new ImageView(babymedicate);
-        
+
         frameHappy = new FlowPane();
         frameSad = new FlowPane();
         frameEat = new FlowPane();
@@ -136,7 +125,6 @@ public class TamagotchiFrames {
         frameBabyhungry = new FlowPane();
         frameBabymedicate = new FlowPane();
 
-        
         frameHappy.getChildren().add(happypicture);
         frameSad.getChildren().add(sadpicture);
         frameEat.getChildren().add(eatpicture);
@@ -157,7 +145,7 @@ public class TamagotchiFrames {
         frameBabydirty.getChildren().add(babydirtypicture);
         frameBabyhungry.getChildren().add(babyhungrypicture);
         frameBabymedicate.getChildren().add(babymedicatepicture);
-        
+
     }
 
     public FlowPane getFrameEgg() {
@@ -165,7 +153,7 @@ public class TamagotchiFrames {
     }
 
     public FlowPane getFrameSick() {
-        if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabysick;
         }
         return frameSick;
@@ -175,33 +163,29 @@ public class TamagotchiFrames {
         return frameSleep;
     }
 
-  /*  public void setFrameSleep(FlowPane frameSleep) {
-        this.frameSleep = frameSleep;
-    } */
-
     public FlowPane getFrameHappy() {
-        if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabyhappy;
         }
         return frameHappy;
     }
 
     public FlowPane getFrameSad() {
-        if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabysad;
         }
         return frameSad;
     }
 
     public FlowPane getFrameEat() {
-        if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabyeat;
         }
         return frameEat;
     }
 
     public FlowPane getFramePlay() {
-         if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabyplay;
         }
         return framePlay;
@@ -212,21 +196,21 @@ public class TamagotchiFrames {
     }
 
     public FlowPane getFrameMedicate() {
-          if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabymedicate;
         }
         return frameMedicate;
     }
 
     public FlowPane getFrameHungry() {
-          if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabyhungry;
         }
         return frameHungry;
     }
 
     public FlowPane getFrameDirty() {
-         if (tamagotchiservice.baby())   {
+        if (tamagotchiservice.baby()) {
             return frameBabydirty;
         }
         return frameDirty;
@@ -236,20 +220,29 @@ public class TamagotchiFrames {
         return frameClean;
     }
 
-      public VBox statistics(String name) throws Exception {
-         
+    /**
+     * Tämänhetkistä tamagotchin tilaa kuvaavan kaavion piirtäminen. Kaavion
+     * pylväät näyttävät kuinka nälkä, surullinen, likainen, sairas ja väsynyt
+     * tamagotchi on. Mitä korkeampi pylväs on, sitä huonompi tila
+     * tamagotchilla on.
+     *
+     * @param name Tamagotchin nimi
+     * 
+     * @return VBox asettelussa sijaitseva kaavio
+     */
+    public VBox statistics(String name) throws Exception {
+
         CategoryAxis x = new CategoryAxis();
-        NumberAxis y = new NumberAxis(0,1000000, 100000);
+        NumberAxis y = new NumberAxis(0, 1000000, 100000);
         BarChart<String, Number> chart = new BarChart<>(x, y);
-        
 
         chart.setTitle("Tamagotchi");
         chart.setLegendVisible(false);
-        Tamagotchi t = tamagotchiservice.Tamagotchi();
+        Tamagotchi t = tamagotchiservice.tamagotchi();
 
         XYChart.Series stats = new XYChart.Series();
         stats.getData().add(new XYChart.Data("Hunger", t.getHunger()));
-        stats.getData().add(new XYChart.Data("Sadness", t.getSadness())); //
+        stats.getData().add(new XYChart.Data("Sadness", t.getSadness()));
         stats.getData().add(new XYChart.Data("Dirtiness", t.getDirtiness()));
         stats.getData().add(new XYChart.Data("Sick", t.getSick()));
         stats.getData().add(new XYChart.Data("Tiredness", t.getTiredness()));

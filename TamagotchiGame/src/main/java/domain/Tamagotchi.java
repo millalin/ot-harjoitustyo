@@ -11,10 +11,7 @@ package domain;
 
 public class Tamagotchi {
 
-    /**
-     *
-     * @author milla
-     */
+ 
     private String name;
     private long dateOfBirth;
     private long currentTime;
@@ -61,8 +58,6 @@ public class Tamagotchi {
         return currentTime;
     }
 
-   
-
     public int getSick() {
         return sick;
     }
@@ -75,7 +70,6 @@ public class Tamagotchi {
         return dateOfBirth;
     }
 
-  
 
     public String getName() {
         return name;
@@ -95,16 +89,16 @@ public class Tamagotchi {
         return sadness;
     }
 
-    public void setSadness(int happiness) {
-        this.sadness = happiness;
+    public void setSadness(int sadness) {
+        this.sadness = sadness;
     }
 
     public int getTiredness() {
         return tiredness;
     }
 
-    public void setTiredness(int energy) {
-        this.tiredness = energy;
+    public void setTiredness(int tiredness) {
+        this.tiredness = tiredness;
     }
 
     public int getDirtiness() {
@@ -131,12 +125,9 @@ public class Tamagotchi {
     
     public int getAge() {
         long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; //sekkuntia
-        int currentAge = (int)a/60/60/24;
+        int currentAge = (int) a / 60 / 60 / 24;
         return currentAge;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
 }

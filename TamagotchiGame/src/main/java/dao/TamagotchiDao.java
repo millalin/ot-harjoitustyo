@@ -5,7 +5,7 @@
  */
 package dao;
 
-import Database.Database;
+import database.Database;
 import domain.Tamagotchi;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,8 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author milla
+ * Luokka tamagotchin tietokannanhallintaa varten. Luokka käyttää tietokannan
+ * Tamagotchi -taulua.
  */
 public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
@@ -34,15 +34,21 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
     private String mood;
     private String address;
 
-    //private Tamagotchi tamagotchi;
-    public TamagotchiDao(Database database) throws Exception {
+    public TamagotchiDao(Database database) throws SQLException {
 
         this.database = database;
-     
-        alustaTietokanta();
+
+        createTable();
 
     }
 
+    /**
+     * Luo tietokantaan uuden tamagotchin.
+     *
+     * @param tamagotchi Tamagotchi olio
+     * 
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
 
@@ -71,6 +77,13 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
+    /**
+     * Päivittää tietokantaan tamagotchin nykytilanteen.
+     *
+     * @param tamagotchi Tamagotchi olio
+     * 
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
         Connection connection = database.newConnection();
@@ -88,7 +101,6 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         statement.setLong(7, System.currentTimeMillis());
         statement.setString(8, tamagotchi.getName());
 
-        
         statement.executeUpdate();
         statement.close();
         connection.close();
@@ -96,7 +108,17 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
-    public Tamagotchi loadTamagotchi(String name) throws Exception {
+    /**
+     * Hakee tietokannasta tamagotcin nimen perusteella ja päivittää sen tilan
+     * vastaamaan kulunutta aikaa siloin kun tamagotchi taas avataan.
+     *
+     * @param name Tamagotchin nimi
+     * 
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return tamagotchi olio
+     */
+    public Tamagotchi loadTamagotchi(String name) throws SQLException {
 
         Connection connection = database.newConnection();
 
@@ -123,8 +145,19 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
+    /**
+     * Päivittää tamagotchin tilan laskemalla paljon aikaa on kulunut siitä, kun
+     * tietokanta viimeksi on päivitetty. Jokaista kulunutta sekuntia kohden
+     * nälkä, väsymys, surullisuus, likaisuus ja sairaustila lisääntyvät 5
+     * yksikköä aivan kuten silloin, kun ohjelma olisi ollut auki ja käynnissä.
+     * Tämä tila päivitetään ajan tasalle.
+     *
+     * @param name Tamagotchin nimi
+     *
+     * @return tamagotchi olio
+     */
     public Tamagotchi updateTimePassing(String name) {
-        //päivitetään ajan kuluminen ajan tasalle kun tamagotchi taas ladataan
+
         Tamagotchi tamagotchi = new Tamagotchi(name);
         long currentTime = System.currentTimeMillis();
         long timeGone = currentTime - time;
@@ -141,11 +174,18 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         tamagotchi.setClean(newClean);
         tamagotchi.setSick(newSick);
         tamagotchi.setMood(mood);
-        tamagotchi.setAlive(true); //myöh haku ja päiv tietokannasta
+        tamagotchi.setAlive(true);
         return tamagotchi;
     }
 
-    public ArrayList list() throws Exception {
+    /**
+     * Hakee tietokannasta tamagotcien nimet ja lisää ne ArrayListiin.
+     * 
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return lista tamagotchien nimistä tietokannassa
+     */
+    public ArrayList list() throws SQLException {
         ArrayList list = new ArrayList();
         Connection connection = database.newConnection();
 
@@ -162,7 +202,15 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         return list;
     }
 
-    public void deleteTamagotchi(String name) throws Exception {
+    /**
+     * Hakee tietokannasta tamagotcin nimen perusteella ja poistaa sen
+     * tietokannasta.
+     *
+     * @param name Tamagotchin nimi
+     * 
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public void deleteTamagotchi(String name) throws SQLException {
         Connection connection = database.newConnection();
 
         PreparedStatement statement
@@ -174,7 +222,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         connection.close();
     }
 
-    public void alustaTietokanta() {
+    /**
+     * Luo tietokantataulun Tamagotchi, mikäli taulua ei löydy ennestään.
+     */
+    public void createTable() {
         try (Connection conne = database.newConnection()) {
             //          conn.prepareStatement("DROP TABLE Tamagotchi IF EXISTS;").executeUpdate();
             conne.prepareStatement("CREATE TABLE IF NOT EXISTS Tamagotchi(id serial, name varchar(25),"
@@ -187,4 +238,3 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     }
 }
-
