@@ -23,7 +23,7 @@ public class Buttons {
     Button wakeup;
     Button statistics;
     Button age;
-    Button back; 
+    Button back;
     String style;
 
     public Buttons() {
@@ -146,12 +146,28 @@ public class Buttons {
     }
 
     /**
-     * Asettaa nappien toiminnan pois päältä ja takaisin toimintaan.
+     * Asettaa nappien, (paitsi sleep ja wake up) toiminnan pois päältä ja
+     * takaisin toimintaan. Käytetään tamagotchin nukkuessa.
      */
     public void disableButtons(boolean t) {
         medicatebutton.setDisable(t);
         playbutton.setDisable(t);
         feedbutton.setDisable(t);
         cleanbutton.setDisable(t);
+        statistics.setDisable(t);
+    }
+
+    /**
+     * Asettaa nappien toiminnan pois päältä ja takaisin toimintaan. Käytössä
+     * munavaiheessa.
+     */
+    public void disableAllButtons(boolean t) {
+        medicatebutton.setDisable(t);
+        playbutton.setDisable(t);
+        feedbutton.setDisable(t);
+        cleanbutton.setDisable(t);
+        sleepbutton.setDisable(t);
+        wakeup.setDisable(t);
+        statistics.setDisable(t);
     }
 }

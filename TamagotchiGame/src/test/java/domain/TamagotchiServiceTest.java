@@ -26,7 +26,7 @@ public class TamagotchiServiceTest {
     TamagotchiService serv;
     String name;
     //  TamagotchiDao tdao;
-    public Map<String, Tamagotchi> tamas;
+   
     Database database;
     
     public TamagotchiServiceTest() {
@@ -43,13 +43,14 @@ public class TamagotchiServiceTest {
     @Before
     public void setUp() throws Exception {
         name = "name";
-        database = new Database("jdbc:h2:./src/main/resources/testitietokanta");        
+        database = new Database("./src/main/resources/testitietokanta");        
         serv = new TamagotchiService(database);
         serv.setName(name);
-        tamagotchi = new Tamagotchi(name);
+        
+        
         serv.newTamagotchi();
-        tamas = new HashMap();
-        tamas.put(name, tamagotchi);
+        tamagotchi = serv.getTamagotchi();
+       
         
     }
     
@@ -220,27 +221,21 @@ public class TamagotchiServiceTest {
         
         serv.setName("x");
         boolean tooShort = serv.tooShortName();
+        serv.setName(name);
         
         assertTrue(tooShort);
     }
     
     @Test
     public void tamagotchiIsBabyWhenAgeLessThan4() throws Exception {
-        
+          
+          
         boolean baby = serv.baby();
         
         assertTrue(baby);
     }
     
-    @Test
-    public void tamagotchiIsAdultWhenAgeMoreThan4() throws Exception {
-        
-        Tamagotchi t = serv.tamagotchi();
-        t.setDateOfBirth(t.getDateOfBirth() * 60 * 24 * 24 * 4);
-        boolean baby = serv.baby();
-        
-        assertEquals(false, baby);
-    }
+
     
      @Test
     public void tamagotchisTirednessGoesDownWhenAsleep() throws Exception {

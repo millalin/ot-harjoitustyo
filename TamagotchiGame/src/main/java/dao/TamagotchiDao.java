@@ -46,7 +46,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * Luo tietokantaan uuden tamagotchin.
      *
      * @param tamagotchi Tamagotchi olio
-     * 
+     *
      * @throws SQLException virhe tietokannanhallinnassa
      */
     @Override
@@ -81,7 +81,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * Päivittää tietokantaan tamagotchin nykytilanteen.
      *
      * @param tamagotchi Tamagotchi olio
-     * 
+     *
      * @throws SQLException virhe tietokannanhallinnassa
      */
     @Override
@@ -113,7 +113,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * vastaamaan kulunutta aikaa siloin kun tamagotchi taas avataan.
      *
      * @param name Tamagotchin nimi
-     * 
+     *
      * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return tamagotchi olio
@@ -180,7 +180,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
 
     /**
      * Hakee tietokannasta tamagotcien nimet ja lisää ne ArrayListiin.
-     * 
+     *
      * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return lista tamagotchien nimistä tietokannassa
@@ -199,6 +199,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
             list.add(name);
 
         }
+        connection.close();
         return list;
     }
 
@@ -207,7 +208,7 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * tietokannasta.
      *
      * @param name Tamagotchin nimi
-     * 
+     *
      * @throws SQLException virhe tietokannanhallinnassa
      */
     public void deleteTamagotchi(String name) throws SQLException {

@@ -17,10 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author milla
+ * Luokka tamagotchin ikien ja syntymäpäivien sekä kaikkien olemassaolleiden
+ * tamagotchien tietokannanhallintaa varten. Luokka käyttää tietokannan
+ * TamagotchisAges -taulua.
  */
-
 public class AgesDao implements Dao<Tamagotchi, Integer> {
 
     private Database database;
@@ -33,6 +33,14 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
 
     }
 
+    /**
+     * Luo tietokantaan uuden tamagotchitieton, jossa pidetään kirjaa
+     * syntymäpäivästä ja iästä sekä elossaolosta.
+     *
+     * @param tamagotchi Tamagotchi olio
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
 
@@ -53,6 +61,14 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
+    /**
+     * Päivittää tietokantaan tamagotchin ikää ja tietoa siitä, onko se vielä
+     * elossa.
+     *
+     * @param tamagotchi Tamagotchi olio
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
         Connection connection = database.newConnection();
@@ -72,6 +88,12 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
         return tamagotchi;
     }
 
+    /**
+     * Hakee tietokannasta tamagotchin nimen, syntymäpäivän, iän ja tieton onko
+     * se elossa ja lisää ne ArrayListiin.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
     public ArrayList list() throws SQLException {
         ArrayList list = new ArrayList();
         Connection connection = database.newConnection();
@@ -87,16 +109,23 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
             String date = DateFormat.getInstance().format(birthtime);
             int age = resultSet.getInt("age");
             boolean alive = resultSet.getBoolean("alive");
-            String tamagotchi = name + ", synt. " + date + ", ikä: " + age + " päivää. Elossa: " +alive;
+            String tamagotchi = name + ", synt. " + date + ", ikä: " + age + " päivää. Elossa: " + alive;
 
             list.add(tamagotchi);
 
         }
+        connection.close();
         return list;
     }
-    
-    public ArrayList names() throws SQLException    {
-         ArrayList list = new ArrayList();
+
+    /**
+     * Hakee tietokannasta tamagotchien nimet, jotka ovat koskaan olleet
+     * olemassa.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public ArrayList names() throws SQLException {
+        ArrayList list = new ArrayList();
         Connection connection = database.newConnection();
 
         PreparedStatement statement
@@ -109,9 +138,13 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
             list.add(name);
 
         }
+        connection.close();
         return list;
     }
 
+    /**
+     * Luo tietokantataulun TamagotchisAges, mikäli taulua ei löydy ennestään.
+     */
     public void createTable() {
         try (Connection conne = database.newConnection()) {
 

@@ -299,16 +299,10 @@ public class TamagotchiService {
      *
      * @return kaikki tietokannassa olevian ja olleiden tamagotchien nimet
      */
-    public String everyNameExistedlist() throws SQLException {
+    public ArrayList everyNameExistedlist() throws SQLException {
         ArrayList<String> list = agesDao.names();
 
-        StringBuilder sb = new StringBuilder();
-        for (String s : list) {
-            sb.append(s);
-            sb.append("\n");
-        }
-
-        return sb.toString();
+        return list;
     }
 
     /**
@@ -334,6 +328,7 @@ public class TamagotchiService {
         if (age >= 4) {
             return false;
         }
+        
         return true;
     }
 
@@ -345,6 +340,13 @@ public class TamagotchiService {
         return this.name;
     }
 
+    /**
+     * Hakee tietokannasta tiedot tamagotcheista, jotka ovat olleet aiemmin
+     * olemassa tai jotka ovat edelleen pelissä.
+     *
+     * @return palauttaa tiedot tamagotchin nimestä, iästä, syntymäpäivästä ja
+     * tiedosto onko elossa Stringinä.
+     */
     public String ages() throws SQLException {
         ArrayList<String> list = agesDao.list();
 
@@ -357,6 +359,9 @@ public class TamagotchiService {
         return sb.toString();
     }
 
+    /**
+     * Päivittää tietokantaan tamagotchin ikää ja elossaolotilannetta.
+     */
     public void ageUpdate() throws SQLException {
         Tamagotchi tamagotchi = tamagotchis.get(name);
         agesDao.update(tamagotchi);
