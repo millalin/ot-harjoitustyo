@@ -1,0 +1,4 @@
+/**
+ * Tietojen pysyväistallennus.
+ */
+package dao;

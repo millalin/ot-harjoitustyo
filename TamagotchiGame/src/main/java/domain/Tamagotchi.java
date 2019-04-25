@@ -27,7 +27,6 @@ public class Tamagotchi {
     public Tamagotchi(String name) {
         
         this.name = name;
-
         this.hunger = 600000;
         this.sadness = 400000;
         this.tiredness = 200000;
@@ -35,7 +34,6 @@ public class Tamagotchi {
         this.alive = true;
         this.age = 0;
         this.sick = 200000;
-
         this.dateOfBirth = System.currentTimeMillis();
         this.currentTime = 0;
         this.mood = "sad";

@@ -118,6 +118,7 @@ public class TamagotchiGameUi extends Application {
                         update(state, stage, deadScene);
                         stage.setScene(playScene);
                     } else {
+                        tamagotchiservice.ageUpdate();
                         stage.setScene(deadScene);
                     }
                 } else {
@@ -324,7 +325,7 @@ public class TamagotchiGameUi extends Application {
     }
 
     /**
-     * Ohjelman alkunäkymän palauttava metodi, joka lLuo alkunäkymän graafisen
+     * Ohjelman alkunäkymän palauttava metodi, joka luo alkunäkymän graafisen
      * ulkoasun.
      *
      * @return GripPane olio, joka sisältää alkunäkymän
@@ -364,6 +365,12 @@ public class TamagotchiGameUi extends Application {
         return group;
     }
 
+    /**
+     * Ohjelman kaikkien tamagotchien historianäkymän palauttava metodi, joka luo alkunäkymän graafisen
+     * ulkoasun.
+     *
+     * @return GripPane olio, joka sisältää historiatilastonäkymän
+     */
     public GridPane agesGridPane() throws SQLException {
         GridPane tamagotchiAges = new GridPane();
 

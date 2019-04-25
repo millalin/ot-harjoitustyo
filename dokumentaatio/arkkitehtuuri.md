@@ -36,4 +36,15 @@ Dao pakkauksen luokat vastaavat tamagotchin tietojen tallentamisesta tietokantaa
 
 Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut tekstikenttään uuden tamagotchin nimen, jota ei ole jo olemassa tietokannassa, etenee uuden tamagotchin luominen seuraavasti: 
 
-![alt.text](sekvenssikaavio.creating.png)
+![alt.text](sekvenssikaavio.new.png)
+
+### Vanhan tamagotchin hakeminen
+
+Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut hakukenttään tamagotchin nimen, joka on olemassa jo pelissä etenee sovellus seuraavasti:
+
+![alt.text](sekvenssikaavio_gettama.png)
+
+Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut hakukenttään tamagotchin nimen, jota ei ole vielä luotu etenee sovellus seuraavalla tavalla:
+
+![alt.text](sekvenssikaavio.alreadyexists.png)
+

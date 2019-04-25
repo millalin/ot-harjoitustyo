@@ -1,0 +1,4 @@
+/**
+ * Tietokantayhteys.
+ */
+package database;
