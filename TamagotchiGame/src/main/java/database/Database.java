@@ -35,7 +35,7 @@ public class Database {
      *
      * @return palauttaa uuden tietokantayhteyden
      *
-     * @throws SQLEXception virhe tietokantayhteydessä
+     * @throws SQLException virhe tietokantayhteydessä
      */
     public Connection newConnection() throws SQLException {
         this.connection = DriverManager.getConnection(address, "sa", "");

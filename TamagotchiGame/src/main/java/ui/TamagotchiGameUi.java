@@ -327,6 +327,8 @@ public class TamagotchiGameUi extends Application {
     /**
      * Ohjelman alkunäkymän palauttava metodi, joka luo alkunäkymän graafisen
      * ulkoasun.
+     * 
+     * @throws SQLException
      *
      * @return GripPane olio, joka sisältää alkunäkymän
      */
@@ -368,6 +370,8 @@ public class TamagotchiGameUi extends Application {
     /**
      * Ohjelman kaikkien tamagotchien historianäkymän palauttava metodi, joka luo alkunäkymän graafisen
      * ulkoasun.
+     * 
+     * @throws SQLException
      *
      * @return GripPane olio, joka sisältää historiatilastonäkymän
      */

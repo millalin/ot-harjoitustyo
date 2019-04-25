@@ -3,6 +3,7 @@ package ui;
 
 import domain.Tamagotchi;
 import domain.TamagotchiService;
+import java.sql.SQLException;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -228,9 +229,11 @@ public class TamagotchiFrames {
      *
      * @param name Tamagotchin nimi
      * 
+     * @throws SQLException
+     * 
      * @return VBox asettelussa sijaitseva kaavio
      */
-    public VBox statistics(String name) throws Exception {
+    public VBox statistics(String name) throws SQLException {
 
         CategoryAxis x = new CategoryAxis();
         NumberAxis y = new NumberAxis(0, 1000000, 100000);

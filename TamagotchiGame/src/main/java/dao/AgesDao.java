@@ -40,6 +40,8 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return tamagotchi olio
      */
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
@@ -68,6 +70,8 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return tamagotchi olio
      */
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
@@ -93,6 +97,8 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * se elossa ja lisää ne ArrayListiin.
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return lista, jossa tamagotchien historiatietoja
      */
     public ArrayList list() throws SQLException {
         ArrayList list = new ArrayList();
@@ -123,6 +129,8 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * olemassa.
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return lista, jossa tamagotchien nimet
      */
     public ArrayList names() throws SQLException {
         ArrayList list = new ArrayList();

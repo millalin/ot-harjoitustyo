@@ -148,6 +148,8 @@ public class Buttons {
     /**
      * Asettaa nappien, (paitsi sleep ja wake up) toiminnan pois päältä ja
      * takaisin toimintaan. Käytetään tamagotchin nukkuessa.
+     * 
+     * @param t true tai false sen mukaan, halutaanko napit käyttöön
      */
     public void disableButtons(boolean t) {
         medicatebutton.setDisable(t);
@@ -160,6 +162,8 @@ public class Buttons {
     /**
      * Asettaa nappien toiminnan pois päältä ja takaisin toimintaan. Käytössä
      * munavaiheessa.
+     * 
+     * @param t true tai false sen mukaan, halutaanko napit käyttöön
      */
     public void disableAllButtons(boolean t) {
         medicatebutton.setDisable(t);

@@ -48,6 +48,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return tamagotchi olio
      */
     @Override
     public Tamagotchi create(Tamagotchi tamagotchi) throws SQLException {
@@ -83,6 +85,8 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
+     * 
+     * @return tamagotchi olio
      */
     @Override
     public Tamagotchi update(Tamagotchi tamagotchi) throws SQLException {
