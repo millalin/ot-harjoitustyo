@@ -23,4 +23,5 @@ päivä |  aika |  mitä tein
 20.4 | 3 | Javadocin aloitusta, tamagotchin toimintojen muutosta niin, että kaikki arvot ovat ajan myötä nousevia ja statistics tilasto helpommin luettavissa, uuden tietokantaluokan hahmottelua, testien muokkaus, koodin muokkausta
 22.4 | 6 | Javadocin tekoa, pieniä muokkauksia ohjelmaan, käyttöohjeen tekoa, uuden tietokantataulun saattaminen toimintaan ja ohjelmaan uuden näkymän lisäys, jossa tamagotchien tietoja ja iät, dokumentaation tekoa
 23.4 | 3 | päivityksiä ja muokkauksia koodiin, napit pois toiminnasta munavaiheessa, päivitys nimien hakuun
-yht | 71 |
+25.4 | 3 | sekvenssikaavioiden ja arkkitehtuurikuvauksen tekoa, muokkauksia javadociin, toimivuustestauksia
+yht | 74 |
