@@ -40,69 +40,71 @@ public class TamagotchiFrames {
     FlowPane frameBabymedicate;
     TamagotchiService tamagotchiservice;
     String name;
+    String path;
 
     public TamagotchiFrames(TamagotchiService tamagotchiservice) {
 
         this.tamagotchiservice = tamagotchiservice;
+        path = "file:images/Gifs/";
 
-        Image happy = new Image("/Gifs/tamag(3).gif");
+        Image happy = new Image(path + "tamag(3).gif");
         ImageView happypicture = new ImageView(happy);
 
-        Image sad = new Image("/Gifs/tamag(12).gif");
+        Image sad = new Image(path + "tamag(12).gif");
         ImageView sadpicture = new ImageView(sad);
 
-        Image eat = new Image("/Gifs/tamag(6).gif");
+        Image eat = new Image(path + "tamag(6).gif");
         ImageView eatpicture = new ImageView(eat);
 
-        Image play = new Image("/Gifs/tamag(8).gif");
+        Image play = new Image(path + "tamag(8).gif");
         ImageView playpicture = new ImageView(play);
 
-        Image dead = new Image("/Gifs/tamag(13).gif");
+        Image dead = new Image(path + "tamag(13).gif");
         ImageView deadpicture = new ImageView(dead);
 
-        Image sick = new Image("/Gifs/tamag(14).gif");
+        Image sick = new Image(path + "tamag(14).gif");
         ImageView sickpicture = new ImageView(sick);
 
-        Image sleep = new Image("/Gifs/tamag(15).gif");
+        Image sleep = new Image(path + "tamag(15).gif");
         ImageView sleeppicture = new ImageView(sleep);
 
-        Image medicate = new Image("/Gifs/tamag(16).gif");
+        Image medicate = new Image(path + "tamag(16).gif");
         ImageView medicatepicture = new ImageView(medicate);
 
-        Image hungry = new Image("/Gifs/tamag(17).gif");
+        Image hungry = new Image(path + "tamag(17).gif");
         ImageView hungrypicture = new ImageView(hungry);
 
-        Image dirty = new Image("/Gifs/tamag(18).gif");
+        Image dirty = new Image(path + "tamag(18).gif");
         ImageView dirtypicture = new ImageView(dirty);
 
-        Image clean = new Image("/Gifs/tamag(19).gif");
+        Image clean = new Image(path + "tamag(19).gif");
         ImageView cleanpicture = new ImageView(clean);
 
-        Image egg = new Image("/Gifs/tamag(20).gif");
+        Image egg = new Image(path + "tamag(20).gif");
         ImageView eggpicture = new ImageView(egg);
 
-        Image babyhappy = new Image("/Gifs/tamagbaby.gif");
+        Image babyhappy = new Image(path + "tamagbaby.gif");
         ImageView babyhappypicture = new ImageView(babyhappy);
 
-        Image babyeat = new Image("/Gifs/tamagbaby(1).gif");
+        Image babyeat = new Image(path + "tamagbaby(1).gif");
         ImageView babyeatpicture = new ImageView(babyeat);
 
-        Image babysad = new Image("/Gifs/tamagbaby(2).gif");
+        Image babysad = new Image(path + "tamagbaby(2).gif");
         ImageView babysadpicture = new ImageView(babysad);
 
-        Image babysick = new Image("/Gifs/tamagbaby(3).gif");
+        Image babysick = new Image(path + "tamagbaby(3).gif");
         ImageView babysickpicture = new ImageView(babysick);
 
-        Image babyplay = new Image("/Gifs/tamababy.gif");
+        Image babyplay = new Image(path + "tamababy.gif");
         ImageView babyplaypicture = new ImageView(babyplay);
 
-        Image babydirty = new Image("/Gifs/poop2.gif");
+        Image babydirty = new Image(path + "poop2.gif");
         ImageView babydirtypicture = new ImageView(babydirty);
 
-        Image babyhungry = new Image("/Gifs/tamahungry.gif");
+        Image babyhungry = new Image(path + "tamahungry.gif");
         ImageView babyhungrypicture = new ImageView(babyhungry);
 
-        Image babymedicate = new Image("/Gifs/tamamedi.gif");
+        Image babymedicate = new Image(path + "tamamedi.gif");
         ImageView babymedicatepicture = new ImageView(babymedicate);
 
         frameHappy = new FlowPane();
