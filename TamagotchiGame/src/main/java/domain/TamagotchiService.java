@@ -77,6 +77,22 @@ public class TamagotchiService {
         }
         return false;
     }
+    
+        /**
+     * Tarkastus onko syötetty nimi liian pitkä. Nimen tulee olla enintään 25
+     * merkkiä pitkä.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     *
+     * @return true jos nimi yli 25 merkkiä, muuten false
+     */
+    public boolean tooLongName() throws SQLException {
+
+        if (name.chars().count() > 25) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Luo uuden tamagotchin ja tallettaa sen tietokantaan.

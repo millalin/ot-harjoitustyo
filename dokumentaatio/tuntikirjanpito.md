@@ -24,4 +24,5 @@ päivä |  aika |  mitä tein
 22.4 | 6 | Javadocin tekoa, pieniä muokkauksia ohjelmaan, käyttöohjeen tekoa, uuden tietokantataulun saattaminen toimintaan ja ohjelmaan uuden näkymän lisäys, jossa tamagotchien tietoja ja iät, dokumentaation tekoa
 23.4 | 3 | päivityksiä ja muokkauksia koodiin, napit pois toiminnasta munavaiheessa, päivitys nimien hakuun
 25.4 | 3 | sekvenssikaavioiden ja arkkitehtuurikuvauksen tekoa, muokkauksia javadociin, toimivuustestauksia
-yht | 74 |
+30.5 | 2 | dokumentaation tekoa, config.properties lisäsys
+yht | 76 |

@@ -2,7 +2,9 @@ package ui;
 
 import database.Database;
 import domain.TamagotchiService;
+import java.io.FileInputStream;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
@@ -45,6 +47,20 @@ public class TamagotchiGameUi extends Application {
     int count;
     AnimationTimer animationtimer;
 
+    @Override
+    public void init() throws Exception {
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+
+        String databaseName = properties.getProperty("database");
+        String todoFile = properties.getProperty("todoFile");
+
+        database = new Database(databaseName);
+        tamagotchiservice = new TamagotchiService(database);
+       
+    }
+
     /**
      * Ohjelman käynnistysmetodi, joka hallinnoi ikkunoiden vaihtamista.
      *
@@ -55,8 +71,7 @@ public class TamagotchiGameUi extends Application {
     @Override
     public void start(Stage stage) throws SQLException {
 
-        database = new Database("./src/main/resources/tamagotchitietokanta");
-        tamagotchiservice = new TamagotchiService(database);
+       
 
         frames = new TamagotchiFrames(tamagotchiservice);
         allbuttons = new Buttons();
@@ -95,6 +110,8 @@ public class TamagotchiGameUi extends Application {
                     nameText.setText("Name already exists, please choose another one");
                 } else if (tamagotchiservice.tooShortName()) {
                     nameText.setText("Name must be atleast 3 characters");
+                } else if (tamagotchiservice.tooLongName()) {
+                    nameText.setText("Name can't be over 25 characters");
                 } else {
                     count = 0;
                     tamagotchiservice.newTamagotchi();
@@ -278,7 +295,7 @@ public class TamagotchiGameUi extends Application {
                 try {
 
                     count++;
-                  
+
                     if (count < 30) {
                         allbuttons.disableAllButtons(true);
                         state.setCenter(frames.getFrameEgg());
@@ -310,7 +327,7 @@ public class TamagotchiGameUi extends Application {
                             state.setCenter(frames.getFrameHappy());
                         }
                     }
-                    
+
                     //AIKA KULUU
                     tamagotchiservice.time();
                     tamagotchiservice.ageUpdate();
@@ -327,7 +344,7 @@ public class TamagotchiGameUi extends Application {
     /**
      * Ohjelman alkunäkymän palauttava metodi, joka luo alkunäkymän graafisen
      * ulkoasun.
-     * 
+     *
      * @throws SQLException
      *
      * @return GripPane olio, joka sisältää alkunäkymän
@@ -368,9 +385,9 @@ public class TamagotchiGameUi extends Application {
     }
 
     /**
-     * Ohjelman kaikkien tamagotchien historianäkymän palauttava metodi, joka luo alkunäkymän graafisen
-     * ulkoasun.
-     * 
+     * Ohjelman kaikkien tamagotchien historianäkymän palauttava metodi, joka
+     * luo alkunäkymän graafisen ulkoasun.
+     *
      * @throws SQLException
      *
      * @return GripPane olio, joka sisältää historiatilastonäkymän

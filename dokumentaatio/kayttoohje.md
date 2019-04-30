@@ -2,6 +2,11 @@
 
 Lataa tiedosto [TamagotchiGame.jar](https://github.com/millalin/ot-harjoitustyo/releases/tag/v0.2)
 
+## Konfigurointi
+
+Ohjelma olettaa, että sen sisältävän kansion juuressa on config.properties tiedosto. Tiedostossa määritellään käytettävän tietokannan osoitepolku ja nimi. Tiedoston muoto on seuraavanlainen:
+
+    database=./src/main/resources/tamagotchitietokanta
 
 ## Ohjelman käynnistäminen
 
