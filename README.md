@@ -23,6 +23,7 @@ Sovelluksessa voi olla monta samanaikaista tamagotcia, jolloin jokaista pitää 
 
 [Viikko 6](https://github.com/millalin/ot-harjoitustyo/releases/tag/v0.3)
 
+[Loppupalautus](https://github.com/millalin/ot-harjoitustyo/releases/tag/v1.0)
 
 ### Komentorivikomennot
 

@@ -6,12 +6,10 @@
 package domain;
 
 /**
- *  Tamagotchi virtuaalilemmikkiä edustava luokka
+ * Tamagotchi virtuaalilemmikkiä edustava luokka.
  */
-
 public class Tamagotchi {
 
- 
     private String name;
     private long dateOfBirth;
     private long currentTime;
@@ -25,7 +23,7 @@ public class Tamagotchi {
     private String mood;
 
     public Tamagotchi(String name) {
-        
+
         this.name = name;
         this.hunger = 600000;
         this.sadness = 400000;
@@ -51,8 +49,7 @@ public class Tamagotchi {
         this.mood = mood;
     }
 
-
-    public  long getCurrentTime() {
+    public long getCurrentTime() {
         return currentTime;
     }
 
@@ -68,18 +65,16 @@ public class Tamagotchi {
         return dateOfBirth;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public int getHunger() {
         return hunger;
     }
 
     public void setHunger(int hunger) {
-       
+
         this.hunger = hunger;
     }
 
@@ -120,12 +115,10 @@ public class Tamagotchi {
      *
      * @return tamagotchin iän päivinä
      */
-    
     public int getAge() {
         long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; //sekkuntia
         int currentAge = (int) a / 60 / 60 / 24;
         return currentAge;
     }
-
 
 }

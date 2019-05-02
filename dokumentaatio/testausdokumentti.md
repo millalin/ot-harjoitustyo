@@ -14,7 +14,9 @@ Dao-luokkien testauksessa käytetään hyväksi testeissä luotua testitietokant
 
 #### Testauskattavuus
 
-Sovelluksen testien rivikattavuus on xx % js haaraumakattavuus xx %. Sovelluksen testikattavuusraportista on jätetty käyttöliittymä pois.Testaamatta jääneet rivit ovat pääosin yksinkertaisia get- ja set-metodeja. Myös poikkeusten (pääasiassa SQLException) testaamattomuus laskee prosenttilukua. 
+Sovelluksen testien rivikattavuus on 89 % ja haaraumakattavuus 74 %. Sovelluksen testikattavuusraportista on jätetty käyttöliittymä pois.Testaamatta jääneet rivit ovat pääosin yksinkertaisia get- ja set-metodeja.
+
+![alt.text](jacoco.png) 
 
 ## Järjestelmätestaus
 
@@ -28,7 +30,7 @@ Sovellus on haettu ja sitä on testattu [käyttöohjeen](https://github.com/mill
 
 Kaikki [määrittelydokumentissa](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) ja käyttöohjeessa mainitut toiminnallisuudet on testattu myös siltä osin, että syötteet ovat virheellisiä.  
 
-## Sovellukseen jääneet ongelmat
+
 
  
 

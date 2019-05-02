@@ -176,6 +176,8 @@ public class TamagotchiServiceTest {
         assertEquals("sleep", result);
     }
     
+    
+    
     @Test
     public void ifTamagotchiExistsReturnsTrue() throws Exception {
         serv.tamaslist();
@@ -235,6 +237,7 @@ public class TamagotchiServiceTest {
         assertTrue(baby);
     }
     
+    
 
     
      @Test
@@ -246,4 +249,23 @@ public class TamagotchiServiceTest {
         
         assertEquals(199000, result);
     }
+    
+       @Test
+    public void tamagotchiNameTooLong() throws Exception {
+          
+          serv.setName("toolongtoolongtoolongtoolong");
+        boolean tooLong = serv.tooLongName();
+        
+        assertTrue(tooLong);
+    }
+    
+         @Test
+    public void emptyNameIsNotOkay() throws Exception {
+          
+          serv.setName("");
+        boolean empty = serv.alreadyExists();
+        
+        assertFalse(empty);
+    }
+ 
 }

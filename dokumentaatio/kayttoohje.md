@@ -1,12 +1,14 @@
 # Käyttöohje
 
-Lataa tiedosto [TamagotchiGame.jar](https://github.com/millalin/ot-harjoitustyo/releases/tag/v0.2)
+Lataa tiedosto [TamagotchiGame.jar](https://github.com/millalin/ot-harjoitustyo/releases/tag/1.0)
 
 ## Konfigurointi
 
-Ohjelma olettaa, että sen sisältävän kansion juuressa on config.properties tiedosto. Tiedostossa määritellään käytettävän tietokannan osoitepolku ja nimi. Tiedoston muoto on seuraavanlainen:
+Ohjelma olettaa, että sen sisältävän kansion juuressa on config.properties tiedosto. Se kuitenkin hakee tietokannan myös oletusosoitteella, jos tiedostoa ei ole. Tiedostoon voi halutessaan määritellä käytettävän tietokannan osoitepolun ja nimen. Tiedoston oletusmuoto on seuraavanlainen:
 
     database=./src/main/resources/tamagotchitietokanta
+
+Ohjelmaan voi ladata myös valmiin [config.properties](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/config.properties)-tiedoston. 
 
 ## Ohjelman käynnistäminen
 
@@ -28,6 +30,7 @@ Olemassaolevan tamagotchin lataaminen tapahtuu syöttämällä nimi nimikenttä�
 
 Tietokannassa olevan tamagotchin voi poistaa syöttämällä nimen nimikenttään ja painamalla delete nappia. Statistics nappia painamalla pääsee katsomaan tietoja kaikista tamagotcheista, jotka ovat olleet tai ovat edelleen pelissä sekä tarkastamaan jokaisen syntymäpäivän ja iän päivinä. Kun uuden tamagotchin luominen tai vanhan lataaminen onnistuu, siirrytään pelinäkymään. 
 
+Statistics napilla siirrytään historianäkymään.
 
 ## Pelinäkymä
 
@@ -50,6 +53,11 @@ Kun hoidat ja hoivaat tamagotchiasi säännöllisesti, siitä kehittyy 4 päivä
 ![alt.text](kayttoohjekuvat/aikuinen.png)
 
 
+## Historiatietonäkymä
+
+Historiatietonäkymässä voi tarkastella kaikkien ikinä pelissä olleiden tamagotchien luomispäivää, ikää sekä tietoa elossaolosta. Näkymästä poistutaan exit -napilla. 
 
 
+## Kuollut näkymä
 
+Jos tamagotchi menehtyy, sitä ei voi enää hoitaa. Näkymästä poistutaan exit -napilla. 

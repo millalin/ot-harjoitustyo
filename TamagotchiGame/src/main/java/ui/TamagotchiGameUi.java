@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import domain.TamagotchiService;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -45,20 +46,30 @@ public class TamagotchiGameUi extends Application {
     Label stats;
     Label tamaAges;
     int count;
+    String databaseName;
     AnimationTimer animationtimer;
 
+    /**
+     * Valmistelee tietokantayhteyden ja tamagotchiService luokan.
+     *
+     * @throws Exception
+     */
     @Override
     public void init() throws Exception {
         Properties properties = new Properties();
 
-        properties.load(new FileInputStream("config.properties"));
+        try {
+            properties.load(new FileInputStream("config.properties"));
+            databaseName = properties.getProperty("database");
+        } catch (FileNotFoundException ex) {
+            databaseName = "./src/main/resources/tamagotchitietokanta";
+        }
 
-        String databaseName = properties.getProperty("database");
         String todoFile = properties.getProperty("todoFile");
 
         database = new Database(databaseName);
         tamagotchiservice = new TamagotchiService(database);
-       
+
     }
 
     /**
@@ -70,8 +81,6 @@ public class TamagotchiGameUi extends Application {
      */
     @Override
     public void start(Stage stage) throws SQLException {
-
-       
 
         frames = new TamagotchiFrames(tamagotchiservice);
         allbuttons = new Buttons();
@@ -96,6 +105,7 @@ public class TamagotchiGameUi extends Application {
 
         //deadState.setTop(); paluunappi? 
         deadState.setCenter(frames.getFrameDead());
+        deadState.setTop(allbuttons.getReturnDead());
 
         Scene startScene = new Scene(startGroup);
         Scene playScene = new Scene(main);
@@ -121,7 +131,6 @@ public class TamagotchiGameUi extends Application {
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         });
 
         allbuttons.getGetTamagotchi().setOnAction((event) -> {
@@ -141,7 +150,6 @@ public class TamagotchiGameUi extends Application {
                 } else {
                     oldone.setText("There is no such tamagotchi");
                 }
-
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -161,6 +169,7 @@ public class TamagotchiGameUi extends Application {
 
         allbuttons.getAge().setOnAction((event) -> {
             try {
+                
                 tamaAges.setText(tamagotchiservice.ages());
                 stage.setScene(agesScene);
 
@@ -178,6 +187,20 @@ public class TamagotchiGameUi extends Application {
         });
 
         allbuttons.getReturnbutton().setOnAction((event) -> {
+            try {
+                nameField.clear();
+                field.clear();
+                del.clear();
+                names.setText(tamagotchiservice.tamaslist());
+
+                stage.setScene(startScene);
+                animationtimer.stop();
+            } catch (Exception ex) {
+                Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        allbuttons.getReturnDead().setOnAction((event) -> {
             try {
                 nameField.clear();
                 field.clear();
@@ -308,7 +331,6 @@ public class TamagotchiGameUi extends Application {
                             allbuttons.disableButtons(false);
                             allbuttons.disableAllButtons(false);
                         }
-
                     }
                     if (tamagotchiservice.tamagotchiAlive() == false) {
                         stage.setScene(deadScene);
@@ -328,7 +350,6 @@ public class TamagotchiGameUi extends Application {
                         }
                     }
 
-                    //AIKA KULUU
                     tamagotchiservice.time();
                     tamagotchiservice.ageUpdate();
                 } catch (Exception ex) {

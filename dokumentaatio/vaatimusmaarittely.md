@@ -27,12 +27,12 @@ Ensimmäisessä näkymässä:
 Pelinäkymässä:
 - luomisen jälkeen näytölle ilmestyy 38 sekunnin ajaksi muna, jonka järkeen siihen ilmestyy vauvavaiheen tamagotchi. 
 - pelissä on nappeja, joilla toi tehdä eri toimintoja
-- käyttäjä voi syöttää tamagotchia
-- käyttäjä voi leikittää tamagotchia
-- käyttäjä voi siivota tamagochin jätteet
-- käyttäjä voi lääkitä tamagotchin, jos se on kipeä
-- käyttäjä voi laittaa tamagotchin nukkumaan
-- käyttäjä voi herättää tamagotchin
+- käyttäjä voi syöttää tamagotchia feed napista, jolloin sen nälkä vähenee
+- käyttäjä voi leikittää tamagotchia play napista, jolloin sen onnellisuus lisääntyy
+- käyttäjä voi siivota tamagochin jätteet clean napista, jolloin sen likaisuus vähenee
+- käyttäjä voi lääkitä tamagotchin, jos se on kipeä medicate -napista
+- käyttäjä voi laittaa tamagotchin nukkumaan sleep napista ja tällöin tamagotchin energia lisääntyy 1000 yksikköä sekuntia kohden
+- käyttäjä voi herättää tamagotchin wake up - napista
 - käyttäjä voi poistua alkunäkymään
 - käyttäjä voi painaa tilastonäkymää, jolloin tamagotchin nykyinen tila näkyy hetken näytöllä
 

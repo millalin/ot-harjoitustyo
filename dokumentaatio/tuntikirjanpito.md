@@ -25,4 +25,5 @@ päivä |  aika |  mitä tein
 23.4 | 3 | päivityksiä ja muokkauksia koodiin, napit pois toiminnasta munavaiheessa, päivitys nimien hakuun
 25.4 | 3 | sekvenssikaavioiden ja arkkitehtuurikuvauksen tekoa, muokkauksia javadociin, toimivuustestauksia
 30.5 | 2 | dokumentaation tekoa, config.properties lisäsys
-yht | 76 |
+2.5 | 4 | dokumentaation tekoa, pieniä koodimuokkauksia, napin lisääminen, viimeistelyä
+yht | 80 |

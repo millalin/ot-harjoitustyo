@@ -34,7 +34,7 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
     }
 
     /**
-     * Luo tietokantaan uuden tamagotchitieton, jossa pidetään kirjaa
+     * Luo tietokantaan uuden tamagotchin, jossa pidetään kirjaa
      * syntymäpäivästä ja iästä sekä elossaolosta.
      *
      * @param tamagotchi Tamagotchi olio
@@ -93,7 +93,7 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
     }
 
     /**
-     * Hakee tietokannasta tamagotchin nimen, syntymäpäivän, iän ja tieton onko
+     * Hakee tietokannasta tamagotchin nimen, syntymäpäivän, iän ja tiedon onko
      * se elossa ja lisää ne ArrayListiin.
      *
      * @throws SQLException virhe tietokannanhallinnassa

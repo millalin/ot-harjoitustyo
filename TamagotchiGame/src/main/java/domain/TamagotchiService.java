@@ -77,8 +77,8 @@ public class TamagotchiService {
         }
         return false;
     }
-    
-        /**
+
+    /**
      * Tarkastus onko syötetty nimi liian pitkä. Nimen tulee olla enintään 25
      * merkkiä pitkä.
      *

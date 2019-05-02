@@ -24,6 +24,7 @@ public class Buttons {
     Button statistics;
     Button age;
     Button back;
+    Button returnDead;
     String style;
 
     public Buttons() {
@@ -83,6 +84,12 @@ public class Buttons {
         deleteTamagotchi = new Button("Delete");
         age = new Button("Statistics");
         back = new Button("Exit");
+        returnDead = new Button("Exit");
+        returnDead.setStyle(style);
+    }
+
+    public Button getReturnDead() {
+        return returnDead;
     }
 
     public Button getBack() {
