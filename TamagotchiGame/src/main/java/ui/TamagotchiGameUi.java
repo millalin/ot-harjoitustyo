@@ -323,13 +323,14 @@ public class TamagotchiGameUi extends Application {
                         allbuttons.disableAllButtons(true);
                         state.setCenter(frames.getFrameEgg());
                     } else {
-                        if (tamagotchiservice.getMood().equals("sleep")) {
-                            state.setCenter(frames.getFrameSleep());
-                            tamagotchiservice.updateTamagotchiSleep();
-                            allbuttons.disableButtons(true);
-                        } else {
+                        if (!tamagotchiservice.getMood().equals("sleep")) {
                             allbuttons.disableButtons(false);
                             allbuttons.disableAllButtons(false);
+                        } else {
+                            state.setCenter(frames.getFrameSleep());
+                            tamagotchiservice.updateTamagotchiSleep();
+                            allbuttons.disableAllButtons(false);
+                            allbuttons.disableButtons(true);
                         }
                     }
                     if (tamagotchiservice.tamagotchiAlive() == false) {
