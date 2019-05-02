@@ -169,7 +169,7 @@ public class TamagotchiGameUi extends Application {
 
         allbuttons.getAge().setOnAction((event) -> {
             try {
-                
+
                 tamaAges.setText(tamagotchiservice.ages());
                 stage.setScene(agesScene);
 

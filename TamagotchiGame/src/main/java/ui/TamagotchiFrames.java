@@ -1,4 +1,3 @@
-
 package ui;
 
 import domain.Tamagotchi;
@@ -155,6 +154,12 @@ public class TamagotchiFrames {
         return frameEgg;
     }
 
+    /**
+     * FlowPane, jossa kipeä kuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameSick() {
         if (tamagotchiservice.baby()) {
             return frameBabysick;
@@ -166,6 +171,12 @@ public class TamagotchiFrames {
         return frameSleep;
     }
 
+    /**
+     * FlowPane, jossa onnellinen kuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameHappy() {
         if (tamagotchiservice.baby()) {
             return frameBabyhappy;
@@ -173,6 +184,12 @@ public class TamagotchiFrames {
         return frameHappy;
     }
 
+    /**
+     * FlowPane, jossa surullinen kuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameSad() {
         if (tamagotchiservice.baby()) {
             return frameBabysad;
@@ -180,6 +197,12 @@ public class TamagotchiFrames {
         return frameSad;
     }
 
+    /**
+     * FlowPane, jossa syöntikuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameEat() {
         if (tamagotchiservice.baby()) {
             return frameBabyeat;
@@ -187,6 +210,12 @@ public class TamagotchiFrames {
         return frameEat;
     }
 
+    /**
+     * FlowPane, jossa leikkikuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFramePlay() {
         if (tamagotchiservice.baby()) {
             return frameBabyplay;
@@ -198,6 +227,12 @@ public class TamagotchiFrames {
         return frameDead;
     }
 
+    /**
+     * FlowPane, jossa lääkintäkuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameMedicate() {
         if (tamagotchiservice.baby()) {
             return frameBabymedicate;
@@ -205,6 +240,12 @@ public class TamagotchiFrames {
         return frameMedicate;
     }
 
+    /**
+     * FlowPane, jossa nälkäinen kuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameHungry() {
         if (tamagotchiservice.baby()) {
             return frameBabyhungry;
@@ -212,6 +253,12 @@ public class TamagotchiFrames {
         return frameHungry;
     }
 
+    /**
+     * FlowPane, jossa likainen kuva(gif).
+     *
+     * @return jos tamagotchi on vauvatilassa, palauttaa vauva-ajan gifin,
+     * muutoin aikuisiän gifin.
+     */
     public FlowPane getFrameDirty() {
         if (tamagotchiservice.baby()) {
             return frameBabydirty;
@@ -226,13 +273,13 @@ public class TamagotchiFrames {
     /**
      * Tämänhetkistä tamagotchin tilaa kuvaavan kaavion piirtäminen. Kaavion
      * pylväät näyttävät kuinka nälkä, surullinen, likainen, sairas ja väsynyt
-     * tamagotchi on. Mitä korkeampi pylväs on, sitä huonompi tila
-     * tamagotchilla on.
+     * tamagotchi on. Mitä korkeampi pylväs on, sitä huonompi tila tamagotchilla
+     * on.
      *
      * @param name Tamagotchin nimi
-     * 
+     *
      * @throws SQLException
-     * 
+     *
      * @return VBox asettelussa sijaitseva kaavio
      */
     public VBox statistics(String name) throws SQLException {
