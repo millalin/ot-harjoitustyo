@@ -25,7 +25,6 @@ public class TamagotchiServiceTest {
     Tamagotchi tamagotchi;
     TamagotchiService serv;
     String name;
-    //  TamagotchiDao tdao;
    
     Database database;
     
@@ -43,7 +42,7 @@ public class TamagotchiServiceTest {
     @Before
     public void setUp() throws Exception {
         name = "name";
-        database = new Database("./src/main/resources/testitietokanta");        
+        database = new Database("./src/main/resources/database/testitietokanta");        
         serv = new TamagotchiService(database);
         serv.setName(name);
         
