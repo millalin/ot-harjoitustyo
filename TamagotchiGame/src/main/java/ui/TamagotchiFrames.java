@@ -45,7 +45,7 @@ public class TamagotchiFrames {
     public TamagotchiFrames(TamagotchiService tamagotchiservice) {
 
         this.tamagotchiservice = tamagotchiservice;
-        path = "file:images/Gifs/";
+        path = "/Gifs/";
 
         Image happy = new Image(path + "tamag(3).gif");
         ImageView happypicture = new ImageView(happy);

@@ -62,7 +62,7 @@ public class TamagotchiGameUi extends Application {
             properties.load(new FileInputStream("config.properties"));
             databaseName = properties.getProperty("database");
         } catch (FileNotFoundException ex) {
-            databaseName = "./src/main/resources/tamagotchitietokanta";
+            databaseName = "./src/main/resources/database/tamagotchitietokanta";
         }
 
         String todoFile = properties.getProperty("todoFile");

@@ -54,6 +54,8 @@ Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut hakukenttään tama
 
 ![alt.text](sekvenssikaavio.alreadyexists.png)
 
+### Tamagotchin poistaminen
+
 Kun alkunäkymä on päällä ja käyttäjä on kirjoittanut nimen tekstikenttään ja painaa delete nappulaa, etenee ohjelma seuraavalla tavalla:
 
 ![alt.text](sekvenssikaaviodelete.png)
