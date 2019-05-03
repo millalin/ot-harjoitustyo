@@ -24,7 +24,7 @@ Sovelluksen järjestelmätestaus on suoritettu manuaalisesti.
 
 #### Asennus ja konfigurointi
 
-Sovellus on haettu ja sitä on testattu [käyttöohjeen](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) kuvaamalla tavalla Ubuntu 18.04-ympäristössä. 
+Sovellus on haettu ja sitä on testattu [käyttöohjeen](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) kuvaamalla tavalla Ubuntu 18.04-ympäristössä usealla eri koneella.  
 
 #### Toiminnallisuudet
 

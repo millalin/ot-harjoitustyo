@@ -103,7 +103,7 @@ public class TamagotchiGameUi extends Application {
         main.getChildren().add(state);
         main.setAlignment(Pos.CENTER);
 
-        //deadState.setTop(); paluunappi? 
+       
         deadState.setCenter(frames.getFrameDead());
         deadState.setTop(allbuttons.getReturnDead());
 
@@ -311,7 +311,7 @@ public class TamagotchiGameUi extends Application {
             @Override
             public void handle(long l) {
 
-                if (l - before < 1_000_000_000L) {  //10 00 ms eli 1sec 
+                if (l - before < 1_000_000_000L) {   
                     return;
                 }
 

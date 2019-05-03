@@ -18,7 +18,7 @@ public class Tamagotchi {
     private int tiredness;
     private int dirtiness;
     private boolean alive;
-    private int age; //days
+    private int age; 
     private int sick;
     private String mood;
 
@@ -111,12 +111,12 @@ public class Tamagotchi {
     }
 
     /**
-     * Palauttaa iän laskettuna päiviksi
+     * Palauttaa iän laskettuna päiviksi.
      *
      * @return tamagotchin iän päivinä
      */
     public int getAge() {
-        long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; //sekkuntia
+        long a = (System.currentTimeMillis() - this.dateOfBirth) / 1000; 
         int currentAge = (int) a / 60 / 60 / 24;
         return currentAge;
     }

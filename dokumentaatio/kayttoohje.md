@@ -53,6 +53,7 @@ Kun hoidat ja hoivaat tamagotchiasi säännöllisesti, siitä kehittyy 4 päivä
 ![alt.text](kayttoohjekuvat/aikuinen.png)
 
 
+
 ## Historiatietonäkymä
 
 Historiatietonäkymässä voi tarkastella kaikkien ikinä pelissä olleiden tamagotchien luomispäivää, ikää sekä tietoa elossaolosta. Näkymästä poistutaan exit -napilla. 

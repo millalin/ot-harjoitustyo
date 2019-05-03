@@ -69,4 +69,4 @@ Pelin edetessä, kun ajan myötä tamagotchin tila huononee ja käyttäjä paina
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
 
-Historianäkymän päivitys ei toimi täydellisesti ja elossaolotieto päivittyy vain, jos tamagotchin tilan käy itse katsomassa pelinäkymässä. 
+Historianäkymän päivitys ei toimi täydellisesti ja elossaolotieto päivittyy vain, jos tamagotchin tilan käy itse katsomassa pelinäkymässä. Hyvin satunnaisesti (hyvin harvoin) siirryttäessä alkunäkymästä pelinäkymään jäävät napit ilmestymättä näkymään. Tämä ilmeisemminkin johtuu jostakin javaFX:n virheestä. 
