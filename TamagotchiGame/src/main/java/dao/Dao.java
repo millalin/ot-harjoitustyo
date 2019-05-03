@@ -11,8 +11,8 @@ import java.sql.SQLException;
 /**
  * Tietokantahallintaluokkien perusrakenteen määrittävä rajapinta.
  *
- * @param <T>
- * @param <K>
+ * @param <T> T
+ * @param <K> K
  */
 public interface Dao<T, K> {
 

@@ -47,7 +47,7 @@ public class TamagotchiService {
     /**
      * Tarkastus onko samanniminen Tamagotchi jo olemassa.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return true jos tamagotchi on olemassa, muuten false
      */
@@ -97,7 +97,7 @@ public class TamagotchiService {
     /**
      * Luo uuden tamagotchin ja tallettaa sen tietokantaan.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      */
     public void newTamagotchi() throws SQLException {
 
@@ -366,7 +366,7 @@ public class TamagotchiService {
      * Hakee tietokannasta tiedot tamagotcheista, jotka ovat olleet aiemmin
      * olemassa tai jotka ovat edelleen pelissä.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return palauttaa tiedot tamagotchin nimestä, iästä, syntymäpäivästä ja
      * tiedosto onko elossa Stringinä.
@@ -386,7 +386,7 @@ public class TamagotchiService {
     /**
      * Päivittää tietokantaan tamagotchin ikää ja elossaolotilannetta.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      */
     public void ageUpdate() throws SQLException {
         Tamagotchi tamagotchi = tamagotchis.get(name);

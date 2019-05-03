@@ -278,7 +278,7 @@ public class TamagotchiFrames {
      *
      * @param name Tamagotchin nimi
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return VBox asettelussa sijaitseva kaavio
      */

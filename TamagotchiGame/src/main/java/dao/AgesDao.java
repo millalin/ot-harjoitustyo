@@ -34,13 +34,13 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
     }
 
     /**
-     * Luo tietokantaan uuden tamagotchin, jossa pidetään kirjaa
-     * syntymäpäivästä ja iästä sekä elossaolosta.
+     * Luo tietokantaan uuden tamagotchin, jossa pidetään kirjaa syntymäpäivästä
+     * ja iästä sekä elossaolosta.
      *
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
-     * 
+     *
      * @return tamagotchi olio
      */
     @Override
@@ -70,7 +70,7 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * @param tamagotchi Tamagotchi olio
      *
      * @throws SQLException virhe tietokannanhallinnassa
-     * 
+     *
      * @return tamagotchi olio
      */
     @Override
@@ -97,7 +97,7 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * se elossa ja lisää ne ArrayListiin.
      *
      * @throws SQLException virhe tietokannanhallinnassa
-     * 
+     *
      * @return lista, jossa tamagotchien historiatietoja
      */
     public ArrayList list() throws SQLException {
@@ -129,7 +129,7 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
      * olemassa.
      *
      * @throws SQLException virhe tietokannanhallinnassa
-     * 
+     *
      * @return lista, jossa tamagotchien nimet
      */
     public ArrayList names() throws SQLException {
@@ -163,6 +163,21 @@ public class AgesDao implements Dao<Tamagotchi, Integer> {
             Logger.getLogger(TamagotchiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    /**
+     * Tyhjentää TamagotchiAges taulun. Käytössä testiluokassa.
+     *
+     * @throws SQLException virhe tietokannanhallinnassa
+     */
+    public void clear() throws SQLException {
+        Connection connection = database.newConnection();
+
+        PreparedStatement statement
+                = connection.prepareStatement("DELETE FROM TamagotchisAges");
+
+        statement.executeUpdate();
+        connection.close();
     }
 
 }

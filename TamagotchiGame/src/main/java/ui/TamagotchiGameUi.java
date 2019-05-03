@@ -52,7 +52,7 @@ public class TamagotchiGameUi extends Application {
     /**
      * Valmistelee tietokantayhteyden ja tamagotchiService luokan.
      *
-     * @throws Exception
+     * @throws Exception virhe tietokannanhallinnassa
      */
     @Override
     public void init() throws Exception {
@@ -103,7 +103,6 @@ public class TamagotchiGameUi extends Application {
         main.getChildren().add(state);
         main.setAlignment(Pos.CENTER);
 
-       
         deadState.setCenter(frames.getFrameDead());
         deadState.setTop(allbuttons.getReturnDead());
 
@@ -311,7 +310,7 @@ public class TamagotchiGameUi extends Application {
             @Override
             public void handle(long l) {
 
-                if (l - before < 1_000_000_000L) {   
+                if (l - before < 1_000_000_000L) {
                     return;
                 }
 
@@ -367,7 +366,7 @@ public class TamagotchiGameUi extends Application {
      * Ohjelman alkunäkymän palauttava metodi, joka luo alkunäkymän graafisen
      * ulkoasun.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return GripPane olio, joka sisältää alkunäkymän
      */
@@ -410,7 +409,7 @@ public class TamagotchiGameUi extends Application {
      * Ohjelman kaikkien tamagotchien historianäkymän palauttava metodi, joka
      * luo alkunäkymän graafisen ulkoasun.
      *
-     * @throws SQLException
+     * @throws SQLException virhe tietokannanhallinnassa
      *
      * @return GripPane olio, joka sisältää historiatilastonäkymän
      */
