@@ -27,4 +27,5 @@ päivä |  aika |  mitä tein
 30.5 | 2 | dokumentaation tekoa, config.properties lisäsys
 2.5 | 4 | dokumentaation tekoa, pieniä koodimuokkauksia, napin lisääminen, viimeistelyä
 3.5 | 2 | ohjelman toiminnan testausta eri koneilla sekä dokumentoinnin viimeistelyä
-yht | 82 |
+5.5 | 1 | Viimeistelyt, pienet muutokset dokumentointiin
+yht | 83 |

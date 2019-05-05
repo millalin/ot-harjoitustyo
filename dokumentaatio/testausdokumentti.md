@@ -6,7 +6,7 @@ Ohjelmaa on testattu JUnitin  yksikkö- sekä integraatiotestein ja myös manuaa
 
 #### Sovelluslogiikka
 
-Testausluokka [TamagotchiServiceTest](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/src/test/java/domain/TamagotchiServiceTest.java) testaa TamagotchiServicen sisältämää sovelluslogiikkaa ja lisäksi Dao-luokkien ja sovelluslogiikan toimivuutta. 
+Testausluokka [TamagotchiServiceTest](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/src/test/java/domain/TamagotchiServiceTest.java) testaa TamagotchiServicen sisältämää sovelluslogiikkaa ja lisäksi Dao-luokkien ja sovelluslogiikan toimivuutta yhdessä Tamagotchiluokan kanssa. 
  
 #### DAO-luokat
 
@@ -24,7 +24,7 @@ Sovelluksen järjestelmätestaus on suoritettu manuaalisesti.
 
 #### Asennus ja konfigurointi
 
-Sovellus on haettu ja sitä on testattu [käyttöohjeen](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) kuvaamalla tavalla Ubuntu 18.04-ympäristössä usealla eri koneella.  
+Sovellus on haettu ja sitä on testattu [käyttöohjeen](https://github.com/millalin/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) kuvaamalla tavalla Ubuntu 18.04-ympäristössä usealla eri koneella. Sovellusta on testattu myös Windows -ympäristössä ja todettu toimivaksi. 
 
 #### Toiminnallisuudet
 

@@ -4,7 +4,7 @@ Lataa tiedosto [TamagotchiGame.jar](https://github.com/millalin/ot-harjoitustyo/
 
 ## Konfigurointi
 
-Ohjelma olettaa, että sen sisältävän kansion juuressa on config.properties tiedosto. Se kuitenkin hakee tietokannan myös oletusosoitteella, jos tiedostoa ei ole. Tiedostoon voi halutessaan määritellä käytettävän tietokannan osoitepolun ja nimen. Tiedoston oletusmuoto on seuraavanlainen:
+Ohjelma olettaa, että sen sisältävän kansion juuressa on config.properties tiedosto. Se kuitenkin luo tietokannan myös oletusosoitteella, vaikkei tiedostoa ei ole. Tiedostoon voi halutessaan määritellä käytettävän tietokannan osoitepolun ja nimen. Tiedoston oletusmuoto on seuraavanlainen:
 
     database=./src/main/resources/tamagotchitietokanta
 

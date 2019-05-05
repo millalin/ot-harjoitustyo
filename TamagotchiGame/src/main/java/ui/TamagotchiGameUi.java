@@ -116,11 +116,11 @@ public class TamagotchiGameUi extends Application {
                 name = nameField.getText();
                 tamagotchiservice.setName(name);
                 if (tamagotchiservice.alreadyExists()) {
-                    nameText.setText("Name already exists, please choose another one");
+                    nameText.setText("Name already exists, please choose another one. Create: ");
                 } else if (tamagotchiservice.tooShortName()) {
-                    nameText.setText("Name must be atleast 3 characters");
+                    nameText.setText("Name must be atleast 3 characters. Create: ");
                 } else if (tamagotchiservice.tooLongName()) {
-                    nameText.setText("Name can't be over 25 characters");
+                    nameText.setText("Name can't be over 25 characters. Create: ");
                 } else {
                     count = 0;
                     tamagotchiservice.newTamagotchi();
@@ -147,7 +147,7 @@ public class TamagotchiGameUi extends Application {
                         stage.setScene(deadScene);
                     }
                 } else {
-                    oldone.setText("There is no such tamagotchi");
+                    oldone.setText("There is no such tamagotchi. Load:");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,7 +207,7 @@ public class TamagotchiGameUi extends Application {
                 names.setText(tamagotchiservice.tamaslist());
 
                 stage.setScene(startScene);
-                animationtimer.stop();
+
             } catch (Exception ex) {
                 Logger.getLogger(TamagotchiGameUi.class.getName()).log(Level.SEVERE, null, ex);
             }

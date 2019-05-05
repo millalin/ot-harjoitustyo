@@ -13,7 +13,7 @@ Käyttöliittymä sisältää neljä erillistä näkymää:
 - kuollut näkymä
 - historia ja ikänäkymä
 
-Jokainen näkymistä on toteutettu omana [Scene](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Scene.html)-oliona. Jokaisesta näkymästä on näkyvänä yksi sijoitettuna sovelluksen [stageen](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/Stage.html). Graafinen käyttöliittymä on luokassa ui.TamagotchiGameUi. 
+Jokainen näkymistä on toteutettu omana [Scene](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Scene.html)-oliona. Jokaisesta näkymästä on näkyvänä  yksi kerrallaan sijoitettuna sovelluksen [stageen](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/Stage.html). Graafinen käyttöliittymä on luokassa ui.TamagotchiGameUi. 
 
 Käyttöliittymä on eriytetty sovelluslogiikasta. Käyttöliittymäluokka [TamagotchiGameUi](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/src/main/java/ui/TamagotchiGameUi.java) käyttää [TamagotchiService](https://github.com/millalin/ot-harjoitustyo/blob/master/TamagotchiGame/src/main/java/domain/TamagotchiService.java)-luokan metoden sovelluslogiikan suorittamiseen. 
 
