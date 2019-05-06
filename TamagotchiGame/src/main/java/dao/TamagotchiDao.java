@@ -167,10 +167,10 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
         long timeGone = currentTime - time;
         int x = (int) (timeGone / 1000);
         int newHunger = hunger + (5 * x);
-        int newEnergy = energy + (5 * x);
         int newHappiness = happiness + (5 * x);
         int newClean = clean + (5 * x);
         int newSick = sick + (5 * x);
+        int newEnergy = calculateTiredness(x);
         tamagotchi.setDateOfBirth(birthtime);
         tamagotchi.setHunger(newHunger);
         tamagotchi.setTiredness(newEnergy);
@@ -241,5 +241,16 @@ public class TamagotchiDao implements Dao<Tamagotchi, Integer> {
             Logger.getLogger(TamagotchiDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    private int calculateTiredness(int timePassed) {
+        int newEnergy = energy + (5 * timePassed);
+        if (mood == "sleep") {
+            newEnergy -= 1000 * timePassed;
+        }
+        if (newEnergy < 0) {
+            newEnergy = 0;
+        }
+        return newEnergy;
     }
 }
