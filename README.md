@@ -64,5 +64,6 @@ Tiedostoon [checkstyle.xml](https://github.com/millalin/ot-harjoitustyo/blob/mas
 Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto target/site/checkstyle.html
 
 
+Tehty Java 8. Java 11 käyttöön tarvitsee ladata [JavaFX runtime](https://openjfx.io/openjfx-docs/#install-javafx), asettaa export PATH_TO_FX=path/to/javafx-sdk-VERSION/lib sekä ajaa jar komennolla java --module-path $PATH_TO_FX --add-modules javafx.controls -jar TamagotchiGame.jar 
 
 
